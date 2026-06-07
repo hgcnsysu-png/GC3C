@@ -46,11 +46,19 @@
             
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
-                    <div class="rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 mb-4 aspect-video flex items-center justify-center">
-                        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300">
-                    </div>
-                    <div id="detail-thumbs" class="flex gap-4 mt-4 overflow-x-auto pb-2 max-w-full scrollbar-thin"></div></div>
-                </div>
+                  <!--  這是全新的左右並排圖片展示區塊 -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
+    
+    <!-- 左側：直向排列的小縮圖（在手機版自動變橫向，電腦版變直向） -->
+    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
+        <!-- 這裡會由 JavaScript 自動塞入縮圖 -->
+    </div>
+    
+    <!-- 右側：霸佔右邊大空白的「超級大主圖展示區」 -->
+    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto">
+        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightbox(this.src)">
+    </div>
+</div>
 
                 <div class="flex flex-col justify-between">
                     <div>
@@ -274,9 +282,10 @@ mainImg.onclick = () => openLightbox(mainImg.src);
             const specsContainer = document.getElementById('detail-specs');
             specsContainer.innerHTML = product.specs.map(s => `<span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-lg font-medium">${s}</span>`).join('');
 
-        const thumbsContainer = document.getElementById('detail-thumbs');
+       //  這是全新的 JS 程式碼
+const thumbsContainer = document.getElementById('detail-thumbs');
 thumbsContainer.innerHTML = product.images.map((img, index) => `
-    <div onmouseenter="changeMainImage('${img}', this)" onclick="openLightbox('${img}')" class="w-32 h-24 w-auto flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer border-2 ${index === 0 ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-gray-50 shadow-sm aspect-[4/3]">
+    <div onmouseenter="changeMainImage('${img}', this)" onclick="openLightbox('${img}')" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${index === 0 ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
         <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
     </div>
 `).join('');
