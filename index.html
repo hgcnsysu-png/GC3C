@@ -39,26 +39,50 @@
         <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
             </div>
 
+       <!-- 商品詳情頁面區塊 -->
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
             </button>
             
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div>
-                  <!--  這是全新的左右並排圖片展示區塊 -->
-<div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
-    
-    <!-- 左側：直向排列的小縮圖（在手機版自動變橫向，電腦版變直向） -->
-    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
-        <!-- 這裡會由 JavaScript 自動塞入縮圖 -->
-    </div>
-    
-    <!-- 右側：霸佔右邊大空白的「超級大主圖展示區」 -->
-    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto">
-        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightbox(this.src)">
-    </div>
-</div>
+                
+                <!-- 左右並排的商品圖片展示區塊 -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
+                    <!-- 左側：直向排列的小縮圖 -->
+                    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
+                        <!-- 由 JavaScript 自動塞入縮圖 -->
+                    </div>
+                    <!-- 右側：超級大主圖展示區 -->
+                    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto">
+                        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+
+                <!-- 右側：商品文字與規格資訊（原封不動移回這裡） -->
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
+                        <h2 id="detail-title" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-4"></h2>
+                        <div id="detail-specs" class="flex flex-wrap gap-2 mb-6"></div>
+                        <div class="border-t border-gray-100 pt-6 mt-6">
+                            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">商品機況與配件</h3>
+                            <p id="detail-condition" class="text-gray-600 leading-relaxed text-sm whitespace-pre-line"></p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-100 pt-6 mt-8 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400 font-medium">直購價</p>
+                            <span id="detail-price" class="text-3xl font-extrabold text-gray-900 tracking-tight"></span>
+                        </div>
+                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
+                            私訊 LINE 購買
+                        </a>
+                    </div>
+                </div> <!-- 文字資訊結束 -->
+
+            </div> <!-- 白色大卡片結束 -->
+        </div> <!-- 詳情頁面區塊結束 -->
 
                 <div class="flex flex-col justify-between">
                     <div>
