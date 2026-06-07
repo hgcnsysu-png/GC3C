@@ -18,14 +18,20 @@
                 <h1 class="text-xl font-bold tracking-wider text-gray-900">冠丞3C</h1>
                 <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
             </div>
-<div class="flex items-center gap-4">
-    <div class="flex bg-gray-100 p-1 rounded-xl gap-1">
-        <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all">全部商品</button>
-        <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">文書商務</button>
-        <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">電競遊戲</button>
-    </div>
-    <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden sm:block">關於我們</button>
-</div>
+            <div class="flex items-center gap-4">
+                <div class="flex bg-gray-100 p-1 rounded-xl gap-1">
+                    <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all">全部商品</button>
+                    <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">文書商務</button>
+                    <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">電競遊戲</button>
+                </div>
+                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden sm:block">關於我們</button>
+                
+                <button onclick="toggleCartModal()" class="relative p-2.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition shadow-sm flex items-center justify-center gap-1.5 group">
+                    <span class="text-sm">🛒</span>
+                    <span class="text-xs font-bold hidden sm:inline">詢問車</span>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-extrabold px-1.5 min-w-[18px] h-[18px] rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -37,41 +43,22 @@
         </div>
 
         <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-            </div>
+        </div>
 
-      <!-- 商品詳情頁面區塊 -->
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
             </button>
             
-            <!-- 白色大卡片開始 -->
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
-                <!-- 【左半邊】：左右並排的商品圖片展示區塊 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
-                    <!-- 左側：直向排列的小縮圖 -->
                     <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
-                        <!-- 由 JavaScript 自動塞入縮圖 -->
-                    </div>
-                    <!-- 右側：超級大主圖展示區 -->
+                        </div>
                     <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto">
                         <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightbox(this.src)">
                     </div>
                 </div>
-
-                <!-- 【右半邊】：商品文字與規格資訊（這次確實鎖在卡片內了！） -->
-                <div class="flex flex-col justify-between">
-                    <div>
-                        <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
-                        <h2 id="detail-title" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-4"></h2>
-                        <div id="detail-specs" class="flex flex-wrap gap-2 mb-6"></div>
-                        
-                      
-                </div> <!-- 【右半邊】結束 -->
-
-            </div> <!-- 白色大卡片結束 -->
-        </div> <!-- 商品詳情頁面區塊結束 -->
 
                 <div class="flex flex-col justify-between">
                     <div>
@@ -83,95 +70,91 @@
                             <p id="detail-condition" class="text-gray-600 leading-relaxed text-sm whitespace-pre-line"></p>
                         </div>
                     </div>
-                    <div class="border-t border-gray-100 pt-6 mt-8 flex items-center justify-between">
+                    <div class="border-t border-gray-100 pt-6 mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
                             <p class="text-xs text-gray-400 font-medium">直購價</p>
                             <span id="detail-price" class="text-3xl font-extrabold text-gray-900 tracking-tight"></span>
                         </div>
-                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
-                            私訊 LINE 購買
+                        <div class="flex gap-2">
+                            <button id="detail-add-cart-btn" onclick="" class="bg-gray-100 hover:bg-gray-200 text-gray-900 text-sm font-bold px-5 py-3.5 rounded-2xl transition shadow-sm flex items-center gap-1.5 flex-shrink-0">
+                                🛒 加入詢問車
+                            </button>
+                            <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-5 py-3.5 rounded-2xl transition shadow-sm text-center flex-grow sm:flex-grow-0 whitespace-nowrap">
+                                立即私訊購買
+                            </a>
+                        </div>
+                    </div>
+                </div> </div> </div> <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <div class="lg:col-span-1">
+                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-4">
+                        我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。
+                    </p>
+                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        實體據點 · 售後有保障
+                    </span>
+                </div>
+
+                <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">SERVICE & LOCATION</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <span class="text-base mt-0.5">📍</span>
+                            <div>
+                                <p class="font-semibold text-gray-900">服務據點</p>
+                                <p class="text-gray-500 mt-0.5">高雄市鳳山區新強路59號1樓</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-base mt-0.5">🛠️</span>
+                            <div>
+                                <p class="font-semibold text-gray-900">核心業務</p>
+                                <p class="text-gray-500 mt-0.5">桌上型電腦維修 / 內部清潔保養 / 故障診斷分析</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-base mt-0.5">⏰</span>
+                            <div>
+                                <p class="font-semibold text-gray-900">營業時間</p>
+                                <div class="text-gray-500 mt-1 space-y-0.5 text-xs">
+                                    <p>週一至週五 11:00 - 20:00</p>
+                                    <p>週六 11:00 - 17:00</p>
+                                    <p class="text-red-500 font-medium">週日公休</p>
+                                    <p class="text-gray-400 pt-1">💡 建議提前預約</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-3xl p-8 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT</h4>
+                        <h5 class="text-xl font-bold mb-2">需要維修或看機？</h5>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-6">歡迎透過以下管道與我們聯繫，我們將盡快為您服務。</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+                            💬 官方 LINE 線上諮詢
                         </a>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                                📞 電話聯絡
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                                🔵 FB 粉絲專頁
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-<!-- 關於我們 & 聯絡資訊區塊 -->
-<section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        
-        <!-- 左欄：品牌簡介 -->
-        <div class="lg:col-span-1">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
-            <p class="text-sm text-gray-500 leading-relaxed mb-4">
-                我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。
-            </p>
-            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                實體據點 · 售後有保障
-            </span>
-        </div>
 
-        <!-- 中欄：服務與據點資訊 -->
-        <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
-            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">SERVICE & LOCATION</h4>
-            <ul class="space-y-4 text-sm">
-                <li class="flex items-start gap-3">
-                    <span class="text-base mt-0.5">📍</span>
-                    <div>
-                        <p class="font-semibold text-gray-900">服務據點</p>
-                        <p class="text-gray-500 mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="text-base mt-0.5">🛠️</span>
-                    <div>
-                        <p class="font-semibold text-gray-900">核心業務</p>
-                        <p class="text-gray-500 mt-0.5">桌上型電腦維修 / 內部清潔保養 / 故障診斷分析</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="text-base mt-0.5">⏰</span>
-                    <div>
-                        <p class="font-semibold text-gray-900">營業時間</p>
-                     <div class="text-gray-500 mt-1 space-y-0.5 text-xs">
-            <p>週一至週五 11:00 - 20:00</p>
-            <p>週六 11:00 - 17:00</p>
-            <p class="text-red-500 font-medium">週日公休</p>
-            <p class="text-gray-400 pt-1">💡 建議提前預約</p>
-        </div>
-    </div>
-</li>
-            </ul>
-        </div>
-
-        <!-- 右欄：聯絡方式 -->
-        <div class="bg-gray-900 text-white rounded-3xl p-8 shadow-sm flex flex-col justify-between">
-            <div>
-                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT</h4>
-                <h5 class="text-xl font-bold mb-2">需要維修或看機？</h5>
-                <p class="text-xs text-gray-400 leading-relaxed mb-6">歡迎透過以下管道與我們聯繫，我們將盡快為您服務。</p>
             </div>
-            
-            <div class="space-y-3">
-                <!-- LINE 按鈕 -->
-                <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition">
-                    💬 官方 LINE 線上諮詢
-                </a>
-                <!-- 電話/粉專 備用通道 -->
-                <div class="grid grid-cols-2 gap-2">
-                    <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
-                        📞 電話聯絡
-                    </a>
-                    <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
-                        🔵 FB 粉絲專頁
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
+        </section>
     </main>
 
     <footer class="bg-white border-t border-gray-100 py-8 text-center text-xs text-gray-400">
@@ -180,30 +163,61 @@
         </div>
     </footer>
 
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" onclick="toggleCartModal()">
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300" onclick="event.stopPropagation()">
+            
+            <div>
+                <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🛒</span>
+                        <h3 class="text-lg font-bold text-gray-900">您的商品詢問車</h3>
+                    </div>
+                    <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-900 text-2xl font-light">&times;</button>
+                </div>
+                
+                <div id="cart-items-container" class="space-y-4 max-h-[60vh] overflow-y-auto pr-1 scrollbar-thin">
+                    </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-4 mt-4">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-sm font-medium text-gray-500">預計總金額 (不含運費)</span>
+                    <span id="cart-total-price" class="text-2xl font-extrabold text-gray-900">NT$ 0</span>
+                </div>
+                <button onclick="sendCartToLine()" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold py-4 rounded-2xl transition shadow-sm flex items-center justify-center gap-2 text-sm">
+                    💬 打包清單！一鍵發送至官方 LINE 詢問
+                </button>
+                <p class="text-[11px] text-center text-gray-400 mt-2.5">💡 點擊後將開啟 LINE 並自動為您填寫好詢問文字，送出即可與店長對帳看機！</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out">
+        <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
+            <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+            <button onclick="closeLightbox()" class="absolute -top-12 right-0 md:-right-12 text-white/70 hover:text-white text-3xl font-light transition">&times;</button>
+        </div>
+    </div>
+
     <script>
+        function scrollToAbout() {
+            showListView();
+            const aboutSection = document.getElementById('about-section');
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
 
-// 一鍵平滑滾動到關於我們區塊
-function scrollToAbout() {
-    // 如果目前在詳情頁，先切換回列表頁
-    showListView();
-    const aboutSection = document.getElementById('about-section');
-    aboutSection.scrollIntoView({ behavior: 'smooth' });
-}
-
-        // ★★★ 【請在此處替換成你從 Sheety 複製的 API 網址】 ★★★
+        // ★★★ 【Sheety API 網址】 ★★★
         const SHEETY_API_URL = "https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1";
 
-        let products = []; // 用來存放從雲端抓下來的商品資料
+        let products = []; 
         let currentFilter = 'all';
+        let cart = []; // 購物車陣列
 
-        // 從 Google 試算表非同步下載資料
         async function fetchProductsFromCloud() {
             try {
                 const response = await fetch(SHEETY_API_URL);
                 const data = await response.json();
-                
-                // Sheety 回傳的 JSON 格式通常會包在一個以工作表名稱命名的屬性裡 (例如 data.products)
-                // 這裡會自動去抓取該陣列，並做簡單的資料清洗（把逗號字串轉回陣列）
                 const rawProducts = data.products || Object.values(data)[0];
                 
                 products = rawProducts.map(p => {
@@ -211,7 +225,6 @@ function scrollToAbout() {
                         id: parseInt(p.id),
                         title: p.title,
                         category: p.category,
-                        // 將 Google 表單內用逗號隔開的文字，轉回網頁用的陣列
                         specs: p.specs ? p.specs.split(',').map(s => s.trim()) : [],
                         images: p.images ? p.images.split(',').map(i => i.trim()) : ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'],
                         condition: p.condition,
@@ -220,7 +233,6 @@ function scrollToAbout() {
                     }
                 });
 
-                // 隱藏載入中，顯示列表
                 document.getElementById('loading-view').classList.add('hidden');
                 document.getElementById('product-list-view').classList.remove('hidden');
                 
@@ -286,22 +298,24 @@ function scrollToAbout() {
             document.getElementById('detail-price').innerText = `NT$ ${product.price.toLocaleString()}`;
             document.getElementById('detail-line-btn').href = product.lineLink;
 
-const mainImg = document.getElementById('detail-main-img');
-mainImg.src = product.images[0];
-mainImg.className = "w-full h-full object-cover transition-all duration-300 cursor-zoom-in";
-// 讓客戶點擊大主圖時，觸發放大燈箱
-mainImg.onclick = () => openLightbox(mainImg.src);
+            // 綁定當前商品 ID 到加入購物車按鈕
+            const addCartBtn = document.getElementById('detail-add-cart-btn');
+            addCartBtn.setAttribute('onclick', `addToCartFromDetail(${product.id})`);
+
+            const mainImg = document.getElementById('detail-main-img');
+            mainImg.src = product.images[0];
+            mainImg.className = "w-full h-full object-cover transition-all duration-300 cursor-zoom-in";
+            mainImg.onclick = () => openLightbox(mainImg.src);
 
             const specsContainer = document.getElementById('detail-specs');
             specsContainer.innerHTML = product.specs.map(s => `<span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-lg font-medium">${s}</span>`).join('');
 
-       //  這是全新的 JS 程式碼
-const thumbsContainer = document.getElementById('detail-thumbs');
-thumbsContainer.innerHTML = product.images.map((img, index) => `
-    <div onmouseenter="changeMainImage('${img}', this)" onclick="openLightbox('${img}')" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${index === 0 ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
-        <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
-    </div>
-`).join('');
+            const thumbsContainer = document.getElementById('detail-thumbs');
+            thumbsContainer.innerHTML = product.images.map((img, index) => `
+                <div onmouseenter="changeMainImage('${img}', this)" onclick="openLightbox('${img}')" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${index === 0 ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
+                    <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
+                </div>
+            `).join('');
         }
 
         function changeMainImage(src, thumbElement) {
@@ -314,11 +328,6 @@ thumbsContainer.innerHTML = product.images.map((img, index) => `
             thumbElement.classList.remove('border-transparent');
             thumbElement.classList.add('border-gray-900');
         }
-
-        document.onkeydown = function(evt) {
-            evt = evt || window.event;
-            if (evt.keyCode == 27) { showListView(); } // 按 Esc 可返回列表
-        };
 
         function showListView() {
             document.getElementById('product-detail-view').classList.add('hidden');
@@ -340,57 +349,153 @@ thumbsContainer.innerHTML = product.images.map((img, index) => `
             });
         }
 
-        // 初始化：從雲端載入
-// 開啟全螢幕放大燈箱
-function openLightbox(src) {
-    const lightbox = document.getElementById('image-lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    
-    lightboxImg.src = src;
-    lightbox.classList.remove('hidden');
-    
-    // 透過微小延遲觸發動畫，讓淡入更平滑
-    setTimeout(() => {
-        lightbox.classList.remove('opacity-0');
-        lightboxImg.classList.remove('scale-95');
-        lightboxImg.classList.add('scale-100');
-    }, 10);
-}
+        // ==================== 🛒 購物車控制邏輯 ====================
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            const panel = modal.querySelector('div');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    panel.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                modal.classList.add('opacity-0');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
 
-// 關閉燈箱
-function closeLightbox() {
-    const lightbox = document.getElementById('image-lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    
-    lightbox.classList.add('opacity-0');
-    lightboxImg.classList.remove('scale-100');
-    lightboxImg.classList.add('scale-95');
-    
-    // 等動態效果跑完再隱藏元件
-    setTimeout(() => {
-        lightbox.classList.add('hidden');
-    }, 300);
-}
+        function addToCartFromDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            if (cart.some(item => item.id === productId)) {
+                alert('✨ 此商品已經在您的詢問車中囉！');
+                toggleCartModal();
+                return;
+            }
+            
+            cart.push(product);
+            updateCartUI();
+            toggleCartModal(); 
+        }
 
-// 擴充原本的 ESC 鍵功能，按下 ESC 也能關閉大圖
-const originalKeyDown = document.onkeydown;
-document.onkeydown = function(evt) {
-    if (originalKeyDown) originalKeyDown(evt);
-    evt = evt || window.event;
-    if (evt.keyCode == 27) { closeLightbox(); }
-};
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countBadge = document.getElementById('cart-count');
+            countBadge.innerText = cart.length;
+            if (cart.length > 0) {
+                countBadge.classList.add('animate-bounce');
+                setTimeout(() => countBadge.classList.remove('animate-bounce'), 1000);
+            }
+
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-sm text-gray-400">
+                        <span class="text-3xl block mb-2">🛒</span>
+                        你的詢問車空空如也<br>快去挑選一些嚴選二手電腦吧！
+                    </div>
+                `;
+                document.getElementById('cart-total-price').innerText = "NT$ 0";
+                return;
+            }
+
+            let totalPrice = 0;
+            container.innerHTML = cart.map(item => {
+                totalPrice += item.price;
+                return `
+                    <div class="flex items-center justify-between gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <img src="${item.images[0]}" class="w-16 h-12 rounded-lg object-cover flex-shrink-0 bg-white border border-gray-100">
+                            <div class="overflow-hidden">
+                                <p class="text-xs font-bold text-gray-950 truncate">${item.title}</p>
+                                <p class="text-xs text-emerald-600 font-extrabold mt-0.5">NT$ ${item.price.toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-xs text-red-400 hover:text-red-600 font-medium transition px-2 py-1">刪除</button>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('cart-total-price').innerText = `NT$ ${totalPrice.toLocaleString()}`;
+        }
+
+        function sendCartToLine() {
+            if (cart.length === 0) {
+                alert('購物車裡沒有商品喔！');
+                return;
+            }
+
+            let textMessage = "您好！我在「冠丞3C官方網站」挑選了以下商品，想詢問目前的機況細節與預約看機時間：\n\n";
+            
+            cart.forEach((item, index) => {
+                textMessage += `${index + 1}. 【${item.category === 'gaming' ? '電競遊戲' : '文書商務'}】${item.title}\n`;
+                textMessage += `   💰 價格：NT$ ${item.price.toLocaleString()}\n\n`;
+            });
+
+            const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+            textMessage += `-----------------------\n`;
+            textMessage += `總計詢問商品共 ${cart.length} 項\n`;
+            textMessage += `💵 預計總金額：NT$ ${totalPrice.toLocaleString()}\n`;
+            textMessage += `謝謝店長！`;
+
+            const encodedText = encodeURIComponent(textMessage);
+            const lineBaseUrl = "https://line.me/R/ti/p/@138uoksb";
+            const finalLineLink = `${lineBaseUrl}?text=${encodedText}`;
+
+            window.open(finalLineLink, '_blank');
+        }
+
+        // ==================== 🖼️ 燈箱大圖控制 ====================
+        function openLightbox(src) {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+            }, 300);
+        }
+
+        const originalKeyDown = document.onkeydown;
+        document.onkeydown = function(evt) {
+            if (originalKeyDown) originalKeyDown(evt);
+            evt = evt || window.event;
+            if (evt.keyCode == 27) { 
+                if (!document.getElementById('image-lightbox').classList.contains('hidden')) {
+                    closeLightbox();
+                } else {
+                    showListView();
+                }
+            }
+        };
+
         window.onload = () => {
             fetchProductsFromCloud();
         };
     </script>
-<!-- 全螢幕大圖檢視燈箱 (Lightbox) -->
-<div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out">
-    <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center">
-        <!-- 放大後的圖片 -->
-        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
-        <!-- 右上角關閉按鈕 -->
-        <button onclick="closeLightbox()" class="absolute -top-12 right-0 md:-right-12 text-white/70 hover:text-white text-3xl font-light transition">&times;</button>
-    </div>
-</div>
 </body>
 </html>
