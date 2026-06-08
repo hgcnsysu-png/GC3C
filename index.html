@@ -34,7 +34,6 @@
                         <option value="price-asc">價位：低 ➔ 高</option>
                         <option value="price-desc">價位：高 ➔ 低</option>
                     </select>
-                    <!-- 自訂下拉小箭頭 -->
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">
                         ▼
                     </div>
@@ -63,26 +62,16 @@
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
             </button>
             
-            <!-- 白色大卡片 -->
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
                 <!-- 【左半邊】：商品圖片展示區塊 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
-                    <!-- 左側：直向排列的小縮圖 -->
                     <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
                     </div>
-                    <!-- 右側：超級大主圖展示區 -->
                     <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto relative group/mainimg">
-                        
-                        <!-- 主圖本體 -->
                         <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightboxFromDetail()">
-                        
-                        <!-- 詳情頁：左切換按鈕 -->
                         <button onclick="prevDetailImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
-                        
-                        <!-- 詳情頁：右切換按鈕 -->
                         <button onclick="nextDetailImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
-                        
                     </div>
                 </div>
 
@@ -111,114 +100,110 @@
             </div>
         </div>
 
-        <!-- 關於我們 & 聯絡資訊區塊 -->
+        <!-- ＝ 關於我們 & 聯絡資訊區塊（重新調配至完美平衡） ＝ -->
         <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
                 
-                <!-- ABOUT US 區塊 -->
-                <div class="lg:col-span-5 flex flex-col justify-between pr-2">
+                <!-- 卡片 1：關於我們 (維持原創文案，背景卡片化達成等高平衡) -->
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
                         <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-6">關於 冠丞 3C</h3>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
                         
-                        <div class="text-[13.5px] text-gray-500 leading-relaxed space-y-5">
+                        <div class="text-[13px] text-gray-500 leading-relaxed space-y-4">
                             <p class="text-gray-600 font-medium">
-                                電腦出現狀況了嗎？想組裝新主機卻不知從何下手？<br>
-                                在地經營多年，提供最貼心的電腦服務：
+                                電腦出現狀況了嗎？想組裝新主機卻不知從何下手？在地經營多年，提供最貼心的電腦服務：
                             </p>
                             
-                            <ul class="space-y-3.5">
-                                <li class="flex items-center gap-2.5 whitespace-nowrap overflow-x-auto no-scrollbar">
-                                    <span class="text-base flex-shrink-0">✅</span>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-sm mt-0.5 flex-shrink-0">✅</span>
                                     <div class="text-gray-600">
                                         <strong class="text-gray-800">硬體升級：</strong>全新主機組裝、各品牌筆電銷售（新機/二手）。
                                     </div>
                                 </li>
-                                <li class="flex items-center gap-2.5 whitespace-nowrap overflow-x-auto no-scrollbar">
-                                    <span class="text-base flex-shrink-0">✅</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-sm mt-0.5 flex-shrink-0">✅</span>
                                     <div class="text-gray-600">
                                         <strong class="text-gray-800">技術檢測：</strong>桌機維修、筆電修繕、伺服器專業維護。
                                     </div>
                                 </li>
                             </ul>
-                            
-                            <p class="text-gray-600 font-medium pt-1">
-                                在地深耕，品質保證。您的數位設備，由我們來守護。
-                            </p>
                         </div>
                     </div>
                     
-                    <div class="mt-8">
-                        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">
+                    <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
+                        <span class="text-[12.5px] text-gray-600 font-medium">在地深耕 · 品質保證</span>
+                        <span class="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            實體據點 · 售後有保障
+                            實體據點
                         </span>
                     </div>
                 </div>
 
-                <!-- SERVICE & LOCATION 區塊（核心業務與電話已更新） -->
-                <div class="lg:col-span-4 bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">SERVICE & LOCATION</h4>
+                <!-- 卡片 2：據點與核心業務 (精簡項目，優化防換行間距) -->
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">LOCATION & SERVICE</h4>
                         <ul class="space-y-4 text-sm">
                             <li class="flex items-start gap-3">
                                 <span class="text-base mt-0.5">📍</span>
                                 <div>
-                                    <p class="font-semibold text-gray-900">服務據點</p>
-                                    <p class="text-gray-500 mt-0.5">高雄市鳳山區新強路59號1樓</p>
+                                    <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
+                                    <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-base mt-0.5">📞</span>
                                 <div>
-                                    <p class="font-semibold text-gray-900">聯絡電話</p>
-                                    <p class="text-gray-500 mt-0.5 font-medium tracking-wide">0934-198-250</p>
+                                    <p class="font-semibold text-gray-900 text-[13.5px]">聯絡電話</p>
+                                    <p class="text-gray-500 text-xs mt-0.5 font-medium tracking-wide">0934-198-250</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-base mt-0.5">🛠️</span>
-                                <div>
-                                    <p class="font-semibold text-gray-900 mb-1">核心業務</p>
-                                    <div class="text-gray-500 space-y-1 text-xs">
-                                        <p>• 全新主機組裝與專業銷售</p>
-                                        <p>• 全新 / 二手筆電嚴選銷售</p>
-                                        <p>• 桌上型與筆記型電腦維修</p>
-                                        <p>• 伺服器硬體維護與修繕</p>
+                                <div class="w-full">
+                                    <p class="font-semibold text-gray-900 text-[13.5px] mb-1.5">核心業務</p>
+                                    <div class="text-gray-500 space-y-1 text-xs leading-relaxed bg-gray-50/60 p-2.5 rounded-xl border border-gray-50">
+                                        <p class="whitespace-nowrap">• 精緻客製｜全新主機組裝與專業銷售</p>
+                                        <p class="whitespace-nowrap">• 多元選購｜全新及二手筆電嚴選銷售</p>
+                                        <p class="whitespace-nowrap">• 全方位維修｜桌上型與筆記型電腦維修</p>
+                                        <p class="whitespace-nowrap">• 企業級支援｜伺服器硬體維護與修繕</p>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    
-                    <div class="flex items-start gap-3 pt-4 border-t border-gray-50 mt-4">
-                        <span class="text-base mt-0.5">⏰</span>
-                        <div>
-                            <p class="font-semibold text-gray-900 text-xs">營業時間</p>
-                            <div class="text-gray-500 mt-1 space-y-0.5 text-[11px]">
-                                <p>週一至週五 11:00 - 20:00 │ 週六 11:00 - 17:00</p>
-                                <p class="text-red-500 font-medium">週日公休 （建議提前預約）</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- CONTACT 區塊 -->
-                <div class="lg:col-span-3 bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                <!-- 卡片 3：營業時間與快速聯絡 (將營業時間切換至此，完美填補深色卡片上半部空白) -->
+                <div class="bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT</h4>
-                        <h5 class="text-xl font-bold mb-2">需要維修或看機？</h5>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-6">歡迎透過以下管道與我們聯繫，我們將盡快為您服務。</p>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT & HOURS</h4>
+                        
+                        <!-- 營業時間改置於此，格式精緻化 -->
+                        <div class="mb-5 bg-white/5 border border-white/10 rounded-xl p-3 flex gap-3 items-start">
+                            <span class="text-base mt-0.5">⏰</span>
+                            <div class="text-xs space-y-1">
+                                <p class="font-semibold text-white/90">營業時間</p>
+                                <p class="text-white/60 text-[11px]">週一至週五 11:00 - 20:00</p>
+                                <p class="text-white/60 text-[11px]">週六 11:00 - 17:00 <span class="text-red-400 font-medium ml-1">週日公休</span></p>
+                            </div>
+                        </div>
+
+                        <h5 class="text-lg font-bold mb-1">需要維修或看機？</h5>
+                        <p class="text-[11.5px] text-gray-400 leading-relaxed mb-5">歡迎透過以下管道與我們聯繫，我們將盡快為您服務。</p>
                     </div>
                     
-                    <div class="space-y-3">
-                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition">
+                    <div class="space-y-2.5">
+                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
                             💬 官方 LINE 線上諮詢
                         </a>
                         <div class="grid grid-cols-2 gap-2">
-                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
                                 📞 電話聯絡
                             </a>
-                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
                                 🔵 FB 專頁
                             </a>
                         </div>
@@ -237,24 +222,17 @@
 
     <!-- 全螢幕大圖檢視燈箱 (Lightbox) -->
     <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
-        
         <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            
             <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
-            
             <div onclick="prevLightboxImage(event)" class="absolute left-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-start pl-4 group/leftzone">
                 <button id="left-arrow-btn" class="text-white/20 group-hover/leftzone:text-white group-hover/leftzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/leftzone:opacity-100 pointer-events-none">‹</button>
             </div>
-            
             <div onclick="nextLightboxImage(event)" class="absolute right-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-end pr-4 group/rightzone">
                 <button id="right-arrow-btn" class="text-white/20 group-hover/rightzone:text-white group-hover/rightzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/rightzone:opacity-100 pointer-events-none">›</button>
             </div>
-            
             <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
         </div>
-
         <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">&times;</button>
-        
         <div class="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/30 tracking-wider pointer-events-none select-none max-w-md mx-auto px-4">
             <span class="block md:hidden">💡 左右滑動螢幕即可切換照片</span>
             <span class="hidden md:block">💡 點擊大圖左右側或使用鍵盤左右鍵 ➔ 即可切換照片</span>
