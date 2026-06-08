@@ -13,14 +13,37 @@
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col">
 
     <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-center md:text-left cursor-pointer" onclick="resetFilters()">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div class="text-center lg:text-left cursor-pointer" onclick="resetFilters()">
                 <h1 class="text-xl font-bold tracking-wider text-gray-900">冠丞3C</h1>
                 <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
             </div>
             
-            <!-- 分類與排序控制區塊 -->
-            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto justify-center md:justify-end">
+            <!-- 分類、搜尋與排序控制區塊 -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
+                
+                <!-- 新增：極簡風格搜尋列 -->
+                <div class="relative w-full sm:w-60">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
+                        🔍
+                    </span>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        oninput="handleSearchInput()"
+                        placeholder="搜尋商品名稱、規格..." 
+                        class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all"
+                    >
+                    <!-- 清空搜尋按鈕 -->
+                    <button 
+                        id="clear-search-btn" 
+                        onclick="clearSearch()" 
+                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 text-sm hidden"
+                    >
+                        &times;
+                    </button>
+                </div>
+
                 <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center">
                     <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">全部商品</button>
                     <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">文書商務</button>
@@ -39,7 +62,7 @@
                     </div>
                 </div>
 
-                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden md:block">關於我們</button>
+                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden lg:block">關於我們</button>
             </div>
         </div>
     </header>
@@ -141,7 +164,7 @@
                     </div>
                 </div>
 
-                <!-- 卡片 2：據點與核心業務 (地圖點擊功能已新增) -->
+                <!-- 卡片 2：據點與核心業務 -->
                 <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div class="space-y-5">
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">LOCATION & SERVICE</h4>
@@ -151,7 +174,6 @@
                                 <div>
                                     <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
                                     <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                                    <!-- Google地圖超連結按鈕 -->
                                     <a href="https://maps.app.goo.gl/DciR2zvujZA6u9GL8" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
                                         🗺️ 點擊獲取 Google 地圖 ➔
                                     </a>
@@ -254,6 +276,7 @@
         let products = []; 
         let currentFilter = 'all';
         let currentSortOrder = 'default'; 
+        let searchQuery = ''; // 新增：儲存當前搜尋文字
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
@@ -301,19 +324,33 @@
 
                 document.getElementById('loading-view').classList.add('hidden');
                 document.getElementById('product-list-view').classList.remove('hidden');
-                renderListView('all');
+                renderListView();
             } catch (error) {
                 console.error("資料解析發生錯誤:", error);
                 document.getElementById('loading-view').innerHTML = `<p class="text-red-500 text-xs">資料載入失敗 (${error.message})</p>`;
             }
         }
 
-        function renderListView(filter = 'all') {
+        // 修改：整合搜尋文字的即時渲染篩選
+        function renderListView() {
             const container = document.getElementById('product-list-view');
             container.innerHTML = '';
             
-            let filteredProducts = filter === 'all' ? [...products] : products.filter(p => p.category === filter);
+            // 1. 進行分類篩選
+            let filteredProducts = currentFilter === 'all' ? [...products] : products.filter(p => p.category === currentFilter);
             
+            // 2. 進行搜尋關鍵字篩選 (支援名稱、規格、機況說明)
+            if (searchQuery.trim() !== '') {
+                const query = searchQuery.toLowerCase().trim();
+                filteredProducts = filteredProducts.filter(p => {
+                    const matchTitle = p.title.toLowerCase().includes(query);
+                    const matchCondition = p.condition.toLowerCase().includes(query);
+                    const matchSpecs = p.specs.some(spec => spec.toLowerCase().includes(query));
+                    return matchTitle || matchCondition || matchSpecs;
+                });
+            }
+
+            // 3. 進行排序篩選
             if (currentSortOrder === 'price-asc') {
                 filteredProducts.sort((a, b) => a.price - b.price); 
             } else if (currentSortOrder === 'price-desc') {
@@ -321,7 +358,7 @@
             }
             
             if (filteredProducts.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">目前該分類暫無現貨，歡迎私訊預約保留！</div>`;
+                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">沒有找到符合條件的商品，換個關鍵字試試看吧！</div>`;
                 return;
             }
 
@@ -352,6 +389,32 @@
                 `;
                 container.innerHTML += card;
             });
+        }
+
+        // 新增：處理搜尋列輸入事件
+        function handleSearchInput() {
+            const input = document.getElementById('search-input');
+            const clearBtn = document.getElementById('clear-search-btn');
+            searchQuery = input.value;
+
+            // 控制清除按鈕的顯示/隱藏
+            if (searchQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            showListView();
+            renderListView();
+        }
+
+        // 新增：清除搜尋文字
+        function clearSearch() {
+            const input = document.getElementById('search-input');
+            input.value = '';
+            searchQuery = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            renderListView();
         }
 
         let currentActiveProductId = null;
@@ -439,7 +502,7 @@
         function filterProducts(category) {
             currentFilter = category;
             showListView();
-            renderListView(category);
+            renderListView();
             
             ['all', 'office', 'gaming'].forEach(cat => {
                 const btn = document.getElementById(`btn-${cat}`);
@@ -451,13 +514,14 @@
         function handleSortChange() {
             const sortSelect = document.getElementById('price-sort');
             currentSortOrder = sortSelect.value;
-            renderListView(currentFilter);
+            renderListView();
         }
 
         function resetFilters() {
             currentFilter = 'all';
             currentSortOrder = 'default';
             document.getElementById('price-sort').value = 'default';
+            clearSearch();
             filterProducts('all');
         }
 
