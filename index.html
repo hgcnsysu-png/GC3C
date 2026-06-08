@@ -71,4 +71,185 @@
                                 <button onclick="selectOfficeSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
                                 <button onclick="selectOfficeSize('13', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">13 吋以下</button>
                                 <button onclick="selectOfficeSize('14', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">14 吋</button>
-                                <button onclick="selectOfficeSize('1
+                                <button onclick="selectOfficeSize('15', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">15 吋以上</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-group relative flex-1 sm:flex-none">
+                        <button onclick="toggleDropdown('gaming-menu', event)" id="btn-gaming" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
+                            <span>電競遊戲</span> <span class="text-[9px] text-gray-400">▼</span>
+                        </button>
+                        <div id="gaming-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
+                            <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
+                                <button onclick="selectGamingSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
+                                <button onclick="selectGamingSize('14', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">14 吋以下</button>
+                                <button onclick="selectGamingSize('15', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">15.6 吋</button>
+                                <button onclick="selectGamingSize('16', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">16 吋以上</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative w-full sm:w-36">
+                    <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
+                        <option value="default">預設排序</option>
+                        <option value="price-asc">價位：低 ➔ 高</option>
+                        <option value="price-desc">價位：高 ➔ 低</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">
+                        ▼
+                    </div>
+                </div>
+
+                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden lg:block">關於我們</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
+        
+        <div id="filter-indicator-bar" class="mb-6 flex flex-wrap gap-2 items-center text-xs hidden">
+            <span class="text-gray-400 font-medium">當前篩選：</span>
+            <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
+                <span></span>
+                <button onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">×</button>
+            </span>
+        </div>
+
+        <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
+            <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
+            <p>正在從雲端同步最新庫存...</p>
+        </div>
+
+        <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+        </div>
+
+        <div id="product-detail-view" class="hidden">
+            <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
+                <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
+            </button>
+            
+            <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
+                    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
+                    </div>
+                    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto relative group/mainimg">
+                        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightboxFromDetail()">
+                        <button onclick="prevDetailImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
+                        <button onclick="nextDetailImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-between">
+                    <div>
+                        <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
+                        <h2 id="detail-title" class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-4"></h2>
+                        <div id="detail-specs" class="flex flex-wrap gap-2 mb-6"></div>
+                        <div class="border-t border-gray-100 pt-6 mt-6">
+                            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">商品機況與配件</h3>
+                            <p id="detail-condition" class="text-gray-600 leading-relaxed text-sm whitespace-pre-line"></p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-100 pt-6 mt-8 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-gray-400 font-medium">直購價</p>
+                            <span id="detail-price" class="text-3xl font-extrabold text-gray-900 tracking-tight"></span>
+                        </div>
+                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
+                            私訊 LINE 購買
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
+                        
+                        <div class="text-[13px] text-gray-500 leading-relaxed space-y-4">
+                            <p class="text-gray-600 font-medium">
+                                我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
+                        <span class="text-[12.5px] text-gray-600 font-medium">在地深耕 · 品質保證</span>
+                        <span class="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            實體據點 · 售後有保障
+                        </span>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">LOCATION & SERVICE</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">📍</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
+                                    <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
+                                    <a href="http://maps.google.com/?q=高雄市鳳山區新強路59號1樓" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
+                                        🗺️ 點擊獲取 Google 地圖 ➔
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">📞</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900 text-[13.5px]">聯絡電話</p>
+                                    <p class="text-gray-500 text-xs mt-0.5 font-medium tracking-wide">0934-198-250</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">🛠️</span>
+                                <div class="w-full">
+                                    <p class="font-semibold text-gray-900 text-[13.5px] mb-1.5">核心業務</p>
+                                    <div class="text-gray-500 space-y-1 text-xs leading-relaxed bg-gray-50/60 p-2.5 rounded-xl border border-gray-50">
+                                        <p class="whitespace-nowrap">• 精緻客製｜全新主機組裝與專業銷售</p>
+                                        <p class="whitespace-nowrap">• 多元選購｜全新及二手筆電嚴選銷售</p>
+                                        <p class="whitespace-nowrap">• 全方位維修｜桌上型與筆記型電腦維修</p>
+                                        <p class="whitespace-nowrap">• 企業級支援｜伺服器硬體維護與修繕</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT & HOURS</h4>
+                        
+                        <div class="mb-5 bg-white/5 border border-white/10 rounded-xl p-3 flex gap-3 items-start">
+                            <span class="text-base mt-0.5">⏰</span>
+                            <div class="text-xs space-y-1">
+                                <p class="font-semibold text-white/90">營業時間</p>
+                                <p class="text-white/60 text-[11px]">週一至週五 11:00 - 20:00</p>
+                                <p class="text-white/60 text-[11px]">週六 11:00 - 17:00 <span class="text-red-400 font-medium ml-1">週日公休 (建議提前預約)</span></p>
+                            </div>
+                        </div>
+
+                        <h5 class="text-lg font-bold mb-1">需要維修或看機？</h5>
+                        <p class="text-[11.5px] text-gray-400 leading-relaxed mb-5">歡迎透過以下管道與我們聯繫，我們將盡快為您服務。</p>
+                    </div>
+                    
+                    <div class="space-y-2.5">
+                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
+                            💬 官方 LINE 線上諮詢
+                        </a>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
+                                📞 電話聯絡
+                            </a>
+                            <a href="
