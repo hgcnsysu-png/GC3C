@@ -13,18 +13,34 @@
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col">
 
     <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="text-center sm:text-left cursor-pointer" onclick="filterProducts('all')">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left cursor-pointer" onclick="resetFilters()">
                 <h1 class="text-xl font-bold tracking-wider text-gray-900">冠丞3C</h1>
                 <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="flex bg-gray-100 p-1 rounded-xl gap-1">
-                    <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all">全部商品</button>
-                    <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">文書商務</button>
-                    <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all">電競遊戲</button>
+            
+            <!-- 分類與排序控制區塊 -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto justify-center md:justify-end">
+                <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center">
+                    <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">全部商品</button>
+                    <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">文書商務</button>
+                    <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">電競遊戲</button>
                 </div>
-                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden sm:block">關於我們</button>
+                
+                <!-- 💡 新增：價位排序下拉選單 -->
+                <div class="relative w-full sm:w-40">
+                    <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
+                        <option value="default">預設排序</option>
+                        <option value="price-asc">價位：低 ➔ 高</option>
+                        <option value="price-desc">價位：高 ➔ 低</option>
+                    </select>
+                    <!-- 自訂下拉小箭頭 -->
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">
+                        ▼
+                    </div>
+                </div>
+
+                <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden md:block">關於我們</button>
             </div>
         </div>
     </header>
@@ -175,33 +191,26 @@
         </div>
     </footer>
 
-    <!-- 全螢幕大圖檢視燈箱 (Lightbox) —— 滑鼠靠近即現箭頭精簡版 -->
+    <!-- 全螢幕大圖檢視燈箱 (Lightbox) -->
     <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
         
-        <!-- 圖片與感應區域包裝層 -->
         <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
             
-            <!-- 放大後的圖片本體 -->
             <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
             
-            <!-- 💡 左半邊感應區：滑鼠靠近時，裡面的按鈕（left-arrow-btn）就會被觸發顯現 -->
             <div onclick="prevLightboxImage(event)" class="absolute left-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-start pl-4 group/leftzone">
                 <button id="left-arrow-btn" class="text-white/20 group-hover/leftzone:text-white group-hover/leftzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/leftzone:opacity-100 pointer-events-none">‹</button>
             </div>
             
-            <!-- 💡 右半邊感應區：滑鼠靠近時，裡面的按鈕（right-arrow-btn）就會被觸發顯現 -->
             <div onclick="nextLightboxImage(event)" class="absolute right-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-end pr-4 group/rightzone">
                 <button id="right-arrow-btn" class="text-white/20 group-hover/rightzone:text-white group-hover/rightzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/rightzone:opacity-100 pointer-events-none">›</button>
             </div>
             
-            <!-- 底部圖片頁數小圓點提示 -->
             <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
         </div>
 
-        <!-- 右上角關閉按鈕 -->
         <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">&times;</button>
         
-        <!-- 底部隱蔽式操作指引提示字 -->
         <div class="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/30 tracking-wider pointer-events-none select-none max-w-md mx-auto px-4">
             <span class="block md:hidden">💡 左右滑動螢幕即可切換照片</span>
             <span class="hidden md:block">💡 點擊大圖左右側或使用鍵盤左右鍵 ➔ 即可切換照片</span>
@@ -219,6 +228,7 @@
 
         let products = []; 
         let currentFilter = 'all';
+        let currentSortOrder = 'default'; // 💡 新增：用來記錄目前的排序狀態
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
@@ -276,7 +286,16 @@
         function renderListView(filter = 'all') {
             const container = document.getElementById('product-list-view');
             container.innerHTML = '';
-            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            // 1. 先篩選分類
+            let filteredProducts = filter === 'all' ? [...products] : products.filter(p => p.category === filter);
+            
+            // 2. 💡 執行價位排序邏輯
+            if (currentSortOrder === 'price-asc') {
+                filteredProducts.sort((a, b) => a.price - b.price); // 低到高
+            } else if (currentSortOrder === 'price-desc') {
+                filteredProducts.sort((a, b) => b.price - a.price); // 高到低
+            }
             
             if (filteredProducts.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">目前該分類暫無現貨，歡迎私訊預約保留！</div>`;
@@ -401,9 +420,24 @@
             
             ['all', 'office', 'gaming'].forEach(cat => {
                 const btn = document.getElementById(`btn-${cat}`);
-                if (cat === category) btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all";
-                else btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all";
+                if (cat === category) btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none";
+                else btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none";
             });
+        }
+
+        // 💡 新增：處理排序選單變更
+        function handleSortChange() {
+            const sortSelect = document.getElementById('price-sort');
+            currentSortOrder = sortSelect.value;
+            renderListView(currentFilter);
+        }
+
+        // 💡 新增：點擊 Logo 回首頁時重設所有篩選與排序
+        function resetFilters() {
+            currentFilter = 'all';
+            currentSortOrder = 'default';
+            document.getElementById('price-sort').value = 'default';
+            filterProducts('all');
         }
 
         // ==================== 🖼️ 全螢幕燈箱控制邏輯 ====================
