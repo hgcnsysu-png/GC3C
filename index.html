@@ -27,7 +27,7 @@
                     <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">電競遊戲</button>
                 </div>
                 
-                <!-- 💡 新增：價位排序下拉選單 -->
+                <!-- 價位排序下拉選單 -->
                 <div class="relative w-full sm:w-40">
                     <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                         <option value="default">預設排序</option>
@@ -113,53 +113,97 @@
 
         <!-- 關於我們 & 聯絡資訊區塊 -->
         <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 
-                <div class="lg:col-span-1">
-                    <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed mb-4">
-                        我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。
-                    </p>
-                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        實體據點 · 售後有保障
-                    </span>
+                <!-- ABOUT US 區塊 -->
+                <div class="lg:col-span-5 flex flex-col justify-between pr-2">
+                    <div>
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">關於 冠丞 3C</h3>
+                        
+                        <div class="text-[13.5px] text-gray-500 leading-relaxed space-y-5">
+                            <p class="text-gray-600 font-medium">
+                                電腦出現狀況了嗎？想組裝新主機卻不知從何下手？<br>
+                                在地經營多年，提供最貼心的電腦服務：
+                            </p>
+                            
+                            <ul class="space-y-3.5">
+                                <li class="flex items-center gap-2.5 whitespace-nowrap overflow-x-auto no-scrollbar">
+                                    <span class="text-base flex-shrink-0">✅</span>
+                                    <div class="text-gray-600">
+                                        <strong class="text-gray-800">硬體升級：</strong>全新主機組裝、各品牌筆電銷售（新機/二手）。
+                                    </div>
+                                </li>
+                                <li class="flex items-center gap-2.5 whitespace-nowrap overflow-x-auto no-scrollbar">
+                                    <span class="text-base flex-shrink-0">✅</span>
+                                    <div class="text-gray-600">
+                                        <strong class="text-gray-800">技術檢測：</strong>桌機維修、筆電修繕、伺服器專業維護。
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <p class="text-gray-600 font-medium pt-1">
+                                在地深耕，品質保證。您的數位設備，由我們來守護。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            實體據點 · 售後有保障
+                        </span>
+                    </div>
                 </div>
 
-                <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">SERVICE & LOCATION</h4>
-                    <ul class="space-y-4 text-sm">
-                        <li class="flex items-start gap-3">
-                            <span class="text-base mt-0.5">📍</span>
-                            <div>
-                                <p class="font-semibold text-gray-900">服務據點</p>
-                                <p class="text-gray-500 mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-base mt-0.5">🛠️</span>
-                            <div>
-                                <p class="font-semibold text-gray-900">核心業務</p>
-                                <p class="text-gray-500 mt-0.5">桌上型電腦維修 / 內部清潔保養 / 故障診斷分析</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-base mt-0.5">⏰</span>
-                            <div>
-                                <p class="font-semibold text-gray-900">營業時間</p>
-                                <div class="text-gray-500 mt-1 space-y-0.5 text-xs">
-                                    <p>週一至週五 11:00 - 20:00</p>
-                                    <p>週六 11:00 - 17:00</p>
-                                    <p class="text-red-500 font-medium">週日公休</p>
-                                    <p class="text-gray-400 pt-1">💡 建議提前預約</p>
+                <!-- SERVICE & LOCATION 區塊（核心業務與電話已更新） -->
+                <div class="lg:col-span-4 bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">SERVICE & LOCATION</h4>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">📍</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900">服務據點</p>
+                                    <p class="text-gray-500 mt-0.5">高雄市鳳山區新強路59號1樓</p>
                                 </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">📞</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900">聯絡電話</p>
+                                    <p class="text-gray-500 mt-0.5 font-medium tracking-wide">0934-198-250</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-base mt-0.5">🛠️</span>
+                                <div>
+                                    <p class="font-semibold text-gray-900 mb-1">核心業務</p>
+                                    <div class="text-gray-500 space-y-1 text-xs">
+                                        <p>• 全新主機組裝與專業銷售</p>
+                                        <p>• 全新 / 二手筆電嚴選銷售</p>
+                                        <p>• 桌上型與筆記型電腦維修</p>
+                                        <p>• 伺服器硬體維護與修繕</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex items-start gap-3 pt-4 border-t border-gray-50 mt-4">
+                        <span class="text-base mt-0.5">⏰</span>
+                        <div>
+                            <p class="font-semibold text-gray-900 text-xs">營業時間</p>
+                            <div class="text-gray-500 mt-1 space-y-0.5 text-[11px]">
+                                <p>週一至週五 11:00 - 20:00 │ 週六 11:00 - 17:00</p>
+                                <p class="text-red-500 font-medium">週日公休 （建議提前預約）</p>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-gray-900 text-white rounded-3xl p-8 shadow-sm flex flex-col justify-between">
+                <!-- CONTACT 區塊 -->
+                <div class="lg:col-span-3 bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT</h4>
                         <h5 class="text-xl font-bold mb-2">需要維修或看機？</h5>
@@ -175,7 +219,7 @@
                                 📞 電話聯絡
                             </a>
                             <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
-                                🔵 FB 粉絲專頁
+                                🔵 FB 專頁
                             </a>
                         </div>
                     </div>
@@ -228,7 +272,7 @@
 
         let products = []; 
         let currentFilter = 'all';
-        let currentSortOrder = 'default'; // 💡 新增：用來記錄目前的排序狀態
+        let currentSortOrder = 'default'; 
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
@@ -287,14 +331,12 @@
             const container = document.getElementById('product-list-view');
             container.innerHTML = '';
             
-            // 1. 先篩選分類
             let filteredProducts = filter === 'all' ? [...products] : products.filter(p => p.category === filter);
             
-            // 2. 💡 執行價位排序邏輯
             if (currentSortOrder === 'price-asc') {
-                filteredProducts.sort((a, b) => a.price - b.price); // 低到高
+                filteredProducts.sort((a, b) => a.price - b.price); 
             } else if (currentSortOrder === 'price-desc') {
-                filteredProducts.sort((a, b) => b.price - a.price); // 高到低
+                filteredProducts.sort((a, b) => b.price - a.price); 
             }
             
             if (filteredProducts.length === 0) {
@@ -425,14 +467,12 @@
             });
         }
 
-        // 💡 新增：處理排序選單變更
         function handleSortChange() {
             const sortSelect = document.getElementById('price-sort');
             currentSortOrder = sortSelect.value;
             renderListView(currentFilter);
         }
 
-        // 💡 新增：點擊 Logo 回首頁時重設所有篩選與排序
         function resetFilters() {
             currentFilter = 'all';
             currentSortOrder = 'default';
@@ -440,7 +480,7 @@
             filterProducts('all');
         }
 
-        // ==================== 🖼️ 全螢幕燈箱控制邏輯 ====================
+        // ==================== 全螢幕燈箱控制邏輯 ====================
         function openLightboxFromDetail() {
             const mainImg = document.getElementById('detail-main-img');
             const startIndex = parseInt(mainImg.dataset.index) || 0;
