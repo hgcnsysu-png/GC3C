@@ -31,29 +31,46 @@
 
     <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
         
+        <!-- 讀取中狀態 -->
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
             <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
             <p>正在從雲端同步最新庫存...</p>
         </div>
 
+        <!-- 商品列表區塊 -->
         <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
         </div>
 
+        <!-- 商品詳情頁面區塊 -->
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
             </button>
             
+            <!-- 白色大卡片 -->
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
+                <!-- 【左半邊】：商品圖片展示區塊 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
+                    <!-- 左側：直向排列的小縮圖 -->
                     <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
-                        </div>
-                    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto">
+                    </div>
+                    <!-- 右側：超級大主圖展示區 -->
+                    <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto relative group/mainimg">
+                        
+                        <!-- 主圖本體 -->
                         <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightboxFromDetail()">
+                        
+                        <!-- 詳情頁：左切換按鈕 -->
+                        <button onclick="prevDetailImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
+                        
+                        <!-- 詳情頁：右切換按鈕 -->
+                        <button onclick="nextDetailImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
+                        
                     </div>
                 </div>
 
+                <!-- 【右半邊】：商品文字與規格資訊 -->
                 <div class="flex flex-col justify-between">
                     <div>
                         <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
@@ -75,7 +92,11 @@
                     </div>
                 </div>
 
-            </div> </div> <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
+            </div>
+        </div>
+
+        <!-- 關於我們 & 聯絡資訊區塊 -->
+        <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 
                 <div class="lg:col-span-1">
@@ -134,4 +155,343 @@
                             💬 官方 LINE 線上諮詢
                         </a>
                         <div class="grid grid-cols-2 gap-2">
-                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium
+                            <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                                📞 電話聯絡
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-3 px-2 rounded-xl font-medium transition">
+                                🔵 FB 粉絲專頁
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-8 text-center text-xs text-gray-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <p>© 2026 冠丞3C. 全台皆可寄送 / 支援面交驗機</p>
+        </div>
+    </footer>
+
+    <!-- 全螢幕大圖檢視燈箱 (Lightbox) —— 滑鼠靠近即現箭頭精簡版 -->
+    <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
+        
+        <!-- 圖片與感應區域包裝層 -->
+        <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            
+            <!-- 放大後的圖片本體 -->
+            <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
+            
+            <!-- 💡 左半邊感應區：滑鼠靠近時，裡面的按鈕（left-arrow-btn）就會被觸發顯現 -->
+            <div onclick="prevLightboxImage(event)" class="absolute left-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-start pl-4 group/leftzone">
+                <button id="left-arrow-btn" class="text-white/20 group-hover/leftzone:text-white group-hover/leftzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/leftzone:opacity-100 pointer-events-none">‹</button>
+            </div>
+            
+            <!-- 💡 右半邊感應區：滑鼠靠近時，裡面的按鈕（right-arrow-btn）就會被觸發顯現 -->
+            <div onclick="nextLightboxImage(event)" class="absolute right-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-end pr-4 group/rightzone">
+                <button id="right-arrow-btn" class="text-white/20 group-hover/rightzone:text-white group-hover/rightzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/rightzone:opacity-100 pointer-events-none">›</button>
+            </div>
+            
+            <!-- 底部圖片頁數小圓點提示 -->
+            <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
+        </div>
+
+        <!-- 右上角關閉按鈕 -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">&times;</button>
+        
+        <!-- 底部隱蔽式操作指引提示字 -->
+        <div class="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/30 tracking-wider pointer-events-none select-none max-w-md mx-auto px-4">
+            <span class="block md:hidden">💡 左右滑動螢幕即可切換照片</span>
+            <span class="hidden md:block">💡 點擊大圖左右側或使用鍵盤左右鍵 ➔ 即可切換照片</span>
+        </div>
+    </div>
+
+    <script>
+        function scrollToAbout() {
+            showListView();
+            const aboutSection = document.getElementById('about-section');
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const SHEETY_API_URL = "https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1";
+
+        let products = []; 
+        let currentFilter = 'all';
+
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function getProp(obj, names) {
+            for (let name of names) {
+                if (obj[name] !== undefined && obj[name] !== null) return obj[name];
+                let lowerName = name.toLowerCase();
+                if (obj[lowerName] !== undefined && obj[lowerName] !== null) return obj[lowerName];
+            }
+            return "";
+        }
+
+        async function fetchProductsFromCloud() {
+            try {
+                const response = await fetch(SHEETY_API_URL);
+                const data = await response.json();
+                const rawProducts = data.products || Object.values(data)[0];
+                
+                if (!rawProducts || rawProducts.length === 0) throw new Error("找不到任何商品資料列。");
+
+                products = rawProducts.map(p => {
+                    let rawId = getProp(p, ['id', 'ID', '序號']);
+                    let rawTitle = getProp(p, ['title', 'TITLE', '商品名稱', '名稱']);
+                    let rawCategory = getProp(p, ['category', 'CATEGORY', '分類']);
+                    let rawSpecs = getProp(p, ['specs', 'SPECS', '規格', '商品規格']);
+                    let rawImages = getProp(p, ['images', 'IMAGES', '圖片', '商品圖片']);
+                    let rawCondition = getProp(p, ['condition', 'CONDITION', '機況', '商品機況']);
+                    let rawPrice = getProp(p, ['price', 'PRICE', '價格', '直購價']);
+                    let rawLineLink = getProp(p, ['lineLink', 'linelink', 'line', 'LINE連結']);
+
+                    return {
+                        id: rawId ? parseInt(rawId) : Math.floor(Math.random() * 100000),
+                        title: rawTitle || "未命名商品",
+                        category: rawCategory || "office",
+                        specs: rawSpecs ? rawSpecs.toString().split(',').map(s => s.trim()) : [],
+                        images: rawImages ? rawImages.toString().split(',').map(i => i.trim()) : ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'],
+                        condition: rawCondition || "暫無說明",
+                        price: rawPrice ? parseInt(rawPrice.toString().replace(/[^0-9]/g, '')) : 0,
+                        lineLink: rawLineLink || "https://line.me/R/ti/p/@138uoksb"
+                    }
+                });
+
+                document.getElementById('loading-view').classList.add('hidden');
+                document.getElementById('product-list-view').classList.remove('hidden');
+                renderListView('all');
+            } catch (error) {
+                console.error("資料解析發生錯誤:", error);
+                document.getElementById('loading-view').innerHTML = `<p class="text-red-500 text-xs">資料載入失敗 (${error.message})</p>`;
+            }
+        }
+
+        function renderListView(filter = 'all') {
+            const container = document.getElementById('product-list-view');
+            container.innerHTML = '';
+            const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">目前該分類暫無現貨，歡迎私訊預約保留！</div>`;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${spec}</span>`).join('');
+                const card = `
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
+                        <div onclick="showDetailView(${product.id})" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative">
+                            <img src="${product.images[0]}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white/95 text-xs text-gray-800 px-3 py-1.5 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition duration-300 font-medium">查看商品詳情</span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 onclick="showDetailView(${product.id})" class="text-base font-bold text-gray-900 mb-2 cursor-pointer hover:text-gray-600 transition truncate">${product.title}</h3>
+                                <div class="flex flex-wrap gap-1 mb-4">${specBadges}</div>
+                                <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-4">${product.condition}</p>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-50">
+                                <span class="text-base font-bold text-gray-900">NT$ ${product.price.toLocaleString()}</span>
+                                <button onclick="showDetailView(${product.id})" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition flex items-center gap-1">
+                                    詳細規格 ➔
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        let currentActiveProductId = null;
+
+        function showDetailView(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            currentActiveProductId = id; 
+            document.getElementById('product-list-view').classList.add('hidden');
+            document.getElementById('product-detail-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            document.getElementById('detail-title').innerText = product.title;
+            document.getElementById('detail-category').innerText = product.category === 'gaming' ? '電競遊戲' : '文書商務';
+            document.getElementById('detail-condition').innerText = product.condition;
+            document.getElementById('detail-price').innerText = `NT$ ${product.price.toLocaleString()}`;
+            document.getElementById('detail-line-btn').href = product.lineLink;
+
+            updateDetailImageDOM(0);
+        }
+
+        function updateDetailImageDOM(index) {
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || !product.images[index]) return;
+
+            const mainImg = document.getElementById('detail-main-img');
+            mainImg.src = product.images[index];
+            mainImg.dataset.index = index;
+
+            const thumbsContainer = document.getElementById('detail-thumbs');
+            thumbsContainer.innerHTML = product.images.map((img, idx) => `
+                <div onmouseenter="syncMainImageFromHover('${img}', ${idx}, this)" onclick="openLightboxFromThumb(${idx})" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${idx === index ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
+                    <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
+                </div>
+            `).join('');
+            
+            const activeThumb = thumbsContainer.children[index];
+            if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+
+        function syncMainImageFromHover(src, index, thumbElement) {
+            const mainImg = document.getElementById('detail-main-img');
+            mainImg.src = src;
+            mainImg.dataset.index = index;
+            
+            const thumbs = thumbElement.parentElement.children;
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].classList.remove('border-gray-900');
+                thumbs[i].classList.add('border-transparent');
+            }
+            thumbElement.classList.remove('border-transparent');
+            thumbElement.classList.add('border-gray-900');
+        }
+
+        function nextDetailImage(event) {
+            if (event) event.stopPropagation(); 
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || product.images.length <= 1) return;
+
+            const mainImg = document.getElementById('detail-main-img');
+            let currentIndex = parseInt(mainImg.dataset.index) || 0;
+            let nextIndex = (currentIndex + 1) % product.images.length;
+            
+            updateDetailImageDOM(nextIndex);
+        }
+
+        function prevDetailImage(event) {
+            if (event) event.stopPropagation(); 
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || product.images.length <= 1) return;
+
+            const mainImg = document.getElementById('detail-main-img');
+            let currentIndex = parseInt(mainImg.dataset.index) || 0;
+            let prevIndex = (currentIndex - 1 + product.images.length) % product.images.length;
+            
+            updateDetailImageDOM(prevIndex);
+        }
+
+        function showListView() {
+            document.getElementById('product-detail-view').classList.add('hidden');
+            document.getElementById('product-list-view').classList.remove('hidden');
+        }
+
+        function filterProducts(category) {
+            currentFilter = category;
+            showListView();
+            renderListView(category);
+            
+            ['all', 'office', 'gaming'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if (cat === category) btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all";
+                else btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all";
+            });
+        }
+
+        // ==================== 🖼️ 全螢幕燈箱控制邏輯 ====================
+        function openLightboxFromDetail() {
+            const mainImg = document.getElementById('detail-main-img');
+            const startIndex = parseInt(mainImg.dataset.index) || 0;
+            initLightbox(startIndex);
+        }
+
+        function openLightboxFromThumb(index) {
+            initLightbox(index);
+        }
+
+        function initLightbox(index) {
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || !product.images.length) return;
+
+            currentLightboxImages = product.images;
+            currentLightboxIndex = index;
+
+            const lightbox = document.getElementById('image-lightbox');
+            lightbox.classList.remove('hidden');
+            updateLightboxDOM();
+
+            setTimeout(() => { lightbox.classList.remove('opacity-0'); }, 10);
+        }
+
+        function updateLightboxDOM() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const dotsContainer = document.getElementById('lightbox-dots');
+            lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+            
+            if (currentLightboxImages.length > 1) {
+                dotsContainer.innerHTML = currentLightboxImages.map((_, idx) => `
+                    <span class="w-2 h-2 rounded-full transition-all duration-300 ${idx === currentLightboxIndex ? 'bg-white scale-125' : 'bg-white/30'}"></span>
+                `).join('');
+            } else {
+                dotsContainer.innerHTML = '';
+            }
+        }
+
+        function nextLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+            updateLightboxDOM();
+            updateDetailImageDOM(currentLightboxIndex);
+        }
+
+        function prevLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+            updateLightboxDOM();
+            updateDetailImageDOM(currentLightboxIndex);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('image-lightbox');
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => { lightbox.classList.add('hidden'); }, 300);
+        }
+
+        const lightboxContainer = document.getElementById('image-lightbox');
+        lightboxContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        lightboxContainer.addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); }, { passive: true });
+
+        function handleSwipeGesture() {
+            const swipeThreshold = 50; 
+            if (touchStartX - touchEndX > swipeThreshold) nextLightboxImage();
+            else if (touchEndX - touchStartX > swipeThreshold) prevLightboxImage();
+        }
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            const lightboxHidden = document.getElementById('image-lightbox').classList.contains('hidden');
+            if (!lightboxHidden) {
+                if (evt.key === "Escape" || evt.keyCode === 27) closeLightbox();
+                else if (evt.key === "ArrowRight" || evt.keyCode === 39) nextLightboxImage();
+                else if (evt.key === "ArrowLeft" || evt.keyCode === 37) prevLightboxImage();
+            } else {
+                if (evt.key === "Escape" || evt.keyCode === 27) showListView();
+            }
+        };
+
+        window.onload = () => {
+            fetchProductsFromCloud();
+        };
+    </script>
+</body>
+</html>
