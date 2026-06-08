@@ -9,7 +9,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* 電腦版 (全螢幕時) 依舊保留滑鼠懸浮即顯示的效果 */
         @media (min-width: 640px) {
             .dropdown-group:hover .dropdown-menu {
                 opacity: 1;
@@ -18,7 +17,6 @@
             }
         }
 
-        /* 透過 JavaScript 動態控制顯示的類別（同時支援手機點擊與電腦控制） */
         .dropdown-menu.is-active {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -36,31 +34,16 @@
             </div>
             
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
-                
+                <!-- 搜尋列 -->
                 <div class="relative w-full sm:w-48">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
-                        🔍
-                    </span>
-                    <input 
-                        type="text" 
-                        id="search-input" 
-                        oninput="handleSearchInput()"
-                        placeholder="搜尋商品..." 
-                        class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all"
-                    >
-                    <button 
-                        id="clear-search-btn" 
-                        onclick="clearSearch()" 
-                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 text-sm hidden"
-                    >
-                        ×
-                    </button>
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">🔍</span>
+                    <input type="text" id="search-input" oninput="handleSearchInput()" placeholder="搜尋商品..." class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all">
+                    <button id="clear-search-btn" onclick="clearSearch()" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 text-sm hidden">×</button>
                 </div>
 
+                <!-- 主分類控制 -->
                 <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center relative">
-                    <button onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">
-                        全部商品
-                    </button>
+                    <button onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">全部商品</button>
                     
                     <div class="dropdown-group relative flex-1 sm:flex-none">
                         <button onclick="toggleDropdown('office-menu', event)" id="btn-office" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
@@ -91,15 +74,14 @@
                     </div>
                 </div>
                 
+                <!-- 價位排序 -->
                 <div class="relative w-full sm:w-36">
                     <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                         <option value="default">預設排序</option>
                         <option value="price-asc">價位：低 ➔ 高</option>
                         <option value="price-desc">價位：高 ➔ 低</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">
-                        ▼
-                    </div>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">▼</div>
                 </div>
 
                 <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-4 hidden lg:block">關於我們</button>
@@ -108,7 +90,7 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
-        
+        <!-- 當前篩選標籤提示 -->
         <div id="filter-indicator-bar" class="mb-6 flex flex-wrap gap-2 items-center text-xs hidden">
             <span class="text-gray-400 font-medium">當前篩選：</span>
             <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
@@ -117,31 +99,32 @@
             </span>
         </div>
 
+        <!-- 讀取中狀態 -->
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
-            <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
-            <p>正在從雲端同步最新庫存...</p>
+            <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status"></div>
+            <p id="loading-text">正在從雲端同步最新庫存...</p>
         </div>
 
-        <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-        </div>
+        <!-- 商品列表區塊 -->
+        <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
 
+        <!-- 商品詳情頁面區塊 -->
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
             </button>
             
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                
+                <!-- 左圖 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
-                    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
-                    </div>
+                    <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1"></div>
                     <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto relative group/mainimg">
                         <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightboxFromDetail()">
                         <button onclick="prevDetailImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
                         <button onclick="nextDetailImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
                     </div>
                 </div>
-
+                <!-- 右文 -->
                 <div class="flex flex-col justify-between">
                     <div>
                         <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
@@ -157,39 +140,32 @@
                             <p class="text-xs text-gray-400 font-medium">直購價</p>
                             <span id="detail-price" class="text-3xl font-extrabold text-gray-900 tracking-tight"></span>
                         </div>
-                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
-                            私訊 LINE 購買
-                        </a>
+                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">私訊 LINE 購買</a>
                     </div>
                 </div>
-
             </div>
         </div>
 
+        <!-- 關於我們 & 聯絡資訊 -->
         <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-                
+                <!-- 卡片 1 -->
                 <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
                         <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
                         <h3 class="text-xl font-bold text-gray-900 mb-4">關於 冠丞 3C</h3>
-                        
                         <div class="text-[13px] text-gray-500 leading-relaxed space-y-4">
-                            <p class="text-gray-600 font-medium">
-                                我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。
-                            </p>
+                            <p class="text-gray-600 font-medium">我們深耕高雄鳳山，專注於 **桌上型電腦維修、全機深層清潔保養與專業硬體檢測分析**。所有上架的嚴選二手筆電與電腦零組件，皆經過嚴格的燒機與功能測試，確保機況優良才交付到您手中。</p>
                         </div>
                     </div>
-                    
                     <div class="mt-6 pt-4 border-t border-gray-50 flex items-center justify-between">
                         <span class="text-[12.5px] text-gray-600 font-medium">在地深耕 · 品質保證</span>
                         <span class="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            實體據點 · 售後有保障
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>實體據點 · 售後有保障
                         </span>
                     </div>
                 </div>
-
+                <!-- 卡片 2 -->
                 <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div class="space-y-5">
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">LOCATION & SERVICE</h4>
@@ -199,9 +175,6 @@
                                 <div>
                                     <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
                                     <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                                    <a href="https://maps.google.com" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
-                                        🗺️ 點擊獲取 Google 地圖 ➔
-                                    </a>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
@@ -215,4 +188,489 @@
                                 <span class="text-base mt-0.5">🛠️</span>
                                 <div class="w-full">
                                     <p class="font-semibold text-gray-900 text-[13.5px] mb-1.5">核心業務</p>
-                                    <div class="text-gray-500 space-y-1 text-xs leading-
+                                    <div class="text-gray-500 space-y-1 text-xs leading-relaxed bg-gray-50/60 p-2.5 rounded-xl border border-gray-50">
+                                        <p class="whitespace-nowrap">• 精緻客製｜全新主機組裝與專業銷售</p>
+                                        <p class="whitespace-nowrap">• 多元選購｜全新及二手筆電嚴選銷售</p>
+                                        <p class="whitespace-nowrap">• 全方位維修｜桌上型與筆記型電腦維修</p>
+                                        <p class="whitespace-nowrap">• 全機清潔｜專業全機精細清潔保養維護</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 卡片 3 -->
+                <div class="bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT & HOURS</h4>
+                        <div class="mb-5 bg-white/5 border border-white/10 rounded-xl p-3 flex gap-3 items-start">
+                            <span class="text-base mt-0.5">⏰</span>
+                            <div class="text-xs space-y-1">
+                                <p class="font-semibold text-white/90">營業時間</p>
+                                <p class="text-white/60 text-[11px]">週一至週五 11:00 - 20:00</p>
+                                <p class="text-white/60 text-[11px]">週六 11:00 - 17:00 <span class="text-red-400 font-medium ml-1">週日公休</span></p>
+                            </div>
+                        </div>
+                        <h5 class="text-lg font-bold mb-1">需要維修或看機？</h5>
+                        <p class="text-[11.5px] text-gray-400 leading-relaxed mb-5">歡迎透過官方 LINE 與我們聯繫預約。</p>
+                    </div>
+                    <div class="space-y-2.5">
+                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">💬 官方 LINE 線上諮詢</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-8 text-center text-xs text-gray-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <p>© 2026 冠丞3C. 全台皆可寄送 / 支援面交驗機</p>
+        </div>
+    </footer>
+
+    <!-- 燈箱 (Lightbox) -->
+    <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
+        <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
+            <div onclick="prevLightboxImage(event)" class="absolute left-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-start pl-4 group/leftzone">
+                <button class="text-white/20 group-hover/leftzone:text-white group-hover/leftzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/leftzone:opacity-100 pointer-events-none">‹</button>
+            </div>
+            <div onclick="nextLightboxImage(event)" class="absolute right-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-end pr-4 group/rightzone">
+                <button class="text-white/20 group-hover/rightzone:text-white group-hover/rightzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/rightzone:opacity-100 pointer-events-none">›</button>
+            </div>
+            <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
+        </div>
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50">×</button>
+    </div>
+
+    <script>
+        function scrollToAbout() {
+            showListView();
+            document.getElementById('about-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Sheety API 網址
+        const SHEETY_API_URL = "https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1";
+
+        let products = []; 
+        let currentFilter = 'all';
+        let currentSortOrder = 'default'; 
+        let searchQuery = ''; 
+        let subFilterType = 'all'; 
+
+        let currentLightboxImages = [];
+        let currentLightboxIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function toggleDropdown(menuId, event) {
+            if (event) event.stopPropagation();
+            const targetMenu = document.getElementById(menuId);
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+            if (targetMenu.classList.contains('is-active')) {
+                targetMenu.classList.remove('is-active');
+            } else {
+                allMenus.forEach(menu => menu.classList.remove('is-active'));
+                targetMenu.classList.add('is-active');
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('is-active'));
+        }
+
+        // ✨ 萬能欄位盲測工具：不管欄位叫什麼名字、大寫、小寫、中文字，通通都能抓到
+        function getProp(obj, names) {
+            if (!obj) return "";
+            for (let name of names) {
+                if (obj[name] !== undefined && obj[name] !== null) return obj[name];
+                let lowerName = name.toLowerCase();
+                if (obj[lowerName] !== undefined && obj[lowerName] !== null) return obj[lowerName];
+            }
+            // 盲測所有可能包含特定字眼的欄位
+            for (let key in obj) {
+                let lowerKey = key.toLowerCase();
+                if (names.some(n => lowerKey.includes(n.toLowerCase()) || n.toLowerCase().includes(lowerKey))) {
+                    if (obj[key] !== undefined && obj[key] !== null) return obj[key];
+                }
+            }
+            return "";
+        }
+
+        async function fetchProductsFromCloud() {
+            try {
+                console.log("正在嘗試發送 API 請求到 Sheety...");
+                const response = await fetch(SHEETY_API_URL);
+                if (!response.ok) throw new Error(`HTTP 錯誤！狀態碼: ${response.status}`);
+                
+                const data = await response.json();
+                console.log("從雲端後台成功取得原始回應資料:", data);
+
+                // 自動判斷陣列包裹的節點
+                const rawProducts = data.products || data.表單回覆1 || Object.values(data)[0];
+                console.log("解包後的原始商品陣列項目數量:", rawProducts ? rawProducts.length : 0);
+                
+                if (!rawProducts || !Array.isArray(rawProducts) || rawProducts.length === 0) {
+                    throw new Error("找不到任何商品資料列，請確認後台是否有填入至少一筆庫存。");
+                }
+
+                products = [];
+                rawProducts.forEach((p, idx) => {
+                    try {
+                        if (!p) return;
+                        
+                        // 讀取各欄位（中英雙向保險）
+                        let rawId = getProp(p, ['id', 'ID', '序號', '時間戳記']);
+                        let rawTitle = getProp(p, ['title', 'TITLE', '商品名稱', '名稱', '筆電型號']);
+                        let rawCategory = getProp(p, ['category', 'CATEGORY', '分類', '用途類別']);
+                        let rawSpecs = getProp(p, ['specs', 'SPECS', '規格', '商品規格', '規格配備']);
+                        let rawImages = getProp(p, ['images', 'IMAGES', '圖片', '商品圖片', '照片']);
+                        let rawCondition = getProp(p, ['condition', 'CONDITION', '機況', '商品機況', '備註說明']);
+                        let rawPrice = getProp(p, ['price', 'PRICE', '價格', '直購價', '售價']);
+                        let rawLineLink = getProp(p, ['lineLink', 'linelink', 'line', 'LINE連結']);
+
+                        // 強大空值預防機制
+                        let finalTitle = rawTitle ? rawTitle.toString().trim() : "";
+                        if (!finalTitle) return; // 如果這列連名字都沒有，直接跳過防崩潰
+
+                        let imgArr = ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'];
+                        if (rawImages) {
+                            let parsedImgs = rawImages.toString().split(',').map(i => i.trim()).filter(Boolean);
+                            if (parsedImgs.length > 0) imgArr = parsedImgs;
+                        }
+
+                        let finalPrice = 0;
+                        if (rawPrice) {
+                            let numStr = rawPrice.toString().replace(/[^0-9]/g, '');
+                            if (numStr) finalPrice = parseInt(numStr);
+                        }
+
+                        products.push({
+                            id: rawId ? rawId.toString() : "id-" + idx + "-" + Math.floor(Math.random()*1000),
+                            title: finalTitle,
+                            category: rawCategory.toString().toLowerCase().includes('gam') || rawCategory.toString().includes('遊戲') || rawCategory.toString().includes('電競') ? 'gaming' : 'office',
+                            specs: rawSpecs ? rawSpecs.toString().split(',').map(s => s.trim()).filter(Boolean) : [],
+                            images: imgArr,
+                            condition: rawCondition || "功能正常，外觀良好。",
+                            price: finalPrice,
+                            lineLink: rawLineLink || "https://line.me/R/ti/p/@138uoksb"
+                        });
+                    } catch (lineErr) {
+                        console.warn(`解析第 ${idx} 行資料時發生局部錯誤，已安全跳過：`, lineErr);
+                    }
+                });
+
+                console.log("最終過濾洗淨後的合法商品總數:", products.length);
+
+                document.getElementById('loading-view').classList.add('hidden');
+                document.getElementById('product-list-view').classList.remove('hidden');
+                renderListView();
+            } catch (error) {
+                console.error("資料讀取或解析發生嚴重崩潰錯誤:", error);
+                document.getElementById('loading-text').innerHTML = `
+                    <span class="text-red-500 font-bold block mb-2">❌ 雲端同步連線失敗</span>
+                    <span class="text-xs text-gray-400 block max-w-md mx-auto bg-gray-50 p-3 rounded-xl border border-gray-100 text-left">
+                        錯誤原因：${error.message}<br><br>
+                        請至瀏覽器按下 <b class="text-gray-700">F12</b> 切換到 <b class="text-gray-700">Console (主控台)</b> 檢視詳細錯誤報表。通常為 Sheety API 額度用盡或 Google 表單欄位名稱不符。
+                    </span>
+                `;
+            }
+        }
+
+        function renderListView() {
+            const container = document.getElementById('product-list-view');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            let filteredProducts = currentFilter === 'all' ? [...products] : products.filter(p => p.category === currentFilter);
+            
+            if (subFilterType !== 'all') {
+                filteredProducts = filteredProducts.filter(p => {
+                    const specsText = p.specs.join(' ').toLowerCase();
+                    const titleText = p.title.toLowerCase();
+                    
+                    const hasSize = (sizeStr) => {
+                        if (specsText.includes(sizeStr + '吋') || specsText.includes(sizeStr + ' 吋') || specsText.includes(sizeStr + '.6') || specsText.includes(sizeStr + ' inch')) return true;
+                        const regex = new RegExp(sizeStr + '(吋|模|機|螢幕|\\s|$)', 'i');
+                        if (sizeStr === '14' && (titleText.includes('15') || titleText.includes('15.6') || specsText.includes('15'))) return false;
+                        return regex.test(titleText);
+                    };
+
+                    if (currentFilter === 'office') {
+                        if (subFilterType === '13') return hasSize('13') || hasSize('12') || hasSize('11') || titleText.includes('13.3');
+                        if (subFilterType === '14') return hasSize('14') && !titleText.includes('15');
+                        if (subFilterType === '15') return hasSize('15') || hasSize('15.6') || hasSize('16') || hasSize('17');
+                    } else if (currentFilter === 'gaming') {
+                        if (subFilterType === '14') return (hasSize('14') || titleText.includes('14吋')) && !titleText.includes('15');
+                        if (subFilterType === '15') return hasSize('15') || hasSize('15.6');
+                        if (subFilterType === '16') return hasSize('16') || hasSize('17') || hasSize('18');
+                    }
+                    return true;
+                });
+            }
+
+            if (searchQuery.trim() !== '') {
+                const query = searchQuery.toLowerCase().trim();
+                filteredProducts = filteredProducts.filter(p => 
+                    p.title.toLowerCase().includes(query) || 
+                    p.condition.toLowerCase().includes(query) || 
+                    p.specs.some(s => s.toLowerCase().includes(query))
+                );
+            }
+
+            if (currentSortOrder === 'price-asc') filteredProducts.sort((a, b) => a.price - b.price);
+            else if (currentSortOrder === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
+            
+            updateIndicatorBar();
+
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">目前沒有此規格的商品在庫，歡迎私訊預約客製機型！</div>`;
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${spec}</span>`).join('');
+                const displayPrice = product.price > 0 ? `NT$ ${product.price.toLocaleString()}` : '請私訊詢價';
+
+                const card = `
+                    <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
+                        <div onclick="showDetailView('${product.id}')" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative">
+                            <img src="${product.images[0]}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-300 flex items-center justify-center">
+                                <span class="bg-white/95 text-xs text-gray-800 px-3 py-1.5 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition duration-300 font-medium">查看商品詳情</span>
+                            </div>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 onclick="showDetailView('${product.id}')" class="text-base font-bold text-gray-900 mb-2 cursor-pointer hover:text-gray-600 transition truncate">${product.title}</h3>
+                                <div class="flex flex-wrap gap-1 mb-4">${specBadges}</div>
+                                <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-4">${product.condition}</p>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-gray-50">
+                                <span class="text-base font-bold text-gray-900">${displayPrice}</span>
+                                <button onclick="showDetailView('${product.id}')" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition flex items-center gap-1">詳細規格 ➔</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function selectOfficeSize(size, event) {
+            if (event) event.stopPropagation();
+            currentFilter = 'office';
+            subFilterType = size;
+            closeAllDropdowns(); 
+            updateCategoryButtonUI();
+            showListView();
+            renderListView();
+        }
+
+        function selectGamingSize(size, event) {
+            if (event) event.stopPropagation();
+            currentFilter = 'gaming';
+            subFilterType = size;
+            closeAllDropdowns(); 
+            updateCategoryButtonUI();
+            showListView();
+            renderListView();
+        }
+
+        function updateIndicatorBar() {
+            const bar = document.getElementById('filter-indicator-bar');
+            const badgeText = document.querySelector('#indicator-badge span');
+            if (subFilterType === 'all') {
+                bar.classList.add('hidden');
+            } else {
+                bar.classList.remove('hidden');
+                let label = subFilterType === '13' ? '13吋以下' : subFilterType === '14' ? '14吋' : subFilterType === '15' ? '15吋以上' : '16吋以上';
+                badgeText.innerText = `${currentFilter === 'office' ? '文書商務' : '電競遊戲'} ➔ ${label}`;
+            }
+        }
+
+        function resetSubFilters() {
+            subFilterType = 'all';
+            renderListView();
+        }
+
+        function filterProducts(category, event) {
+            if (event) event.stopPropagation();
+            currentFilter = category;
+            subFilterType = 'all'; 
+            closeAllDropdowns();
+            showListView();
+            updateCategoryButtonUI();
+            renderListView();
+        }
+
+        function updateCategoryButtonUI() {
+            ['all', 'office', 'gaming'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if (cat === currentFilter) {
+                    btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none";
+                } else {
+                    btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none";
+                }
+            });
+        }
+
+        function handleSearchInput() {
+            searchQuery = document.getElementById('search-input').value;
+            document.getElementById('clear-search-btn').classList.toggle('hidden', searchQuery.length === 0);
+            showListView();
+            renderListView();
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            searchQuery = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            renderListView();
+        }
+
+        function handleSortChange() {
+            currentSortOrder = document.getElementById('price-sort').value;
+            renderListView();
+        }
+
+        function resetFilters() {
+            currentFilter = 'all';
+            currentSortOrder = 'default';
+            subFilterType = 'all';
+            document.getElementById('price-sort').value = 'default';
+            clearSearch();
+            filterProducts('all');
+        }
+
+        let currentActiveProductId = null;
+
+        function showDetailView(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            currentActiveProductId = id; 
+            document.getElementById('product-list-view').classList.add('hidden');
+            document.getElementById('product-detail-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            document.getElementById('detail-title').innerText = product.title;
+            document.getElementById('detail-category').innerText = product.category === 'gaming' ? '電競遊戲' : '文書商務';
+            document.getElementById('detail-condition').innerText = product.condition;
+            document.getElementById('detail-price').innerText = product.price > 0 ? `NT$ ${product.price.toLocaleString()}` : '請私訊詢價';
+            document.getElementById('detail-line-btn').href = product.lineLink;
+
+            document.getElementById('detail-specs').innerHTML = product.specs.map(s => `
+                <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-lg font-medium">${s}</span>
+            `).join('');
+
+            updateDetailImageDOM(0);
+        }
+
+        function updateDetailImageDOM(index) {
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || !product.images[index]) return;
+
+            const mainImg = document.getElementById('detail-main-img');
+            mainImg.src = product.images[index];
+            mainImg.dataset.index = index;
+
+            const thumbsContainer = document.getElementById('detail-thumbs');
+            thumbsContainer.innerHTML = product.images.map((img, idx) => `
+                <div onmouseenter="syncMainImageFromHover('${img}', ${idx}, this)" onclick="openLightboxFromThumb(${idx})" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${idx === index ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
+                    <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
+                </div>
+            `).join('');
+        }
+
+        function syncMainImageFromHover(src, index, thumbElement) {
+            document.getElementById('detail-main-img').src = src;
+            document.getElementById('detail-main-img').dataset.index = index;
+            Array.from(thumbElement.parentElement.children).forEach(t => t.classList.replace('border-gray-900', 'border-transparent'));
+            thumbElement.classList.replace('border-transparent', 'border-gray-900');
+        }
+
+        function nextDetailImage(event) {
+            if (event) event.stopPropagation();
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product) return;
+            let idx = (parseInt(document.getElementById('detail-main-img').dataset.index) + 1) % product.images.length;
+            updateDetailImageDOM(idx);
+        }
+
+        function prevDetailImage(event) {
+            if (event) event.stopPropagation();
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product) return;
+            let idx = (parseInt(document.getElementById('detail-main-img').dataset.index) - 1 + product.images.length) % product.images.length;
+            updateDetailImageDOM(idx);
+        }
+
+        function showListView() {
+            document.getElementById('product-detail-view').classList.add('hidden');
+            document.getElementById('product-list-view').classList.remove('hidden');
+        }
+
+        function openLightboxFromDetail() {
+            initLightbox(parseInt(document.getElementById('detail-main-img').dataset.index) || 0);
+        }
+
+        function openLightboxFromThumb(index) {
+            initLightbox(index);
+        }
+
+        function initLightbox(index) {
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product) return;
+            currentLightboxImages = product.images;
+            currentLightboxIndex = index;
+            document.getElementById('image-lightbox').classList.remove('hidden');
+            updateLightboxDOM();
+            setTimeout(() => { document.getElementById('image-lightbox').classList.remove('opacity-0'); }, 10);
+        }
+
+        function updateLightboxDOM() {
+            document.getElementById('lightbox-img').src = currentLightboxImages[currentLightboxIndex];
+            document.getElementById('lightbox-dots').innerHTML = currentLightboxImages.length > 1 ? currentLightboxImages.map((_, idx) => `
+                <span class="w-2 h-2 rounded-full ${idx === currentLightboxIndex ? 'bg-white scale-125' : 'bg-white/30'}"></span>
+            `).join('') : '';
+        }
+
+        function nextLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+            updateLightboxDOM();
+        }
+
+        function prevLightboxImage(event) {
+            if (event) event.stopPropagation();
+            if (currentLightboxImages.length <= 1) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+            updateLightboxDOM();
+        }
+
+        function closeLightbox() {
+            document.getElementById('image-lightbox').classList.add('opacity-0');
+            setTimeout(() => { document.getElementById('image-lightbox').classList.add('hidden'); }, 300);
+        }
+
+        document.getElementById('image-lightbox').addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+        document.getElementById('image-lightbox').addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; if(touchStartX - touchEndX > 50) nextLightboxImage(); else if(touchEndX - touchStartX > 50) prevLightboxImage(); }, {passive:true});
+
+        document.onkeydown = function(evt) {
+            if (!document.getElementById('image-lightbox').classList.contains('hidden')) {
+                if (evt.key === "Escape") closeLightbox();
+                if (evt.key === "ArrowRight") nextLightboxImage();
+                if (evt.key === "ArrowLeft") prevLightboxImage();
+            } else if (evt.key === "Escape") {
+                showListView();
+            }
+        };
+
+        window.onload = () => {
+            fetchProductsFromCloud();
+        };
+    </script>
+</body>
+</html>
