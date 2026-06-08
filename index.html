@@ -8,9 +8,25 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* 電腦版 (全螢幕時) 依舊保留滑鼠懸浮即顯示的效果 */
+        @media (min-width: 640px) {
+            .dropdown-group:hover .dropdown-menu {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                pointer-events: auto;
+            }
+        }
+
+        /* 透過 JavaScript 動態控制顯示的類別（同時支援手機點擊與電腦控制） */
+        .dropdown-menu.is-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
     </style>
 </head>
-<body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col" onclick="closeAllDropdowns()">
 
     <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
@@ -22,8 +38,8 @@
             <!-- 分類、搜尋與排序控制區塊 -->
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
                 
-                <!-- 新增：極簡風格搜尋列 -->
-                <div class="relative w-full sm:w-60">
+                <!-- 搜尋列 -->
+                <div class="relative w-full sm:w-48">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
                         🔍
                     </span>
@@ -31,10 +47,9 @@
                         type="text" 
                         id="search-input" 
                         oninput="handleSearchInput()"
-                        placeholder="搜尋商品名稱、規格..." 
+                        placeholder="搜尋商品..." 
                         class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all"
                     >
-                    <!-- 清空搜尋按鈕 -->
                     <button 
                         id="clear-search-btn" 
                         onclick="clearSearch()" 
@@ -44,14 +59,48 @@
                     </button>
                 </div>
 
-                <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center">
-                    <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">全部商品</button>
-                    <button onclick="filterProducts('office')" id="btn-office" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">文書商務</button>
-                    <button onclick="filterProducts('gaming')" id="btn-gaming" class="px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none">電競遊戲</button>
+                <!-- 主分類控制區區塊 -->
+                <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center relative">
+                    <!-- 全部商品 -->
+                    <button onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">
+                        全部商品
+                    </button>
+                    
+                    <!-- 文書商務 (支援手機點擊切換) -->
+                    <div class="dropdown-group relative flex-1 sm:flex-none">
+                        <button onclick="toggleDropdown('office-menu', event)" id="btn-office" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
+                            <span>文書商務</span> <span class="text-[9px] text-gray-400">▼</span>
+                        </button>
+                        <!-- 下拉選單實體 -->
+                        <div id="office-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
+                            <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
+                                <button onclick="selectOfficeSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
+                                <button onclick="selectOfficeSize('13', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">13 吋以下</button>
+                                <button onclick="selectOfficeSize('14', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">14 吋</button>
+                                <button onclick="selectOfficeSize('15', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">15 吋以上</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 電競遊戲 (支援手機點擊切換) -->
+                    <div class="dropdown-group relative flex-1 sm:flex-none">
+                        <button onclick="toggleDropdown('gaming-menu', event)" id="btn-gaming" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
+                            <span>電競遊戲</span> <span class="text-[9px] text-gray-400">▼</span>
+                        </button>
+                        <!-- 下拉選單實體 -->
+                        <div id="gaming-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
+                            <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
+                                <button onclick="selectGamingSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
+                                <button onclick="selectGamingSize('14', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">14 吋以下</button>
+                                <button onclick="selectGamingSize('15', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">15.6 吋</button>
+                                <button onclick="selectGamingSize('16', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-500 hover:text-gray-900 transition">16 吋以上</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- 價位排序下拉選單 -->
-                <div class="relative w-full sm:w-40">
+                <div class="relative w-full sm:w-36">
                     <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                         <option value="default">預設排序</option>
                         <option value="price-asc">價位：低 ➔ 高</option>
@@ -69,6 +118,15 @@
 
     <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
         
+        <!-- 當前篩選標籤提示 -->
+        <div id="filter-indicator-bar" class="mb-6 flex flex-wrap gap-2 items-center text-xs hidden">
+            <span class="text-gray-400 font-medium">當前篩選：</span>
+            <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
+                <span></span>
+                <button onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">&times;</button>
+            </span>
+        </div>
+
         <!-- 讀取中狀態 -->
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
             <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
@@ -276,12 +334,36 @@
         let products = []; 
         let currentFilter = 'all';
         let currentSortOrder = 'default'; 
-        let searchQuery = ''; // 新增：儲存當前搜尋文字
+        let searchQuery = ''; 
+        let subFilterType = 'all'; 
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
         let touchStartX = 0;
         let touchEndX = 0;
+
+        // 📱 手機版選單切換核心邏輯
+        function toggleDropdown(menuId, event) {
+            if (event) event.stopPropagation(); // 防止點擊事件穿透
+
+            const targetMenu = document.getElementById(menuId);
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+
+            // 如果目前點擊的選單本來就開著，那就把它關掉
+            if (targetMenu.classList.contains('is-active')) {
+                targetMenu.classList.remove('is-active');
+            } else {
+                // 先關閉其他所有選單，再打開當前選單
+                allMenus.forEach(menu => menu.classList.remove('is-active'));
+                targetMenu.classList.add('is-active');
+            }
+        }
+
+        // 點擊空白處自動收合下拉選單
+        function closeAllDropdowns() {
+            const allMenus = document.querySelectorAll('.dropdown-menu');
+            allMenus.forEach(menu => menu.classList.remove('is-active'));
+        }
 
         function getProp(obj, names) {
             for (let name of names) {
@@ -331,15 +413,37 @@
             }
         }
 
-        // 修改：整合搜尋文字的即時渲染篩選
         function renderListView() {
             const container = document.getElementById('product-list-view');
             container.innerHTML = '';
             
-            // 1. 進行分類篩選
             let filteredProducts = currentFilter === 'all' ? [...products] : products.filter(p => p.category === currentFilter);
             
-            // 2. 進行搜尋關鍵字篩選 (支援名稱、規格、機況說明)
+            if (subFilterType !== 'all') {
+                filteredProducts = filteredProducts.filter(p => {
+                    const textToSearch = (p.title + p.condition + p.specs.join('')).toLowerCase();
+                    
+                    if (currentFilter === 'office') {
+                        if (subFilterType === '13') {
+                            return textToSearch.includes('13') || textToSearch.includes('12') || textToSearch.includes('11') || textToSearch.includes('13.3');
+                        } else if (subFilterType === '14') {
+                            return textToSearch.includes('14') || textToSearch.includes('14.1');
+                        } else if (subFilterType === '15') {
+                            return textToSearch.includes('15') || textToSearch.includes('16') || textToSearch.includes('17') || textToSearch.includes('15.6');
+                        }
+                    } else if (currentFilter === 'gaming') {
+                        if (subFilterType === '14') {
+                            return textToSearch.includes('14') || textToSearch.includes('13') || textToSearch.includes('14.1');
+                        } else if (subFilterType === '15') {
+                            return textToSearch.includes('15.6') || textToSearch.includes('15吋') || (textToSearch.includes('15') && !textToSearch.includes('15.6'));
+                        } else if (subFilterType === '16') {
+                            return textToSearch.includes('16') || textToSearch.includes('17') || textToSearch.includes('18');
+                        }
+                    }
+                    return true;
+                });
+            }
+
             if (searchQuery.trim() !== '') {
                 const query = searchQuery.toLowerCase().trim();
                 filteredProducts = filteredProducts.filter(p => {
@@ -350,15 +454,16 @@
                 });
             }
 
-            // 3. 進行排序篩選
             if (currentSortOrder === 'price-asc') {
                 filteredProducts.sort((a, b) => a.price - b.price); 
             } else if (currentSortOrder === 'price-desc') {
                 filteredProducts.sort((a, b) => b.price - a.price); 
             }
             
+            updateIndicatorBar();
+
             if (filteredProducts.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">沒有找到符合條件的商品，換個關鍵字試試看吧！</div>`;
+                container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">沒有找到符合該尺寸的規格庫存，換個條件試試看吧！</div>`;
                 return;
             }
 
@@ -391,13 +496,75 @@
             });
         }
 
-        // 新增：處理搜尋列輸入事件
+        function selectOfficeSize(size, event) {
+            if (event) event.stopPropagation();
+            currentFilter = 'office';
+            subFilterType = size;
+            closeAllDropdowns(); // 點選完畢自動關閉選單
+            updateCategoryButtonUI();
+            showListView();
+            renderListView();
+        }
+
+        function selectGamingSize(size, event) {
+            if (event) event.stopPropagation();
+            currentFilter = 'gaming';
+            subFilterType = size;
+            closeAllDropdowns(); // 點選完畢自動關閉選單
+            updateCategoryButtonUI();
+            showListView();
+            renderListView();
+        }
+
+        function updateIndicatorBar() {
+            const bar = document.getElementById('filter-indicator-bar');
+            const badgeText = document.querySelector('#indicator-badge span');
+            
+            if (subFilterType === 'all') {
+                bar.classList.add('hidden');
+            } else {
+                bar.classList.remove('hidden');
+                if (currentFilter === 'office') {
+                    let label = subFilterType === '13' ? '13吋以下' : subFilterType === '14' ? '14吋' : '15吋以上';
+                    badgeText.innerText = `文書商務 ➔ ${label}`;
+                } else if (currentFilter === 'gaming') {
+                    let label = subFilterType === '14' ? '14吋以下' : subFilterType === '15' ? '15.6吋' : '16吋以上';
+                    badgeText.innerText = `電競遊戲 ➔ ${label}`;
+                }
+            }
+        }
+
+        function resetSubFilters() {
+            subFilterType = 'all';
+            renderListView();
+        }
+
+        function filterProducts(category, event) {
+            if (event) event.stopPropagation();
+            currentFilter = category;
+            subFilterType = 'all'; 
+            closeAllDropdowns();
+            showListView();
+            updateCategoryButtonUI();
+            renderListView();
+        }
+
+        function updateCategoryButtonUI() {
+            ['all', 'office', 'gaming'].forEach(cat => {
+                const btn = document.getElementById(`btn-${cat}`);
+                if (cat === currentFilter) {
+                    btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none";
+                } else {
+                    btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none" + (cat !== 'all' ? " w-full flex items-center justify-center gap-0.5" : "");
+                }
+            });
+        }
+
         function handleSearchInput() {
             const input = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search-btn');
             searchQuery = input.value;
 
-            // 控制清除按鈕的顯示/隱藏
             if (searchQuery.length > 0) {
                 clearBtn.classList.remove('hidden');
             } else {
@@ -408,13 +575,27 @@
             renderListView();
         }
 
-        // 新增：清除搜尋文字
         function clearSearch() {
             const input = document.getElementById('search-input');
             input.value = '';
             searchQuery = '';
             document.getElementById('clear-search-btn').classList.add('hidden');
             renderListView();
+        }
+
+        function handleSortChange() {
+            const sortSelect = document.getElementById('price-sort');
+            currentSortOrder = sortSelect.value;
+            renderListView();
+        }
+
+        function resetFilters() {
+            currentFilter = 'all';
+            currentSortOrder = 'default';
+            subFilterType = 'all';
+            document.getElementById('price-sort').value = 'default';
+            clearSearch();
+            filterProducts('all');
         }
 
         let currentActiveProductId = null;
@@ -499,33 +680,6 @@
             document.getElementById('product-list-view').classList.remove('hidden');
         }
 
-        function filterProducts(category) {
-            currentFilter = category;
-            showListView();
-            renderListView();
-            
-            ['all', 'office', 'gaming'].forEach(cat => {
-                const btn = document.getElementById(`btn-${cat}`);
-                if (cat === category) btn.className = "px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none";
-                else btn.className = "px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex-1 sm:flex-none";
-            });
-        }
-
-        function handleSortChange() {
-            const sortSelect = document.getElementById('price-sort');
-            currentSortOrder = sortSelect.value;
-            renderListView();
-        }
-
-        function resetFilters() {
-            currentFilter = 'all';
-            currentSortOrder = 'default';
-            document.getElementById('price-sort').value = 'default';
-            clearSearch();
-            filterProducts('all');
-        }
-
-        // ==================== 全螢幕燈箱控制邏輯 ====================
         function openLightboxFromDetail() {
             const mainImg = document.getElementById('detail-main-img');
             const startIndex = parseInt(mainImg.dataset.index) || 0;
