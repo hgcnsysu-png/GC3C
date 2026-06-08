@@ -35,10 +35,8 @@
                 <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
             </div>
             
-            <!-- 分類、搜尋與排序控制區塊 -->
             <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
                 
-                <!-- 搜尋列 -->
                 <div class="relative w-full sm:w-48">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
                         🔍
@@ -55,23 +53,19 @@
                         onclick="clearSearch()" 
                         class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 text-sm hidden"
                     >
-                        &times;
+                        ×
                     </button>
                 </div>
 
-                <!-- 主分類控制區區塊 -->
                 <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center relative">
-                    <!-- 全部商品 -->
                     <button onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">
                         全部商品
                     </button>
                     
-                    <!-- 文書商務 (支援手機點擊切換) -->
                     <div class="dropdown-group relative flex-1 sm:flex-none">
                         <button onclick="toggleDropdown('office-menu', event)" id="btn-office" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
                             <span>文書商務</span> <span class="text-[9px] text-gray-400">▼</span>
                         </button>
-                        <!-- 下拉選單實體 -->
                         <div id="office-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
                             <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
                                 <button onclick="selectOfficeSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
@@ -82,12 +76,10 @@
                         </div>
                     </div>
 
-                    <!-- 電競遊戲 (支援手機點擊切換) -->
                     <div class="dropdown-group relative flex-1 sm:flex-none">
                         <button onclick="toggleDropdown('gaming-menu', event)" id="btn-gaming" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
                             <span>電競遊戲</span> <span class="text-[9px] text-gray-400">▼</span>
                         </button>
-                        <!-- 下拉選單實體 -->
                         <div id="gaming-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
                             <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
                                 <button onclick="selectGamingSize('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 hover:text-gray-900 transition">所有尺寸</button>
@@ -99,7 +91,6 @@
                     </div>
                 </div>
                 
-                <!-- 價位排序下拉選單 -->
                 <div class="relative w-full sm:w-36">
                     <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                         <option value="default">預設排序</option>
@@ -118,26 +109,22 @@
 
     <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
         
-        <!-- 當前篩選標籤提示 -->
         <div id="filter-indicator-bar" class="mb-6 flex flex-wrap gap-2 items-center text-xs hidden">
             <span class="text-gray-400 font-medium">當前篩選：</span>
             <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
                 <span></span>
-                <button onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">&times;</button>
+                <button onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">×</button>
             </span>
         </div>
 
-        <!-- 讀取中狀態 -->
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
             <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
             <p>正在從雲端同步最新庫存...</p>
         </div>
 
-        <!-- 商品列表區塊 -->
         <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
         </div>
 
-        <!-- 商品詳情頁面區塊 -->
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
                 <span class="transform group-hover:-translate-x-1 transition-transform">←</span> 返回商品列表
@@ -145,7 +132,6 @@
             
             <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
                 
-                <!-- 【左半邊】：商品圖片展示區塊 -->
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-start md:h-[450px]">
                     <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
                     </div>
@@ -156,7 +142,6 @@
                     </div>
                 </div>
 
-                <!-- 【右半邊】：商品文字與規格資訊 -->
                 <div class="flex flex-col justify-between">
                     <div>
                         <span id="detail-category" class="inline-block bg-gray-100 text-gray-500 text-xs font-semibold px-2.5 py-1 rounded-full mb-3 uppercase tracking-wider"></span>
@@ -181,11 +166,9 @@
             </div>
         </div>
 
-        <!-- ＝ 關於我們 & 聯絡資訊區塊 ＝ -->
         <section id="about-section" class="mt-20 border-t border-gray-100 pt-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
                 
-                <!-- 卡片 1：關於我們 -->
                 <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
                         <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">ABOUT US</h2>
@@ -222,7 +205,6 @@
                     </div>
                 </div>
 
-                <!-- 卡片 2：據點與核心業務 -->
                 <div class="bg-white border border-gray-100 rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div class="space-y-5">
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest">LOCATION & SERVICE</h4>
@@ -232,7 +214,7 @@
                                 <div>
                                     <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
                                     <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                                    <a href="https://maps.app.goo.gl/DciR2zvujZA6u9GL8" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
+                                    <a href="https://maps.google.com/?q=高雄市鳳山區新強路59號1樓" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
                                         🗺️ 點擊獲取 Google 地圖 ➔
                                     </a>
                                 </div>
@@ -260,7 +242,6 @@
                     </div>
                 </div>
 
-                <!-- 卡片 3：營業時間與快速聯絡 -->
                 <div class="bg-gray-900 text-white rounded-3xl p-7 shadow-sm flex flex-col justify-between">
                     <div>
                         <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">CONTACT & HOURS</h4>
@@ -303,7 +284,6 @@
         </div>
     </footer>
 
-    <!-- 全螢幕大圖檢視燈箱 (Lightbox) -->
     <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
         <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
             <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
@@ -315,7 +295,7 @@
             </div>
             <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
         </div>
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">&times;</button>
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">×</button>
         <div class="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/30 tracking-wider pointer-events-none select-none max-w-md mx-auto px-4">
             <span class="block md:hidden">💡 左右滑動螢幕即可切換照片</span>
             <span class="hidden md:block">💡 點擊大圖左右側或使用鍵盤左右鍵 ➔ 即可切換照片</span>
@@ -329,7 +309,8 @@
             aboutSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        const SHEETY_API_URL = "https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1";
+        // 加上安全網址編碼處理中文空格
+        const SHEETY_API_URL = encodeURI("https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1");
 
         let products = []; 
         let currentFilter = 'all';
@@ -421,24 +402,34 @@
             
             if (subFilterType !== 'all') {
                 filteredProducts = filteredProducts.filter(p => {
-                    const textToSearch = (p.title + p.condition + p.specs.join('')).toLowerCase();
+                    // 品名、機況與規格全部黏成字串來擷取比對
+                    const textToSearch = (p.title + " " + p.condition + " " + p.specs.join(' ')).toLowerCase();
                     
+                    let size = null;
+                    
+                    // 1. 優先尋找有明確尺寸單位的文字（例如：13.3吋, 14 吋, 15.6", 14inch）
+                    const sizeWithUnit = textToSearch.match(/([0-9.]+)\s*(?:吋|\"|inch)/);
+                    if (sizeWithUnit) {
+                        size = parseFloat(sizeWithUnit[1]);
+                    } else {
+                        // 2. 如果沒有帶單位，精準擷取獨立的數字（排除前後黏著字母的處理器型號如 i5-1135G7、或商品號 NB-013）
+                        const looseSize = textToSearch.match(/(?:^|[^a-z0-9-])(13\.3|14\.1|15\.6|11|12|13|14|15|16|17|18)(?![0-9a-z.-])/);
+                        if (looseSize) {
+                            size = parseFloat(looseSize[1]);
+                        }
+                    }
+
+                    if (size === null) return false;
+
+                    // 3. 依據提取出的實際數字範圍做精確劃分
                     if (currentFilter === 'office') {
-                        if (subFilterType === '13') {
-                            return textToSearch.includes('13') || textToSearch.includes('12') || textToSearch.includes('11') || textToSearch.includes('13.3');
-                        } else if (subFilterType === '14') {
-                            return textToSearch.includes('14') || textToSearch.includes('14.1');
-                        } else if (subFilterType === '15') {
-                            return textToSearch.includes('15') || textToSearch.includes('16') || textToSearch.includes('17') || textToSearch.includes('15.6');
-                        }
+                        if (subFilterType === '13') return size <= 13.9;
+                        if (subFilterType === '14') return size >= 14 && size <= 14.9;
+                        if (subFilterType === '15') return size >= 15;
                     } else if (currentFilter === 'gaming') {
-                        if (subFilterType === '14') {
-                            return textToSearch.includes('14') || textToSearch.includes('13') || textToSearch.includes('14.1');
-                        } else if (subFilterType === '15') {
-                            return textToSearch.includes('15.6') || textToSearch.includes('15吋') || (textToSearch.includes('15') && !textToSearch.includes('15.6'));
-                        } else if (subFilterType === '16') {
-                            return textToSearch.includes('16') || textToSearch.includes('17') || textToSearch.includes('18');
-                        }
+                        if (subFilterType === '14') return size <= 14.9;
+                        if (subFilterType === '15') return size >= 15 && size <= 15.9;
+                        if (subFilterType === '16') return size >= 16;
                     }
                     return true;
                 });
