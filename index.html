@@ -313,8 +313,8 @@
             aboutSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 💡 修正：使用 encodeURI 處理中文 API 網址與空格，確保庫存同步成功
-        const SHEETY_API_URL = encodeURI("https://api.sheety.co/c639d54327c265ec5d7afbe9073b67d4/二手筆電上架後台 (回覆)/表單回覆1");
+        // 💡 修正：更換為你專屬的 Google Apps Script 免費不限流 API 網址
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbyX6eNovl5w4vO-HOb1JgESqHHiCX0J4MM0t8sCgSsfNdBHt-PHxjwB961-FgfzZiSz/exec";
 
         let products = []; 
         let currentFilter = 'all';
@@ -329,22 +329,19 @@
 
         // 📱 手機版選單切換核心邏輯
         function toggleDropdown(menuId, event) {
-            if (event) event.stopPropagation(); // 防止點擊事件穿透
+            if (event) event.stopPropagation();
 
             const targetMenu = document.getElementById(menuId);
             const allMenus = document.querySelectorAll('.dropdown-menu');
 
-            // 如果目前點擊的選單本來就開著，那就把它關掉
             if (targetMenu.classList.contains('is-active')) {
                 targetMenu.classList.remove('is-active');
             } else {
-                // 先關閉其他所有選單，再打開當前選單
                 allMenus.forEach(menu => menu.classList.remove('is-active'));
                 targetMenu.classList.add('is-active');
             }
         }
 
-        // 點擊空白處自動收合下拉選單
         function closeAllDropdowns() {
             const allMenus = document.querySelectorAll('.dropdown-menu');
             allMenus.forEach(menu => menu.classList.remove('is-active'));
@@ -359,31 +356,54 @@
             return "";
         }
 
+        // 💡 修正：改用 fetch 讀取 GAS 回傳的 JSON 陣列結構，並與你原有的邏輯完美對對應
         async function fetchProductsFromCloud() {
             try {
-                const response = await fetch(SHEETY_API_URL);
-                const data = await response.json();
-                const rawProducts = data.products || Object.values(data)[0];
+                const response = await fetch(GAS_API_URL);
+                const rawProducts = await response.json();
                 
                 if (!rawProducts || rawProducts.length === 0) throw new Error("找不到任何商品資料列。");
 
-                products = rawProducts.map(p => {
-                    let rawId = getProp(p, ['id', 'ID', '序號']);
-                    let rawTitle = getProp(p, ['title', 'TITLE', '商品名稱', '名稱']);
-                    let rawCategory = getProp(p, ['category', 'CATEGORY', '分類']);
-                    let rawSpecs = getProp(p, ['specs', 'SPECS', '規格', '商品規格']);
-                    let rawImages = getProp(p, ['images', 'IMAGES', '圖片', '商品圖片']);
-                    let rawCondition = getProp(p, ['condition', 'CONDITION', '機況', '商品機況']);
-                    let rawPrice = getProp(p, ['price', 'PRICE', '價格', '直購價']);
-                    let rawLineLink = getProp(p, ['lineLink', 'linelink', 'line', 'LINE連結']);
+                products = rawProducts.map((p, idx) => {
+                    // 自動兼容中英文試算表標題欄位
+                    let rawId = getProp(p, ['id', 'ID', '序號', '商品序號']);
+                    let rawTitle = getProp(p, ['title', 'TITLE', '商品名稱', '名稱', '型號']);
+                    let rawCategory = getProp(p, ['category', 'CATEGORY', '分類', '商品分類']);
+                    let rawSpecs = getProp(p, ['specs', 'SPECS', '規格', '商品規格', '硬體規格']);
+                    let rawImages = getProp(p, ['images', 'IMAGES', '圖片', '商品圖片', '圖片網址']);
+                    let rawCondition = getProp(p, ['condition', 'CONDITION', '機況', '商品機況', '機況說明']);
+                    let rawPrice = getProp(p, ['price', 'PRICE', '價格', '直購價', '售價']);
+                    let rawLineLink = getProp(p, ['lineLink', 'linelink', 'line', 'LINE連結', '購買連結']);
+
+                    // 處理規格轉陣列 (支援逗號、換行或 | 符號切分)
+                    let specsArray = [];
+                    if (rawSpecs) {
+                        specsArray = rawSpecs.toString().split(/[\n,，;；|]/).map(s => s.trim()).filter(s => s.length > 0);
+                    }
+
+                    // 處理多圖轉陣列 (支援逗號、換行或 | 符號切分)
+                    let imagesArray = ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'];
+                    if (rawImages) {
+                        const parsedImgs = rawImages.toString().split(/[\n,，|]/).map(i => i.trim()).filter(i => i.startsWith('http'));
+                        if (parsedImgs.length > 0) imagesArray = parsedImgs;
+                    }
+
+                    // 統一分類為小寫代碼 'office' 或 'gaming'
+                    let cleanCategory = "office";
+                    if (rawCategory) {
+                        let catStr = rawCategory.toString().toLowerCase();
+                        if (catStr.includes("gaming") || catStr.includes("電競") || catStr.includes("遊戲")) {
+                            cleanCategory = "gaming";
+                        }
+                    }
 
                     return {
-                        id: rawId ? parseInt(rawId) : Math.floor(Math.random() * 100000),
+                        id: rawId ? parseInt(rawId) : (idx + 1),
                         title: rawTitle || "未命名商品",
-                        category: rawCategory || "office",
-                        specs: rawSpecs ? rawSpecs.toString().split(',').map(s => s.trim()) : [],
-                        images: rawImages ? rawImages.toString().split(',').map(i => i.trim()) : ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'],
-                        condition: rawCondition || "暫無說明",
+                        category: cleanCategory,
+                        specs: specsArray,
+                        images: imagesArray,
+                        condition: rawCondition || "功能正常，機況良好。",
                         price: rawPrice ? parseInt(rawPrice.toString().replace(/[^0-9]/g, '')) : 0,
                         lineLink: rawLineLink || "https://line.me/R/ti/p/@138uoksb"
                     }
@@ -604,6 +624,12 @@
             document.getElementById('detail-condition').innerText = product.condition;
             document.getElementById('detail-price').innerText = `NT$ ${product.price.toLocaleString()}`;
             document.getElementById('detail-line-btn').href = product.lineLink;
+
+            // 渲染硬體標籤
+            const specsContainer = document.getElementById('detail-specs');
+            specsContainer.innerHTML = product.specs.map(spec => `
+                <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-xl border border-gray-200/60">${spec}</span>
+            `).join('');
 
             updateDetailImageDOM(0);
         }
