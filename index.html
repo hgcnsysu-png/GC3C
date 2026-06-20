@@ -4,6 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>冠丞3C | 優質嚴選 測試優良</title>
+    <meta name="description" content="冠丞3C 提供高雄鳳山全新與二手筆電、電競筆電、桌機組裝及電腦維修服務，全台寄送並支援面交驗機。">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://hgcnsysu-png.github.io/GC3C/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="冠丞3C">
+    <meta property="og:title" content="冠丞3C｜優質二手筆電與電腦服務">
+    <meta property="og:description" content="全新與二手筆電嚴選銷售、桌機組裝及電腦維修，全台寄送並支援面交驗機。">
+    <meta property="og:url" content="https://hgcnsysu-png.github.io/GC3C/">
+    <meta property="og:image" content="https://gcs.rimg.com.tw/g2/b/b2/34/22622793124404_739.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ComputerStore",
+        "name": "冠丞3C",
+        "url": "https://hgcnsysu-png.github.io/GC3C/",
+        "telephone": "+886-934-198-250",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "新強路59號1樓",
+            "addressLocality": "鳳山區",
+            "addressRegion": "高雄市",
+            "addressCountry": "TW"
+        },
+        "openingHours": ["Mo-Fr 11:00-20:00", "Sa 11:00-17:00"],
+        "sameAs": ["https://www.facebook.com/profile.php?id=100087183290571"]
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -24,20 +53,39 @@
             transform: translateY(0) scale(1);
             pointer-events: auto;
         }
+
+        @media (max-width: 1023px) {
+            #filter-panel:not(.is-open) {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col" onclick="closeAllDropdowns()">
 
-    <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col lg:flex-row justify-between items-center gap-4">
-<div class="text-center lg:text-left cursor-pointer" onclick="resetFilters(); showListView(); window.scrollTo({ top: 0, behavior: 'smooth' });">
-    <h1 class="text-xl font-bold tracking-wider text-gray-900">冠丞3C</h1>
-    <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
-</div>
-            
-            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
-                
-                <div class="relative w-full sm:w-48">
+    <header class="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-5 lg:px-6 py-3 flex flex-col lg:flex-row justify-between items-center gap-3">
+            <div class="flex items-center justify-between w-full lg:w-auto">
+                <button type="button" class="text-left" onclick="resetFilters(); window.scrollTo({ top: 0, behavior: 'smooth' });" aria-label="返回全部商品">
+                    <h1 class="text-xl font-bold tracking-wider text-gray-900">冠丞3C</h1>
+                    <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
+                </button>
+                <button type="button" id="mobile-filter-toggle" onclick="toggleFilterPanel(event)" aria-expanded="false" aria-controls="filter-panel" class="lg:hidden text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl px-3 py-2 transition">
+                    篩選與排序
+                </button>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-3 w-full lg:w-auto justify-center lg:justify-end">
+                <div class="relative w-full lg:w-48">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 text-xs">
                         🔍
                     </span>
@@ -48,22 +96,24 @@
                         placeholder="搜尋商品..." 
                         class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all"
                     >
-                    <button 
+                    <button type="button"
                         id="clear-search-btn" 
                         onclick="clearSearch()" 
+                        aria-label="清除搜尋"
                         class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 text-sm hidden"
                     >
                         ×
                     </button>
                 </div>
 
-                <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full sm:w-auto justify-center relative">
-                    <button onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 sm:flex-none">
-                        全部商品
-                    </button>
+                <div id="filter-panel" class="w-full lg:w-auto flex flex-col lg:flex-row items-center gap-3">
+                    <div class="flex bg-gray-100 p-1 rounded-xl gap-1 w-full lg:w-auto justify-center relative">
+                        <button type="button" onclick="filterProducts('all', event)" id="btn-all" class="px-4 py-2 text-xs rounded-lg bg-white text-gray-900 font-medium shadow-sm transition-all flex-1 lg:flex-none">
+                            全部商品
+                        </button>
                     
-                    <div class="dropdown-group relative flex-1 sm:flex-none">
-                        <button onclick="toggleDropdown('office-menu', event)" id="btn-office" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
+                    <div class="dropdown-group relative flex-1 lg:flex-none">
+                        <button type="button" onclick="toggleDropdown('office-menu', event)" id="btn-office" aria-expanded="false" aria-controls="office-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
                             <span>文書商務</span> <span class="text-[9px] text-gray-400">▼</span>
                         </button>
                         <div id="office-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
@@ -76,8 +126,8 @@
                         </div>
                     </div>
 
-                    <div class="dropdown-group relative flex-1 sm:flex-none">
-                        <button onclick="toggleDropdown('gaming-menu', event)" id="btn-gaming" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
+                    <div class="dropdown-group relative flex-1 lg:flex-none">
+                        <button type="button" onclick="toggleDropdown('gaming-menu', event)" id="btn-gaming" aria-expanded="false" aria-controls="gaming-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-0.5">
                             <span>電競遊戲</span> <span class="text-[9px] text-gray-400">▼</span>
                         </button>
                         <div id="gaming-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-36 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
@@ -89,10 +139,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <div class="relative flex-grow sm:w-36">
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full lg:w-auto">
+                    <div class="relative flex-grow lg:w-36">
                         <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                             <option value="default">預設排序</option>
                             <option value="price-asc">價位：低 ➔ 高</option>
@@ -103,9 +153,10 @@
                         </div>
                     </div>
 
-                    <button onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-3 whitespace-nowrap flex-shrink-0 py-2">
+                    <button type="button" onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-3 whitespace-nowrap flex-shrink-0 py-2">
                         關於我們
                     </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,6 +179,11 @@
 
         <div id="product-list-view" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
         </div>
+        <div id="load-more-wrap" class="hidden text-center mt-10">
+            <button type="button" onclick="loadMoreProducts()" class="bg-white border border-gray-200 hover:border-gray-300 hover:shadow-sm text-gray-700 text-sm font-medium px-8 py-3 rounded-2xl transition">
+                載入更多商品
+            </button>
+        </div>
 
         <div id="product-detail-view" class="hidden">
             <button onclick="showListView()" class="mb-8 text-sm text-gray-500 hover:text-gray-900 transition flex items-center gap-2 group">
@@ -140,9 +196,11 @@
                     <div id="detail-thumbs" class="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-x-visible md:overflow-y-auto max-h-full scrollbar-thin pb-2 md:pb-0 pr-0 md:pr-1">
                     </div>
                     <div class="order-1 md:order-2 md:col-span-4 bg-gray-50 rounded-2xl overflow-hidden shadow-sm h-full flex items-center justify-center border border-gray-100 aspect-video md:aspect-auto relative group/mainimg">
-                        <img id="detail-main-img" src="" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in" onclick="openLightboxFromDetail()">
-                        <button onclick="prevDetailImage(event)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
-                        <button onclick="nextDetailImage(event)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
+                        <button type="button" class="w-full h-full" onclick="openLightboxFromDetail()" aria-label="放大商品圖片">
+                            <img id="detail-main-img" src="" alt="" decoding="async" class="w-full h-full object-cover transition-all duration-300 cursor-zoom-in">
+                        </button>
+                        <button type="button" onclick="prevDetailImage(event)" aria-label="上一張商品圖片" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-100 lg:opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">‹</button>
+                        <button type="button" onclick="nextDetailImage(event)" aria-label="下一張商品圖片" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-2xl w-10 h-10 rounded-full flex items-center justify-center opacity-100 lg:opacity-0 group-hover/mainimg:opacity-100 transition duration-300 z-10 p-0">›</button>
                     </div>
                 </div>
 
@@ -161,7 +219,7 @@
                             <p class="text-xs text-gray-400 font-medium">直購價</p>
                             <span id="detail-price" class="text-3xl font-extrabold text-gray-900 tracking-tight"></span>
                         </div>
-                        <a id="detail-line-btn" href="#" target="_blank" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
+                        <a id="detail-line-btn" href="#" target="_blank" rel="noopener noreferrer" class="bg-[#06C755] hover:bg-[#05b34c] text-white text-sm font-bold px-8 py-3.5 rounded-2xl transition shadow-sm">
                             私訊 LINE 購買
                         </a>
                     </div>
@@ -218,7 +276,7 @@
                                 <div>
                                     <p class="font-semibold text-gray-900 text-[13.5px]">服務據點</p>
                                     <p class="text-gray-500 text-xs mt-0.5">高雄市鳳山區新強路59號1樓</p>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=高雄市鳳山區新強路59號" target="_blank" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
+                                    <a href="https://www.google.com/maps/search/?api=1&query=高雄市鳳山區新強路59號" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-[11px] text-blue-500 hover:text-blue-600 font-medium mt-1.5 hover:underline transition-all gap-1">
                                         🗺️ 點擊獲取 Google 地圖 ➔
                                     </a>
                                 </div>
@@ -264,14 +322,14 @@
                     </div>
                     
                     <div class="space-y-2.5">
-                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
+                        <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" rel="noopener noreferrer" class="w-full bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition shadow-sm">
                             💬 官方 LINE 線上諮詢
                         </a>
                         <div class="grid grid-cols-2 gap-2">
                             <a href="tel:0934198250" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
                                 📞 電話聯絡
                             </a>
-                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
+                            <a href="https://www.facebook.com/profile.php?id=100087183290571" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/15 text-white text-center text-xs py-2.5 px-2 rounded-xl font-medium transition">
                                 🔵 FB 專頁
                             </a>
                         </div>
@@ -288,9 +346,9 @@
         </div>
     </footer>
 
-    <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
+    <div id="image-lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="商品圖片檢視器" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 md:p-4 hidden opacity-0 transition-opacity duration-300 cursor-zoom-out select-none">
         <div class="relative max-w-full md:max-w-5xl max-h-[85vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
+            <img id="lightbox-img" src="" alt="" decoding="async" class="max-w-[95vw] max-h-[80vh] md:max-w-full md:max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-all duration-300">
             <div onclick="prevLightboxImage(event)" class="absolute left-0 top-0 w-1/2 h-full cursor-pointer z-10 flex items-center justify-start pl-4 group/leftzone">
                 <button id="left-arrow-btn" class="text-white/20 group-hover/leftzone:text-white group-hover/leftzone:bg-white/10 text-4xl font-light transition-all duration-200 rounded-full w-14 h-14 flex items-center justify-center p-0 md:opacity-0 group-hover/leftzone:opacity-100 pointer-events-none">‹</button>
             </div>
@@ -299,7 +357,7 @@
             </div>
             <div id="lightbox-dots" class="flex gap-2 mt-4 z-20"></div>
         </div>
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">×</button>
+        <button type="button" id="lightbox-close-btn" onclick="closeLightbox()" aria-label="關閉圖片檢視器" class="absolute top-4 right-4 text-white/50 hover:text-white hover:bg-white/10 text-3xl font-light transition rounded-xl w-12 h-12 flex items-center justify-center z-50 select-none">×</button>
         <div class="absolute bottom-6 left-0 right-0 text-center text-[11px] text-white/30 tracking-wider pointer-events-none select-none max-w-md mx-auto px-4">
             <span class="block md:hidden">💡 左右滑動螢幕即可切換照片</span>
             <span class="hidden md:block">💡 點擊大圖左右側或使用鍵盤左右鍵 ➔ 即可切換照片</span>
@@ -321,11 +379,49 @@
         let currentSortOrder = 'default'; 
         let searchQuery = ''; 
         let subFilterType = 'all'; 
+        let visibleProductLimit = 18;
+        const PRODUCTS_PER_PAGE = 18;
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
         let touchStartX = 0;
         let touchEndX = 0;
+        let lastFocusedElement = null;
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            })[char]);
+        }
+
+        function safeHttpUrl(value, fallback = '') {
+            try {
+                const url = new URL(String(value), window.location.href);
+                return url.protocol === 'https:' ? url.href : fallback;
+            } catch {
+                return fallback;
+            }
+        }
+
+        function normalizeSpecText(value) {
+            return String(value ?? '')
+                .replace(/(\d+(?:\.\d+)?)\s*inchs?/gi, '$1 吋')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function toggleFilterPanel(event) {
+            if (event) event.stopPropagation();
+            const panel = document.getElementById('filter-panel');
+            const button = document.getElementById('mobile-filter-toggle');
+            const isOpen = panel.classList.toggle('is-open');
+            button.setAttribute('aria-expanded', String(isOpen));
+            button.textContent = isOpen ? '收合篩選' : '篩選與排序';
+        }
 
         // 📱 手機版選單切換核心邏輯
         function toggleDropdown(menuId, event) {
@@ -340,11 +436,16 @@
                 allMenus.forEach(menu => menu.classList.remove('is-active'));
                 targetMenu.classList.add('is-active');
             }
+
+            document.getElementById('btn-office').setAttribute('aria-expanded', String(document.getElementById('office-menu').classList.contains('is-active')));
+            document.getElementById('btn-gaming').setAttribute('aria-expanded', String(document.getElementById('gaming-menu').classList.contains('is-active')));
         }
 
         function closeAllDropdowns() {
             const allMenus = document.querySelectorAll('.dropdown-menu');
             allMenus.forEach(menu => menu.classList.remove('is-active'));
+            document.getElementById('btn-office').setAttribute('aria-expanded', 'false');
+            document.getElementById('btn-gaming').setAttribute('aria-expanded', 'false');
         }
 
         function getProp(obj, names) {
@@ -359,10 +460,14 @@
         // 💡 修正：改用 fetch 讀取 GAS 回傳的 JSON 陣列結構，並與你原有的邏輯完美對對應
         async function fetchProductsFromCloud() {
             try {
-                const response = await fetch(GAS_API_URL);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 12000);
+                const response = await fetch(GAS_API_URL, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (!response.ok) throw new Error(`伺服器回應 ${response.status}`);
                 const rawProducts = await response.json();
                 
-                if (!rawProducts || rawProducts.length === 0) throw new Error("找不到任何商品資料列。");
+                if (!Array.isArray(rawProducts) || rawProducts.length === 0) throw new Error("找不到任何商品資料列。");
 
                 products = rawProducts.map((p, idx) => {
                     // 自動兼容中英文試算表標題欄位
@@ -378,13 +483,15 @@
                     // 處理規格轉陣列 (支援逗號、換行或 | 符號切分)
                     let specsArray = [];
                     if (rawSpecs) {
-                        specsArray = rawSpecs.toString().split(/[\n,，;；|]/).map(s => s.trim()).filter(s => s.length > 0);
+                        specsArray = rawSpecs.toString().split(/[\n,，;；|]/).map(normalizeSpecText).filter(Boolean);
                     }
 
                     // 處理多圖轉陣列 (支援逗號、換行或 | 符號切分)
                     let imagesArray = ['https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800'];
                     if (rawImages) {
-                        const parsedImgs = rawImages.toString().split(/[\n,，|]/).map(i => i.trim()).filter(i => i.startsWith('http'));
+                        const parsedImgs = rawImages.toString().split(/[\n,，|]/)
+                            .map(i => safeHttpUrl(i.trim()))
+                            .filter(Boolean);
                         if (parsedImgs.length > 0) imagesArray = parsedImgs;
                     }
 
@@ -397,30 +504,36 @@
                         }
                     }
 
+                    const parsedId = Number.parseInt(rawId, 10);
                     return {
-                        id: rawId ? parseInt(rawId) : (idx + 1),
-                        title: rawTitle || "未命名商品",
+                        id: Number.isFinite(parsedId) ? parsedId : (idx + 1),
+                        title: normalizeSpecText(rawTitle) || "未命名商品",
                         category: cleanCategory,
                         specs: specsArray,
                         images: imagesArray,
-                        condition: rawCondition || "功能正常，機況良好。",
-                        price: rawPrice ? parseInt(rawPrice.toString().replace(/[^0-9]/g, '')) : 0,
-                        lineLink: rawLineLink || "https://line.me/R/ti/p/@138uoksb"
+                        condition: String(rawCondition || "功能正常，機況良好。").trim(),
+                        price: rawPrice ? Number.parseInt(rawPrice.toString().replace(/[^0-9]/g, ''), 10) || 0 : 0,
+                        lineLink: safeHttpUrl(rawLineLink, "https://line.me/R/ti/p/@138uoksb")
                     }
                 });
 
                 document.getElementById('loading-view').classList.add('hidden');
                 document.getElementById('product-list-view').classList.remove('hidden');
                 renderListView();
+                openProductFromUrl();
             } catch (error) {
                 console.error("資料解析發生錯誤:", error);
-                document.getElementById('loading-view').innerHTML = `<p class="text-red-500 text-xs">資料載入失敗 (${error.message})</p>`;
+                const message = error.name === 'AbortError' ? '連線逾時，請稍後再試。' : '目前無法載入商品資料。';
+                document.getElementById('loading-view').innerHTML = `
+                    <p class="text-red-500 text-xs mb-4">${message}</p>
+                    <button type="button" onclick="location.reload()" class="bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-xl text-xs font-medium">重新載入</button>
+                `;
             }
         }
 
         function renderListView() {
             const container = document.getElementById('product-list-view');
-            container.innerHTML = '';
+            const loadMoreWrap = document.getElementById('load-more-wrap');
             
             let filteredProducts = currentFilter === 'all' ? [...products] : products.filter(p => p.category === currentFilter);
             
@@ -474,42 +587,54 @@
 
             if (filteredProducts.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center text-gray-400 py-20 text-sm">沒有找到符合該尺寸的規格庫存，換個條件試試看吧！</div>`;
+                loadMoreWrap.classList.add('hidden');
                 return;
             }
 
-            filteredProducts.forEach(product => {
-                const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${spec}</span>`).join('');
-                const card = `
+            const visibleProducts = filteredProducts.slice(0, visibleProductLimit);
+            const cards = visibleProducts.map(product => {
+                const safeTitle = escapeHTML(product.title);
+                const safeCondition = escapeHTML(product.condition);
+                const safeImage = escapeHTML(safeHttpUrl(product.images[0], ''));
+                const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${escapeHTML(spec)}</span>`).join('');
+                return `
                     <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
-                        <div onclick="showDetailView(${product.id})" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative">
-                            <img src="${product.images[0]}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+                        <button type="button" onclick="showDetailView(${product.id})" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative text-left" aria-label="查看 ${safeTitle} 詳情">
+                            <img src="${safeImage}" alt="${safeTitle}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-300 flex items-center justify-center">
                                 <span class="bg-white/95 text-xs text-gray-800 px-3 py-1.5 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition duration-300 font-medium">查看商品詳情</span>
                             </div>
-                        </div>
+                        </button>
                         <div class="p-5 flex flex-col flex-grow justify-between">
                             <div>
-                                <h3 onclick="showDetailView(${product.id})" class="text-base font-bold text-gray-900 mb-2 cursor-pointer hover:text-gray-600 transition truncate">${product.title}</h3>
+                                <h3 class="text-base font-bold text-gray-900 mb-2 truncate">${safeTitle}</h3>
                                 <div class="flex flex-wrap gap-1 mb-4">${specBadges}</div>
-                                <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-4">${product.condition}</p>
+                                <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4">${safeCondition}</p>
                             </div>
                             <div class="flex justify-between items-center pt-3 border-t border-gray-50">
                                 <span class="text-base font-bold text-gray-900">NT$ ${product.price.toLocaleString()}</span>
-                                <button onclick="showDetailView(${product.id})" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition flex items-center gap-1">
+                                <button type="button" onclick="showDetailView(${product.id})" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition flex items-center gap-1">
                                     詳細規格 ➔
                                 </button>
                             </div>
                         </div>
                     </div>
                 `;
-                container.innerHTML += card;
             });
+            container.innerHTML = cards.join('');
+            loadMoreWrap.classList.toggle('hidden', visibleProductLimit >= filteredProducts.length);
+        }
+
+        function loadMoreProducts() {
+            visibleProductLimit += PRODUCTS_PER_PAGE;
+            renderListView();
         }
 
         function selectOfficeSize(size, event) {
             if (event) event.stopPropagation();
             currentFilter = 'office';
             subFilterType = size;
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             closeAllDropdowns();
             updateCategoryButtonUI();
             showListView();
@@ -520,6 +645,7 @@
             if (event) event.stopPropagation();
             currentFilter = 'gaming';
             subFilterType = size;
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             closeAllDropdowns();
             updateCategoryButtonUI();
             showListView();
@@ -546,6 +672,7 @@
 
         function resetSubFilters() {
             subFilterType = 'all';
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             renderListView();
         }
 
@@ -553,6 +680,7 @@
             if (event) event.stopPropagation();
             currentFilter = category;
             subFilterType = 'all'; 
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             closeAllDropdowns();
             showListView();
             updateCategoryButtonUI();
@@ -574,6 +702,7 @@
             const input = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search-btn');
             searchQuery = input.value;
+            visibleProductLimit = PRODUCTS_PER_PAGE;
 
             if (searchQuery.length > 0) {
                 clearBtn.classList.remove('hidden');
@@ -589,6 +718,7 @@
             const input = document.getElementById('search-input');
             input.value = '';
             searchQuery = '';
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             document.getElementById('clear-search-btn').classList.add('hidden');
             renderListView();
         }
@@ -596,6 +726,7 @@
         function handleSortChange() {
             const sortSelect = document.getElementById('price-sort');
             currentSortOrder = sortSelect.value;
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             renderListView();
         }
 
@@ -610,25 +741,46 @@
 
         let currentActiveProductId = null;
 
-        function showDetailView(id) {
+        function updateProductUrl(id = null, replace = false) {
+            const url = new URL(window.location.href);
+            if (id === null) {
+                url.searchParams.delete('product');
+            } else {
+                url.searchParams.set('product', String(id));
+            }
+            const method = replace ? 'replaceState' : 'pushState';
+            history[method]({ product: id }, '', `${url.pathname}${url.search}${url.hash}`);
+        }
+
+        function openProductFromUrl() {
+            const id = Number.parseInt(new URLSearchParams(window.location.search).get('product'), 10);
+            if (Number.isFinite(id) && products.some(product => product.id === id)) {
+                showDetailView(id, false);
+            }
+        }
+
+        function showDetailView(id, updateUrl = true) {
             const product = products.find(p => p.id === id);
             if (!product) return;
 
             currentActiveProductId = id; 
             document.getElementById('product-list-view').classList.add('hidden');
+            document.getElementById('load-more-wrap').classList.add('hidden');
             document.getElementById('product-detail-view').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (updateUrl) updateProductUrl(id);
 
             document.getElementById('detail-title').innerText = product.title;
             document.getElementById('detail-category').innerText = product.category === 'gaming' ? '電競遊戲' : '文書商務';
             document.getElementById('detail-condition').innerText = product.condition;
             document.getElementById('detail-price').innerText = `NT$ ${product.price.toLocaleString()}`;
             document.getElementById('detail-line-btn').href = product.lineLink;
+            document.title = `${product.title}｜冠丞3C`;
 
             // 渲染硬體標籤
             const specsContainer = document.getElementById('detail-specs');
             specsContainer.innerHTML = product.specs.map(spec => `
-                <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-xl border border-gray-200/60">${spec}</span>
+                <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-xl border border-gray-200/60">${escapeHTML(spec)}</span>
             `).join('');
 
             updateDetailImageDOM(0);
@@ -639,23 +791,27 @@
             if (!product || !product.images[index]) return;
 
             const mainImg = document.getElementById('detail-main-img');
-            mainImg.src = product.images[index];
+            mainImg.src = safeHttpUrl(product.images[index], '');
+            mainImg.alt = `${product.title} 商品圖片 ${index + 1}`;
             mainImg.dataset.index = index;
 
             const thumbsContainer = document.getElementById('detail-thumbs');
             thumbsContainer.innerHTML = product.images.map((img, idx) => `
-                <div onmouseenter="syncMainImageFromHover('${img}', ${idx}, this)" onclick="openLightboxFromThumb(${idx})" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${idx === index ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
-                    <img src="${img}" class="w-full h-full object-cover select-none pointer-events-none">
-                </div>
+                <button type="button" onmouseenter="syncMainImageFromHover(${idx}, this)" onclick="openLightboxFromThumb(${idx})" aria-label="查看第 ${idx + 1} 張商品圖片" class="w-24 md:w-full aspect-[4/3] flex-shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 ${idx === index ? 'border-gray-900' : 'border-transparent'} hover:border-gray-400 transition bg-white shadow-sm">
+                    <img src="${escapeHTML(safeHttpUrl(img, ''))}" alt="${escapeHTML(product.title)} 縮圖 ${idx + 1}" loading="lazy" decoding="async" class="w-full h-full object-cover select-none pointer-events-none">
+                </button>
             `).join('');
             
             const activeThumb = thumbsContainer.children[index];
             if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
         }
 
-        function syncMainImageFromHover(src, index, thumbElement) {
+        function syncMainImageFromHover(index, thumbElement) {
+            const product = products.find(p => p.id === currentActiveProductId);
+            if (!product || !product.images[index]) return;
             const mainImg = document.getElementById('detail-main-img');
-            mainImg.src = src;
+            mainImg.src = safeHttpUrl(product.images[index], '');
+            mainImg.alt = `${product.title} 商品圖片 ${index + 1}`;
             mainImg.dataset.index = index;
             
             const thumbs = thumbElement.parentElement.children;
@@ -691,9 +847,12 @@
             updateDetailImageDOM(prevIndex);
         }
 
-        function showListView() {
+        function showListView(updateUrl = true) {
             document.getElementById('product-detail-view').classList.add('hidden');
             document.getElementById('product-list-view').classList.remove('hidden');
+            document.getElementById('load-more-wrap').classList.toggle('hidden', visibleProductLimit >= products.length);
+            document.title = '冠丞3C | 優質嚴選 測試優良';
+            if (updateUrl && new URLSearchParams(window.location.search).has('product')) updateProductUrl(null);
         }
 
         function openLightboxFromDetail() {
@@ -712,18 +871,24 @@
 
             currentLightboxImages = product.images;
             currentLightboxIndex = index;
+            lastFocusedElement = document.activeElement;
 
             const lightbox = document.getElementById('image-lightbox');
             lightbox.classList.remove('hidden');
             updateLightboxDOM();
 
-            setTimeout(() => { lightbox.classList.remove('opacity-0'); }, 10);
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                document.getElementById('lightbox-close-btn').focus();
+            }, 10);
         }
 
         function updateLightboxDOM() {
             const lightboxImg = document.getElementById('lightbox-img');
             const dotsContainer = document.getElementById('lightbox-dots');
-            lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+            const product = products.find(p => p.id === currentActiveProductId);
+            lightboxImg.src = safeHttpUrl(currentLightboxImages[currentLightboxIndex], '');
+            lightboxImg.alt = product ? `${product.title} 放大圖片 ${currentLightboxIndex + 1}` : '商品放大圖片';
             
             if (currentLightboxImages.length > 1) {
                 dotsContainer.innerHTML = currentLightboxImages.map((_, idx) => `
@@ -753,7 +918,10 @@
         function closeLightbox() {
             const lightbox = document.getElementById('image-lightbox');
             lightbox.classList.add('opacity-0');
-            setTimeout(() => { lightbox.classList.add('hidden'); }, 300);
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                if (lastFocusedElement) lastFocusedElement.focus();
+            }, 300);
         }
 
         const lightboxContainer = document.getElementById('image-lightbox');
@@ -778,7 +946,14 @@
             }
         };
 
+        window.addEventListener('popstate', () => {
+            const id = Number.parseInt(new URLSearchParams(window.location.search).get('product'), 10);
+            if (Number.isFinite(id)) showDetailView(id, false);
+            else showListView(false);
+        });
+
         window.onload = () => {
+            document.querySelectorAll('button:not([type])').forEach(button => button.type = 'button');
             fetchProductsFromCloud();
         };
     </script>
