@@ -400,7 +400,9 @@
         let searchQuery = ''; 
         let subFilterType = 'all'; 
         let visibleProductLimit = 18;
+        let homeProductLimit = 6;
         const PRODUCTS_PER_PAGE = 18;
+        const HOME_PRODUCTS_PER_PAGE = 6;
 
         let currentLightboxImages = [];
         let currentLightboxIndex = 0;
@@ -583,7 +585,8 @@
                     createHomeProductSection('全新桌機', '全新組裝主機，分為文書與遊戲用途', desktops, 'desktop'),
                     createHomeProductSection('二手筆電', '文書與遊戲筆電，並可依螢幕尺寸篩選', laptops, 'laptop')
                 ].join('');
-                loadMoreWrap.classList.add('hidden');
+                const hasMoreHomeProducts = desktops.length > homeProductLimit || laptops.length > homeProductLimit;
+                loadMoreWrap.classList.toggle('hidden', !hasMoreHomeProducts);
                 return;
             }
 
@@ -684,7 +687,7 @@
         }
 
         function createHomeProductSection(title, description, sectionProducts, type) {
-            const cards = sectionProducts.slice(0, 6).map(createProductCard).join('');
+            const cards = sectionProducts.slice(0, homeProductLimit).map(createProductCard).join('');
             const content = cards || `
                 <div class="col-span-full bg-white border border-dashed border-gray-200 rounded-2xl py-12 text-center">
                     <p class="text-gray-600 font-medium">目前尚無${title}商品</p>
@@ -742,7 +745,12 @@
         }
 
         function loadMoreProducts() {
-            visibleProductLimit += PRODUCTS_PER_PAGE;
+            const isHomeView = mainCategory === 'all' && currentFilter === 'all' && subFilterType === 'all';
+            if (isHomeView) {
+                homeProductLimit += HOME_PRODUCTS_PER_PAGE;
+            } else {
+                visibleProductLimit += PRODUCTS_PER_PAGE;
+            }
             renderListView();
         }
 
@@ -831,6 +839,8 @@
             currentFilter = 'all';
             currentSortOrder = 'default';
             subFilterType = 'all';
+            homeProductLimit = HOME_PRODUCTS_PER_PAGE;
+            visibleProductLimit = PRODUCTS_PER_PAGE;
             document.getElementById('price-sort').value = 'default';
             clearSearch();
             closeAllDropdowns();
@@ -952,7 +962,7 @@
         function showListView(updateUrl = true) {
             document.getElementById('product-detail-view').classList.add('hidden');
             document.getElementById('product-list-view').classList.remove('hidden');
-            document.getElementById('load-more-wrap').classList.toggle('hidden', visibleProductLimit >= products.length);
+            renderListView();
             document.title = '冠丞3C | 優質嚴選 測試優良';
             if (updateUrl && new URLSearchParams(window.location.search).has('product')) updateProductUrl(null);
         }
