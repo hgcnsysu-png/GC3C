@@ -508,11 +508,10 @@
 
         // 💡 修正：改用 fetch 讀取 GAS 回傳的 JSON 陣列結構，並與你原有的邏輯完美對對應
         async function fetchProductsFromCloud() {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 60000);
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 12000);
                 const response = await fetch(GAS_API_URL, { signal: controller.signal });
-                clearTimeout(timeoutId);
                 if (!response.ok) throw new Error(`伺服器回應 ${response.status}`);
                 const rawProducts = await response.json();
                 
@@ -583,6 +582,8 @@
                     <p class="text-red-500 text-xs mb-4">${message}</p>
                     <button type="button" onclick="location.reload()" class="bg-white border border-gray-200 text-gray-700 px-5 py-2 rounded-xl text-xs font-medium">重新載入</button>
                 `;
+            } finally {
+                clearTimeout(timeoutId);
             }
         }
 
