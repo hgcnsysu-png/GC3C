@@ -10,7 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_TW">
     <meta property="og:site_name" content="冠丞3C">
-    <meta property="og:title" content="冠丞3C｜優質二手筆電與電腦服務">
+    <meta property="og:title" content="冠丞3C｜全新與二手筆電嚴選">
     <meta property="og:description" content="全新與二手筆電嚴選銷售、桌機組裝及電腦維修，全台寄送並支援面交驗機。">
     <meta property="og:url" content="https://hgcnsysu-png.github.io/GC3C/">
     <meta property="og:image" content="https://gcs.rimg.com.tw/g2/b/b2/34/22622793124404_739.jpg">
@@ -38,13 +38,32 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* 電腦版 (全螢幕時) 依舊保留滑鼠懸浮即顯示的效果 */
-        @media (min-width: 640px) {
-            .dropdown-group:hover .dropdown-menu {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-                pointer-events: auto;
+        /* 以按鈕開關統一滑鼠、觸控與鍵盤操作。 */
+        .dropdown-menu { visibility: hidden; }
+        .dropdown-menu.is-active { visibility: visible; }
+        :where(button, a, input, select):focus-visible { outline: 3px solid #059669; outline-offset: 3px; }
+        body { background: #f7f9f8; }
+        main { scroll-margin-top: 110px; }
+        #product-list-view, #about-section { scroll-margin-top: 110px; }
+        .product-card { border-color: #e5ebe7; }
+        @media (hover: hover) {
+            .product-card:hover { transform: translateY(-3px); border-color: #b7d5c5; box-shadow: 0 12px 28px -16px #365b49; }
+        }
+        #detail-main-img { object-fit: contain; }
+        #about-section .whitespace-nowrap { white-space: normal; }
+        #filter-panel button, #price-sort { min-height: 40px; }
+        @media (max-width: 639px) {
+            #filter-panel { max-height: calc(100dvh - 130px); overflow-y: auto; align-items: stretch; }
+            .dropdown-group { position: static; }
+            #new-laptop-menu, #laptop-menu {
+                position: absolute; top: 100%; left: 0; right: 0; width: 100%;
+                transform: none; max-height: 50dvh; overflow-y: auto;
             }
+            #filter-panel { overflow: visible; }
+            #filter-panel button { min-height: 44px; }
+            #product-list-view, #about-section { scroll-margin-top: 240px; }
+            #product-detail-view > div { padding: 20px; gap: 24px; }
+            #detail-line-btn { padding: 12px 16px; }
         }
 
         /* 透過 JavaScript 動態控制顯示的類別（同時支援手機點擊與電腦控制） */
@@ -60,16 +79,7 @@
             }
         }
 
-        @media (max-width: 639px) {
-            #laptop-menu {
-                position: fixed;
-                left: 20px;
-                right: 20px;
-                top: 158px;
-                width: auto;
-                transform: none;
-            }
-        }
+
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -102,9 +112,10 @@
                     </span>
                     <input 
                         type="text" 
-                        id="search-input" 
+                        id="search-input"
+                        aria-label="搜尋商品名稱或規格" 
                         oninput="handleSearchInput()"
-                        placeholder="搜尋商品..." 
+                        placeholder="搜尋型號、CPU、規格…" 
                         class="w-full bg-gray-100 border border-transparent text-gray-800 placeholder-gray-400 text-xs rounded-xl pl-9 pr-8 py-2.5 font-medium focus:outline-none focus:bg-white focus:border-gray-200 transition-all"
                     >
                     <button type="button"
@@ -124,14 +135,14 @@
                         </button>
                      
                     <div class="dropdown-group relative flex-1 lg:flex-none">
-                        <button type="button" onclick="toggleDropdown('desktop-menu', event)" id="btn-desktop" aria-expanded="false" aria-controls="desktop-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-1">
-                            <span>全新桌機</span> <span class="text-[9px] text-gray-400">▼</span>
+                        <button type="button" onclick="toggleDropdown('new-laptop-menu', event)" id="btn-new-laptop" aria-expanded="false" aria-controls="new-laptop-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-1">
+                            <span>全新筆電</span> <span class="text-[9px] text-gray-400">▼</span>
                         </button>
-                        <div id="desktop-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-40 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
+                        <div id="new-laptop-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-40 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
                             <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
-                                <button type="button" onclick="selectDesktopCategory('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 transition">全部全新桌機</button>
-                                <button type="button" onclick="selectDesktopCategory('office', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">文書桌機</button>
-                                <button type="button" onclick="selectDesktopCategory('gaming', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">遊戲桌機</button>
+                                <button type="button" onclick="selectNewLaptopCategory('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 transition">全部全新筆電</button>
+                                <button type="button" onclick="selectNewLaptopCategory('office', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">文書筆電</button>
+                                <button type="button" onclick="selectNewLaptopCategory('gaming', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">遊戲筆電</button>
                             </div>
                         </div>
                     </div>
@@ -142,6 +153,7 @@
                         </button>
                         <div id="laptop-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-72 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
                             <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-3 shadow-xl grid grid-cols-2 gap-3">
+                                <button type="button" onclick="selectMainCategory('laptop')" class="col-span-2 text-left px-2 py-2 text-xs rounded-lg hover:bg-gray-50 font-semibold text-gray-800">全部二手筆電</button>
                                 <div>
                                     <p class="px-2 pb-1.5 text-[11px] font-bold text-gray-800">文書筆電</p>
                                     <button type="button" onclick="selectLaptopSize('office', 'all', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-600">所有尺寸</button>
@@ -163,7 +175,7 @@
 
                     <div class="flex items-center gap-3 w-full lg:w-auto">
                     <div class="relative flex-grow lg:w-36">
-                        <select id="price-sort" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
+                        <select id="price-sort" aria-label="商品價格排序" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
                             <option value="default">預設排序</option>
                             <option value="price-asc">價位：低 ➔ 高</option>
                             <option value="price-desc">價位：高 ➔ 低</option>
@@ -187,9 +199,11 @@
             <span class="text-gray-400 font-medium">當前篩選：</span>
             <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
                 <span></span>
-                <button onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">×</button>
+                <button aria-label="清除分類篩選" onclick="resetSubFilters()" class="hover:text-blue-800 text-sm font-bold">×</button>
             </span>
         </div>
+
+        <p id="result-summary" role="status" aria-live="polite" class="hidden text-sm text-gray-500 mb-5"></p>
 
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
             <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
@@ -473,6 +487,15 @@
             document.querySelectorAll('.dropdown-group > button[aria-expanded]').forEach(button => button.setAttribute('aria-expanded', 'false'));
         }
 
+        // 只依商品類型／分類判斷新舊，避免「全新電池」等機況文字誤判。
+        function getProductType(typeText) {
+            const text = String(typeText || '').toLowerCase();
+            if (/二手|中古|used|second[ -]?hand|refurbished/.test(text)) return 'laptop';
+            if (/桌機|桌上型|組裝主機|desktop/.test(text)) return 'desktop';
+            return /全新|新機|(?:^|[^a-z])new(?:[-_ ]?(?:laptop|notebook))?(?:$|[^a-z])/.test(text)
+                ? 'new-laptop' : 'laptop';
+        }
+
         function getProp(obj, names) {
             for (let name of names) {
                 if (obj[name] !== undefined && obj[name] !== null) return obj[name];
@@ -492,7 +515,7 @@
                 if (!response.ok) throw new Error(`伺服器回應 ${response.status}`);
                 const rawProducts = await response.json();
                 
-                if (!Array.isArray(rawProducts) || rawProducts.length === 0) throw new Error("找不到任何商品資料列。");
+                if (!Array.isArray(rawProducts)) throw new Error("商品資料格式不正確。");
 
                 products = rawProducts.map((p, idx) => {
                     // 自動兼容中英文試算表標題欄位
@@ -523,16 +546,9 @@
 
                     // 大分類：沒有特別標示的舊資料，預設沿用為二手筆電。
                     const typeText = `${rawProductType} ${rawCategory}`.toLowerCase();
-                    const titleText = String(rawTitle || '').toLowerCase();
-                    const isDesktop = typeText.includes('desktop')
-                        || typeText.includes('全新桌機')
-                        || typeText.includes('桌機')
-                        || typeText.includes('桌上型')
-                        || typeText.includes('組裝主機')
-                        || titleText.includes('桌上型電腦');
-                    const productType = isDesktop ? 'desktop' : 'laptop';
+                    const productType = getProductType(typeText);
 
-                    // 桌機與筆電都分成文書、電競兩種用途。
+                    // 全新與二手筆電都分成文書、遊戲兩種用途。
                     let cleanCategory = "office";
                     if (rawCategory || rawProductType) {
                         const categoryText = `${rawCategory} ${rawProductType}`.toLowerCase();
@@ -569,37 +585,46 @@
             }
         }
 
+        function isHomeView() {
+            return mainCategory === 'all' && currentFilter === 'all' && subFilterType === 'all'
+                && !searchQuery.trim() && currentSortOrder === 'default';
+        }
+
         function renderListView() {
             const container = document.getElementById('product-list-view');
             const loadMoreWrap = document.getElementById('load-more-wrap');
 
             let filteredProducts = applyProductFilters(products);
             updateIndicatorBar();
+            const summary = document.getElementById('result-summary');
+            summary.textContent = searchQuery.trim()
+                ? `搜尋「${searchQuery.trim()}」：${filteredProducts.length} 件商品`
+                : `共 ${filteredProducts.length} 件商品`;
+            summary.classList.toggle('hidden', isHomeView());
 
-            // 首頁直接分成「全新桌機」與「二手筆電」兩個商品展示區塊。
-            if (mainCategory === 'all' && currentFilter === 'all' && subFilterType === 'all') {
-                const desktops = filteredProducts.filter(product => product.type === 'desktop');
+            // 首頁直接分成「全新筆電」與「二手筆電」兩個商品展示區塊。
+            if (isHomeView()) {
+                const newLaptops = filteredProducts.filter(product => product.type === 'new-laptop');
                 const laptops = filteredProducts.filter(product => product.type === 'laptop');
                 container.className = 'space-y-16';
                 container.innerHTML = [
-                    createHomeProductSection('全新桌機', '全新組裝主機，分為文書與遊戲用途', desktops, 'desktop'),
+                    createHomeProductSection('全新筆電', '全新筆電嚴選，滿足文書工作與遊戲需求', newLaptops, 'new-laptop'),
                     createHomeProductSection('二手筆電', '文書與遊戲筆電，並可依螢幕尺寸篩選', laptops, 'laptop')
                 ].join('');
-                const hasMoreHomeProducts = desktops.length > homeProductLimit || laptops.length > homeProductLimit;
+                const hasMoreHomeProducts = newLaptops.length > homeProductLimit || laptops.length > homeProductLimit;
                 loadMoreWrap.classList.toggle('hidden', !hasMoreHomeProducts);
                 return;
             }
 
             container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
             if (filteredProducts.length === 0) {
-                const emptyTitle = mainCategory === 'desktop' ? '目前尚無全新桌機商品' : '沒有找到符合條件的商品';
-                const emptyHint = mainCategory === 'desktop'
-                    ? '在試算表的分類填入「全新桌機 文書」或「全新桌機 遊戲」，商品就會顯示在這裡。'
-                    : '換個分類、尺寸或搜尋條件試試看吧！';
+                const emptyTitle = '目前沒有符合條件的商品';
+                const emptyHint = '試試其他關鍵字或分類，也歡迎透過 LINE 詢問想找的機型。';
                 container.innerHTML = `
                     <div class="col-span-full text-center py-20">
                         <p class="text-gray-700 font-semibold mb-2">${emptyTitle}</p>
-                        <p class="text-gray-400 text-sm">${emptyHint}</p>
+                        <p class="text-gray-500 text-sm">${emptyHint}</p>
+                        <button type="button" onclick="resetFilters()" class="mt-5 px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm">查看全部商品</button>
                     </div>
                 `;
                 loadMoreWrap.classList.add('hidden');
@@ -664,7 +689,7 @@
             const safeImage = escapeHTML(safeHttpUrl(product.images[0], ''));
             const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${escapeHTML(spec)}</span>`).join('');
             return `
-                <article class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
+                <article class="product-card bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
                     <button type="button" onclick="showDetailView(${product.id})" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative text-left" aria-label="查看 ${safeTitle} 詳情">
                         <img src="${safeImage}" alt="${safeTitle}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         <span class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-300 flex items-center justify-center">
@@ -673,12 +698,13 @@
                     </button>
                     <div class="p-5 flex flex-col flex-grow justify-between">
                         <div>
-                            <h3 class="text-base font-bold text-gray-900 mb-2 truncate">${safeTitle}</h3>
+                            <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">${safeTitle}</h3>
+                            <p class="text-[11px] text-emerald-700 font-semibold mb-2">${product.type === 'new-laptop' ? '全新筆電' : product.type === 'desktop' ? '桌上型電腦' : '二手筆電'} · ${product.category === 'gaming' ? '遊戲效能' : '文書商務'}</p>
                             <div class="flex flex-wrap gap-1 mb-4">${specBadges}</div>
                             <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4">${safeCondition}</p>
                         </div>
                         <div class="flex justify-between items-center pt-3 border-t border-gray-50">
-                            <span class="text-base font-bold text-gray-900">NT$ ${product.price.toLocaleString()}</span>
+                            <span class="text-lg font-bold text-emerald-700">NT$ ${product.price.toLocaleString()}</span>
                             <button type="button" onclick="showDetailView(${product.id})" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition">詳細規格 ➔</button>
                         </div>
                     </div>
@@ -691,14 +717,15 @@
             const content = cards || `
                 <div class="col-span-full bg-white border border-dashed border-gray-200 rounded-2xl py-12 text-center">
                     <p class="text-gray-600 font-medium">目前尚無${title}商品</p>
-                    <p class="text-gray-400 text-xs mt-2">新增商品後會自動展示在這個區塊</p>
+                    <p class="text-gray-500 text-sm mt-2">商品陸續更新，歡迎詢問想找的機型</p>
+                    <a href="https://line.me/R/ti/p/@138uoksb" target="_blank" rel="noopener noreferrer" class="inline-flex mt-4 text-sm font-semibold text-emerald-700 hover:underline">LINE 詢問庫存 ↗</a>
                 </div>
             `;
             return `
                 <section aria-labelledby="home-${type}-title">
                     <div class="flex items-end justify-between gap-4 mb-5">
                         <div>
-                            <h2 id="home-${type}-title" class="text-xl md:text-2xl font-bold text-gray-900">${title}</h2>
+                            <h2 id="home-${type}-title" class="text-xl md:text-2xl font-bold text-gray-900">${title}<span class="ml-3 inline-flex align-middle text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 text-gray-600">${sectionProducts.length} 件</span></h2>
                             <p class="text-xs text-gray-400 mt-1">${description}</p>
                         </div>
                         <button type="button" onclick="selectMainCategory('${type}')" class="text-xs text-blue-600 hover:text-blue-700 font-medium whitespace-nowrap">查看全部 ➔</button>
@@ -720,9 +747,9 @@
             document.getElementById('product-list-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function selectDesktopCategory(category, event) {
+        function selectNewLaptopCategory(category, event) {
             if (event) event.stopPropagation();
-            mainCategory = 'desktop';
+            mainCategory = 'new-laptop';
             currentFilter = category;
             subFilterType = 'all';
             visibleProductLimit = PRODUCTS_PER_PAGE;
@@ -745,8 +772,7 @@
         }
 
         function loadMoreProducts() {
-            const isHomeView = mainCategory === 'all' && currentFilter === 'all' && subFilterType === 'all';
-            if (isHomeView) {
+            if (isHomeView()) {
                 homeProductLimit += HOME_PRODUCTS_PER_PAGE;
             } else {
                 visibleProductLimit += PRODUCTS_PER_PAGE;
@@ -762,8 +788,8 @@
                 bar.classList.add('hidden');
             } else {
                 bar.classList.remove('hidden');
-                const typeLabel = mainCategory === 'desktop' ? '全新桌機' : '二手筆電';
-                const useLabel = currentFilter === 'office' ? '文書' : currentFilter === 'gaming' ? (mainCategory === 'desktop' ? '電競' : '遊戲') : '全部';
+                const typeLabel = mainCategory === 'new-laptop' ? '全新筆電' : '二手筆電';
+                const useLabel = currentFilter === 'office' ? '文書' : currentFilter === 'gaming' ? (mainCategory === 'new-laptop' ? '電競' : '遊戲') : '全部';
                 let sizeLabel = '';
                 if (subFilterType !== 'all') {
                     sizeLabel = currentFilter === 'office'
@@ -792,7 +818,7 @@
 
         function updateCategoryButtonUI() {
             const selected = mainCategory === 'all' ? 'all' : mainCategory;
-            ['all', 'desktop', 'laptop'].forEach(category => {
+            ['all', 'new-laptop', 'laptop'].forEach(category => {
                 const button = document.getElementById(`btn-${category}`);
                 const active = category === selected;
                 const widthClass = category === 'all' ? '' : 'w-full';
@@ -875,14 +901,16 @@
 
             currentActiveProductId = id; 
             document.getElementById('product-list-view').classList.add('hidden');
+            document.getElementById('result-summary').classList.add('hidden');
+            document.getElementById('filter-indicator-bar').classList.add('hidden');
             document.getElementById('load-more-wrap').classList.add('hidden');
             document.getElementById('product-detail-view').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (updateUrl) updateProductUrl(id);
 
             document.getElementById('detail-title').innerText = product.title;
-            document.getElementById('detail-category').innerText = product.type === 'desktop'
-                ? (product.category === 'gaming' ? '全新桌機 · 遊戲' : '全新桌機 · 文書')
+            document.getElementById('detail-category').innerText = product.type === 'new-laptop'
+                ? (product.category === 'gaming' ? '全新筆電 · 遊戲' : '全新筆電 · 文書')
                 : (product.category === 'gaming' ? '二手筆電 · 電競遊戲' : '二手筆電 · 文書商務');
             document.getElementById('detail-condition').innerText = product.condition;
             document.getElementById('detail-price').innerText = `NT$ ${product.price.toLocaleString()}`;
@@ -1054,7 +1082,7 @@
                 else if (evt.key === "ArrowRight" || evt.keyCode === 39) nextLightboxImage();
                 else if (evt.key === "ArrowLeft" || evt.keyCode === 37) prevLightboxImage();
             } else {
-                if (evt.key === "Escape" || evt.keyCode === 27) showListView();
+                if (evt.key === "Escape" || evt.keyCode === 27) { closeAllDropdowns(); showListView(); }
             }
         };
 
