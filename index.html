@@ -53,8 +53,8 @@
         #about-section .whitespace-nowrap { white-space: normal; }
         #filter-panel button, #price-sort { min-height: 40px; }
         @media (max-width: 639px) {
-            #filter-panel { max-height: calc(100dvh - 130px); overflow-y: auto; align-items: stretch; }
-            .dropdown-group { position: static; }
+            #filter-panel { align-items: stretch; }
+            #filter-panel .dropdown-group { position: static; }
             #new-laptop-menu, #laptop-menu {
                 position: absolute; top: 100%; left: 0; right: 0; width: 100%;
                 transform: none; max-height: 50dvh; overflow-y: auto;
@@ -69,7 +69,8 @@
         /* 透過 JavaScript 動態控制顯示的類別（同時支援手機點擊與電腦控制） */
         .dropdown-menu.is-active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
             pointer-events: auto;
         }
 
