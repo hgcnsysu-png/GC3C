@@ -102,6 +102,9 @@
 
 .pc-wizard{scroll-margin-top:115px}@media(max-width:639px){.pc-wizard{scroll-margin-top:150px}}
     .pc-hero{grid-template-columns:minmax(0,1fr) 300px}.pc-art{min-height:270px}.pc-art:before,.pc-art:after{display:none}.pc-art svg{width:300px;height:auto;filter:none}@media(max-width:639px){.pc-hero{grid-template-columns:1fr}}
+
+.nl-toolbar[hidden]{display:none!important}.nl-toolbar{margin-bottom:22px;scroll-margin-top:110px}.nl-heading{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:21px}.nl-heading h2{font-size:24px;letter-spacing:-.5px;font-weight:750;color:#17241f}.nl-heading p{font-size:12px;color:#7a877f;margin-top:5px}.nl-heading>span{font-size:11px;background:#edf3ef;color:#5a7063;border-radius:30px;padding:7px 11px;white-space:nowrap}.nl-controls{padding:16px;background:white;border:1px solid #e3eae5;border-radius:17px;display:flex;align-items:center;justify-content:space-between;gap:16px}.nl-uses{display:flex;gap:5px;background:#f2f5f3;padding:4px;border-radius:11px;flex-shrink:0}.nl-uses button{border:0;background:none;color:#708077;padding:10px 15px;border-radius:8px;font-size:12px;min-height:42px;transition:background .15s}.nl-uses button[aria-pressed="true"]{background:#193c2a;color:#fff;box-shadow:0 2px 5px #173e2310}.nl-selects{display:flex;gap:13px;flex-wrap:wrap}.nl-selects label{font-size:10px;color:#7a877f;display:flex;flex-direction:column;gap:5px}.nl-selects select{font:inherit;font-size:12px;color:#32473b;padding:7px 24px 7px 0;background:transparent;border:0;min-height:30px;cursor:pointer;max-width:145px}.nl-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px;min-height:24px;font-size:11px;color:#7a877f}.nl-meta button{color:#047857;background:none;border:0;min-height:32px;padding:4px 0}.nl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}.nl-card{width:100%;text-align:left;display:flex;flex-direction:column;border:1px solid #e2e9e4;border-radius:18px;background:#fff;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;color:#1b2d21}.nl-photo{position:relative;aspect-ratio:16/10;background:#f0f4f1;overflow:hidden}.nl-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}.nl-type{position:absolute;left:12px;top:12px;background:#ffffffed;color:#38614b;border:1px solid #ffffffcc;padding:5px 9px;border-radius:7px;font-size:10px;backdrop-filter:blur(8px)}.nl-card-body{padding:19px 20px;display:flex;flex-direction:column;flex:1}.nl-card h3{font-size:15px;font-weight:700;line-height:1.65;min-height:49px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nl-specs{font-size:11px;color:#7a877f;line-height:1.9;min-height:42px;margin-top:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nl-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;padding-top:15px;border-top:1px solid #eef2ef}.nl-price{font-size:21px;font-weight:750;letter-spacing:-.5px}.nl-price small{font-size:10px;font-weight:500;letter-spacing:0;margin-right:4px;color:#859188}.nl-action{font-size:11px;color:#668170;white-space:nowrap}.nl-empty{grid-column:1/-1;padding:64px 24px;text-align:center;background:#fff;border:1px dashed #d9e5dd;border-radius:18px}.nl-empty h3{font-size:16px;font-weight:650;margin-bottom:10px}.nl-empty p{font-size:12px;color:#7a877f;line-height:1.8;margin-bottom:20px}#filter-indicator-bar,#result-summary{display:none!important}#load-more-wrap>button{border-radius:12px;border-color:#dbe5de;color:#356047;font-size:12px;min-height:44px}@media(hover:hover){.nl-card:hover{transform:translateY(-3px);border-color:#aecab8;box-shadow:0 12px 24px -16px #365b49}.nl-card:hover img{transform:scale(1.025)}}@media(max-width:1023px){.nl-controls{align-items:stretch;flex-direction:column}.nl-selects{justify-content:space-between}.nl-uses{align-self:flex-start}.nl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:639px){.nl-toolbar{scroll-margin-top:140px}.nl-heading{align-items:flex-start;margin-bottom:17px}.nl-heading h2{font-size:21px}.nl-heading p{font-size:11px;max-width:190px;line-height:1.8}.nl-heading>span{font-size:10px;padding:6px 9px}.nl-controls{padding:12px;gap:15px}.nl-uses{width:100%;align-self:stretch}.nl-uses button{flex:1;padding:9px 4px;font-size:11px}.nl-selects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.nl-selects select{width:100%;font-size:11px;padding-right:4px;max-width:none}.nl-meta{align-items:flex-start;font-size:10px}.nl-grid{grid-template-columns:1fr;gap:16px}.nl-card-body{padding:17px 18px}.nl-card h3{min-height:0}.nl-specs{min-height:0;margin-top:7px}.nl-card-bottom{margin-top:14px;padding-top:14px}.nl-photo{aspect-ratio:16/9}.nl-action{font-size:12px}}
+
 </style>
 </head>
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col" onclick="closeAllDropdowns()">
@@ -114,7 +117,7 @@
                     <p class="text-xs text-gray-400 mt-0.5">專業嚴選 · 功能皆經嚴格測試</p>
                 </button>
                 <button type="button" id="mobile-filter-toggle" onclick="toggleFilterPanel(event)" aria-expanded="false" aria-controls="filter-panel" class="lg:hidden text-xs font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl px-3 py-2 transition">
-                    篩選與排序
+                    網站選單
                 </button>
             </div>
 
@@ -149,44 +152,9 @@
                      
                     <button type="button" onclick="openPcWizard()" id="btn-pc" aria-pressed="false" class="px-4 py-2 text-xs rounded-lg text-emerald-700 hover:bg-white font-semibold transition-all flex-1 lg:flex-none whitespace-nowrap">極速 PC 組裝估價 ↗</button>
 
-                    <div class="dropdown-group relative flex-1 lg:flex-none">
-                        <button type="button" onclick="toggleDropdown('laptop-menu', event)" id="btn-laptop" aria-expanded="false" aria-controls="laptop-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-1">
-                            <span>二手筆電</span> <span class="text-[9px] text-gray-400">▼</span>
-                        </button>
-                        <div id="laptop-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-72 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
-                            <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-3 shadow-xl grid grid-cols-2 gap-3">
-                                <button type="button" onclick="selectMainCategory('laptop')" class="col-span-2 text-left px-2 py-2 text-xs rounded-lg hover:bg-gray-50 font-semibold text-gray-800">全部二手筆電</button>
-                                <div>
-                                    <p class="px-2 pb-1.5 text-[11px] font-bold text-gray-800">文書筆電</p>
-                                    <button type="button" onclick="selectLaptopSize('office', 'all', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-600">所有尺寸</button>
-                                    <button type="button" onclick="selectLaptopSize('office', '13', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">13 吋以下</button>
-                                    <button type="button" onclick="selectLaptopSize('office', '14', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">14 吋</button>
-                                    <button type="button" onclick="selectLaptopSize('office', '15', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">15 吋以上</button>
-                                </div>
-                                <div class="border-l border-gray-100 pl-3">
-                                    <p class="px-2 pb-1.5 text-[11px] font-bold text-gray-800">遊戲筆電</p>
-                                    <button type="button" onclick="selectLaptopSize('gaming', 'all', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-600">所有尺寸</button>
-                                    <button type="button" onclick="selectLaptopSize('gaming', '14', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">14 吋以下</button>
-                                    <button type="button" onclick="selectLaptopSize('gaming', '15', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">15.6 吋</button>
-                                    <button type="button" onclick="selectLaptopSize('gaming', '16', event)" class="w-full text-left px-2 py-1.5 text-xs rounded-lg hover:bg-gray-50 text-gray-500">16 吋以上</button>
-                                </div>
-                            </div>
-                        </div>
+<button type="button" id="btn-laptop" onclick="selectMainCategory('laptop')" class="px-4 py-2 text-xs rounded-lg text-gray-500 font-medium">二手筆電</button>
                     </div>
-                    </div>
-
                     <div class="flex items-center gap-3 w-full lg:w-auto">
-                    <div class="relative flex-grow lg:w-36">
-                        <select id="price-sort" aria-label="商品價格排序" onchange="handleSortChange()" class="w-full bg-gray-100 border border-transparent text-gray-600 text-xs rounded-xl px-3 py-2.5 font-medium cursor-pointer focus:outline-none focus:bg-white focus:border-gray-200 transition-all appearance-none">
-                            <option value="default">預設排序</option>
-                            <option value="price-asc">價位：低 ➔ 高</option>
-                            <option value="price-desc">價位：高 ➔ 低</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 text-[10px]">
-                            ▼
-                        </div>
-                    </div>
-
                     <button type="button" onclick="scrollToAbout()" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition-all border-l border-gray-200 pl-3 whitespace-nowrap flex-shrink-0 py-2">
                         關於我們
                     </button>
@@ -279,6 +247,12 @@
 
         <p id="result-summary" role="status" aria-live="polite" class="hidden text-sm text-gray-500 mb-5"></p>
 
+<section id="nl-toolbar" class="nl-toolbar" aria-labelledby="nl-title">
+ <div class="nl-heading"><div><h2 id="nl-title">二手筆電</h2><p>依用途、尺寸與預算，找到適合你的那一台。</p></div><span id="nl-count" role="status" aria-live="polite">庫存同步中</span></div>
+ <div class="nl-controls"><div class="nl-uses" role="group" aria-label="筆電用途"><button type="button" data-nl-use="all" onclick="nlUse('all')" aria-pressed="true">全部筆電</button><button type="button" data-nl-use="office" onclick="nlUse('office')" aria-pressed="false">文書商務</button><button type="button" data-nl-use="gaming" onclick="nlUse('gaming')" aria-pressed="false">遊戲效能</button></div>
+ <div class="nl-selects"><label>螢幕尺寸<select id="nl-size" onchange="nlChange()"><option value="all">不限尺寸</option><option value="13">13 吋以下</option><option value="14">14 吋</option><option value="15">15 吋級</option><option value="16">16 吋以上</option></select></label><label>購買預算<select id="nl-budget" onchange="nlChange()"><option value="all">不限預算</option><option value="10">1 萬元以下</option><option value="15">1 萬–1.5 萬元</option><option value="20">1.5 萬–2 萬元</option><option value="plus">2 萬元以上</option></select></label><label>排序方式<select id="price-sort" onchange="handleSortChange()"><option value="default">預設排序</option><option value="price-asc">價格由低到高</option><option value="price-desc">價格由高到低</option></select></label></div></div>
+ <div class="nl-meta"><span id="nl-selected">先選用途，或直接瀏覽所有筆電。</span><button type="button" id="nl-clear" onclick="nlReset()" hidden>清除篩選 ×</button></div>
+</section>
         <div id="loading-view" class="text-center py-20 text-sm text-gray-400">
             <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-gray-400 rounded-full mb-2" role="status" aria-label="loading"></div>
             <p>正在從雲端同步最新庫存...</p>
@@ -686,50 +660,19 @@
         }
 
         function renderListView() {
-            const container = document.getElementById('product-list-view');
-            const loadMoreWrap = document.getElementById('load-more-wrap');
-
-            let filteredProducts = applyProductFilters(products);
-            updateIndicatorBar();
-            const summary = document.getElementById('result-summary');
-            summary.textContent = searchQuery.trim()
-                ? `搜尋「${searchQuery.trim()}」：${filteredProducts.length} 件商品`
-                : `共 ${filteredProducts.length} 件商品`;
-            summary.classList.toggle('hidden', isHomeView());
-
+            const container=document.getElementById('product-list-view');
+            const loadMore=document.getElementById('load-more-wrap');
+            let filtered=applyProductFilters(products);
+            if(isHomeView())filtered=filtered.filter(p=>p.type==='laptop');
+            const limit=isHomeView()?homeProductLimit:visibleProductLimit;
+            const visible=filtered.slice(0,limit);
+            container.className='nl-grid';
+            container.innerHTML=visible.length?visible.map(createProductCard).join(''):'<div class="nl-empty"><h3>還沒有符合條件的筆電</h3><p>試試放寬尺寸、預算，或換個搜尋關鍵字。</p><button type="button" class="pc-btn" onclick="nlReset()">清除篩選，查看全部筆電</button></div>';
+            loadMore.classList.toggle('hidden',visible.length>=filtered.length);
+            loadMore.querySelector('button').textContent='顯示更多筆電（還有 '+Math.max(0,filtered.length-visible.length)+' 台）';
+            document.getElementById('nl-count').textContent=filtered.length+' 台 · 顯示 '+visible.length+' 台';
             pcSyncVisibility();
-            // 首頁組裝估價入口獨立於庫存，以下保留二手筆電展示。
-            if (isHomeView()) {
-                const newLaptops = filteredProducts.filter(product => product.type === 'new-laptop');
-                const laptops = filteredProducts.filter(product => product.type === 'laptop');
-                container.className = 'space-y-16';
-                container.innerHTML = [
-                    createHomeProductSection('二手筆電', '文書與遊戲筆電，並可依螢幕尺寸篩選', laptops, 'laptop')
-                ].join('');
-                const hasMoreHomeProducts = laptops.length > homeProductLimit;
-                loadMoreWrap.classList.toggle('hidden', !hasMoreHomeProducts);
-                return;
-            }
-
-            container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8';
-            if (filteredProducts.length === 0) {
-                const emptyTitle = '目前沒有符合條件的商品';
-                const emptyHint = '試試其他關鍵字或分類，也歡迎透過 LINE 詢問想找的機型。';
-                container.innerHTML = `
-                    <div class="col-span-full text-center py-20">
-                        <p class="text-gray-700 font-semibold mb-2">${emptyTitle}</p>
-                        <p class="text-gray-500 text-sm">${emptyHint}</p>
-                        <button type="button" onclick="resetFilters()" class="mt-5 px-5 py-2.5 bg-gray-900 text-white rounded-xl text-sm">查看全部商品</button>
-                    </div>
-                `;
-                loadMoreWrap.classList.add('hidden');
-                return;
-            }
-
-            const visibleProducts = filteredProducts.slice(0, visibleProductLimit);
-            const cards = visibleProducts.map(createProductCard);
-            container.innerHTML = cards.join('');
-            loadMoreWrap.classList.toggle('hidden', visibleProductLimit >= filteredProducts.length);
+            nlSync();
         }
 
         function applyProductFilters(sourceProducts) {
@@ -745,6 +688,7 @@
                 result = result.filter(product => matchesLaptopSize(product, subFilterType));
             }
 
+            result = result.filter(nlBudgetMatch);
             if (searchQuery.trim()) {
                 const query = searchQuery.toLowerCase().trim();
                 result = result.filter(product =>
@@ -759,52 +703,19 @@
             return result;
         }
 
-        function matchesLaptopSize(product, sizeFilter) {
-            const text = `${product.title} ${product.condition} ${product.specs.join(' ')}`.toLowerCase();
-            const matched = text.match(/([0-9.]+)\s*(?:吋|\"|inch)/)
-                || text.match(/(?:^|[^a-z0-9-])(13\.3|14\.1|15\.6|11|12|13|14|15|16|17|18)(?![0-9a-z.-])/);
-            if (!matched) return false;
-            const size = Number.parseFloat(matched[1]);
-            if (currentFilter === 'office') {
-                if (sizeFilter === '13') return size <= 13.9;
-                if (sizeFilter === '14') return size >= 14 && size <= 14.9;
-                if (sizeFilter === '15') return size >= 15;
-            }
-            if (currentFilter === 'gaming') {
-                if (sizeFilter === '14') return size <= 14.9;
-                if (sizeFilter === '15') return size >= 15 && size <= 15.9;
-                if (sizeFilter === '16') return size >= 16;
-            }
-            return true;
+        function matchesLaptopSize(product,sizeFilter){
+            const text=product.condition+' '+product.specs.join(' ')+' '+product.title;
+            const match=text.match(/([0-9]+(?:\.[0-9]+)?)\s*(?:吋|"|inch)/i);
+            if(!match)return false;
+            const size=Number(match[1]);
+            return sizeFilter==='13'?size<14:sizeFilter==='14'?size>=14&&size<15:sizeFilter==='15'?size>=15&&size<16:sizeFilter==='16'?size>=16:true;
         }
 
         function createProductCard(product) {
-            const safeTitle = escapeHTML(product.title);
-            const safeCondition = escapeHTML(product.condition);
-            const safeImage = escapeHTML(safeHttpUrl(product.images[0], ''));
-            const specBadges = product.specs.slice(0, 3).map(spec => `<span class="inline-block bg-gray-50 text-gray-500 text-[11px] px-2 py-0.5 rounded border border-gray-100">${escapeHTML(spec)}</span>`).join('');
-            return `
-                <article class="product-card bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group">
-                    <button type="button" onclick="showDetailView(${product.id})" class="aspect-video w-full bg-gray-50 overflow-hidden cursor-pointer relative text-left" aria-label="查看 ${safeTitle} 詳情">
-                        <img src="${safeImage}" alt="${safeTitle}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <span class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition duration-300 flex items-center justify-center">
-                            <span class="bg-white/95 text-xs text-gray-800 px-3 py-1.5 rounded-xl shadow-sm opacity-0 group-hover:opacity-100 transition duration-300 font-medium">查看商品詳情</span>
-                        </span>
-                    </button>
-                    <div class="p-5 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3rem]">${safeTitle}</h3>
-                            <p class="text-[11px] text-emerald-700 font-semibold mb-2">${product.type === 'new-laptop' ? '全新筆電' : product.type === 'desktop' ? '桌上型電腦' : '二手筆電'} · ${product.category === 'gaming' ? '遊戲效能' : '文書商務'}</p>
-                            <div class="flex flex-wrap gap-1 mb-4">${specBadges}</div>
-                            <p class="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4">${safeCondition}</p>
-                        </div>
-                        <div class="flex justify-between items-center pt-3 border-t border-gray-50">
-                            <span class="text-lg font-bold text-emerald-700">NT$ ${product.price.toLocaleString()}</span>
-                            <button type="button" onclick="showDetailView(${product.id})" class="text-xs text-gray-500 hover:text-gray-900 font-medium transition">詳細規格 ➔</button>
-                        </div>
-                    </div>
-                </article>
-            `;
+            const title=escapeHTML(product.title);
+            const image=escapeHTML(safeHttpUrl(product.images[0],''));
+            const specs=escapeHTML(product.specs.slice(0,3).join(' · '));
+            return '<button type="button" class="nl-card" onclick="showDetailView('+product.id+')" aria-label="查看 '+title+' 詳情"><div class="nl-photo"><img src="'+image+'" alt="" loading="lazy" decoding="async"><span class="nl-type">'+(product.category==='gaming'?'遊戲效能':'文書商務')+'</span></div><div class="nl-card-body"><h3>'+title+'</h3><p class="nl-specs">'+specs+'</p><div class="nl-card-bottom"><span class="nl-price">'+(product.price>0?'<small>NT$</small>'+product.price.toLocaleString():'洽詢價格')+'</span><span class="nl-action">查看詳情 ↗</span></div></div></button>';
         }
 
         function createHomeProductSection(title, description, sectionProducts, type) {
@@ -839,7 +750,7 @@
             updateCategoryButtonUI();
             showListView();
             renderListView();
-            document.getElementById('product-list-view').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('nl-toolbar').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function selectNewLaptopCategory(category, event) {
@@ -916,7 +827,7 @@
             ['all', 'laptop'].forEach(category => {
                 const button = document.getElementById(`btn-${category}`);
                 const active = category === selected;
-                const widthClass = category === 'all' ? '' : 'w-full';
+                const widthClass = 'whitespace-nowrap';
                 button.className = `${widthClass} px-4 py-2 text-xs rounded-lg font-medium transition-all flex items-center justify-center gap-1 flex-1 lg:flex-none ${
                     active ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'
                 }`;
@@ -956,6 +867,7 @@
         }
 
         function resetFilters() {
+            nlBudget='all';
             mainCategory = 'all';
             currentFilter = 'all';
             currentSortOrder = 'default';
@@ -993,6 +905,7 @@
         function showDetailView(id, updateUrl = true) {
             pcClose();
             document.getElementById('pc-section').hidden = true;
+            document.getElementById('nl-toolbar').hidden = true;
             const product = products.find(p => p.id === id);
             if (!product) return;
 
@@ -1230,6 +1143,14 @@ function pcText(){return ['【冠丞 3C｜極速 PC 組裝估價需求單】',..
 async function pcContact(){await pcCopy();window.location.href='https://line.me/R/ti/p/@138uoksb';}
 async function pcCopy(){const text=pcText();let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);ok=true;}}catch{}if(!ok){const previous=document.activeElement;const box=document.createElement('textarea');box.value=text;box.setAttribute('aria-label','組裝需求單複製暫存');box.style.cssText='position:fixed;left:-9999px;top:0;font-size:16px';document.body.appendChild(box);box.focus();box.select();box.setSelectionRange(0,box.value.length);try{ok=document.execCommand('copy');}catch{}box.remove();if(previous&&previous.focus)previous.focus({preventScroll:true});}document.getElementById('pc-status').textContent=ok?'已複製完整需求單，開啟 LINE 後請貼上傳送。':'瀏覽器未允許複製，請下載需求單後複製文字。';return ok;}
 function pcDownload(){const url=URL.createObjectURL(new Blob(['\ufeff'+pcText()],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='冠丞3C-PC組裝需求單.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.getElementById('pc-status').textContent='已建立需求單下載。';}
+
+
+let nlBudget='all';
+function nlUse(use){mainCategory='laptop';currentFilter=use;visibleProductLimit=PRODUCTS_PER_PAGE;showListView();updateCategoryButtonUI();}
+function nlChange(){subFilterType=document.getElementById('nl-size').value;nlBudget=document.getElementById('nl-budget').value;mainCategory='laptop';visibleProductLimit=PRODUCTS_PER_PAGE;showListView();updateCategoryButtonUI();}
+function nlReset(){nlBudget='all';resetFilters();selectMainCategory('laptop');}
+function nlBudgetMatch(p){return nlBudget==='all'||p.price>0&&(nlBudget==='10'?p.price<=10000:nlBudget==='15'?p.price>10000&&p.price<=15000:nlBudget==='20'?p.price>15000&&p.price<=20000:p.price>20000);}
+function nlSync(){const detail=!document.getElementById('product-detail-view').classList.contains('hidden');document.getElementById('nl-toolbar').hidden=detail;document.getElementById('nl-size').value=subFilterType;document.getElementById('nl-budget').value=nlBudget;document.querySelectorAll('[data-nl-use]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.nlUse===currentFilter)));const picked=[];if(currentFilter!=='all')picked.push(currentFilter==='gaming'?'遊戲效能':'文書商務');if(subFilterType!=='all')picked.push(document.getElementById('nl-size').selectedOptions[0].textContent);if(nlBudget!=='all')picked.push(document.getElementById('nl-budget').selectedOptions[0].textContent);if(searchQuery.trim())picked.push('搜尋「'+searchQuery.trim()+'」');if(currentSortOrder!=='default')picked.push(document.getElementById('price-sort').selectedOptions[0].textContent);document.getElementById('nl-selected').textContent=picked.length?picked.join(' · '):'先選用途，或直接瀏覽所有筆電。';document.getElementById('nl-clear').hidden=!picked.length;}
 
     </script>
 </body>
