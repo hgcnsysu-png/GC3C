@@ -90,6 +90,16 @@
                 animation-iteration-count: 1 !important;
             }
         }
+    
+/* PC inquiry: isolated styles, sharing the storefront's neutral / emerald palette. */
+.pc-area{--pc-green:#047857;--pc-ink:#17241f;--pc-muted:#65716b;color:var(--pc-ink);margin-bottom:64px;scroll-margin-top:115px}
+.pc-area [hidden]{display:none!important}.pc-area button,.pc-area a,.pc-area input,.pc-area textarea{font:inherit}.pc-area button{cursor:pointer}.pc-area button:disabled{cursor:not-allowed;opacity:.4}.pc-area button:focus-visible,.pc-area a:focus-visible,.pc-area input:focus-visible,.pc-area textarea:focus-visible{outline:3px solid #34d399;outline-offset:3px}
+.pc-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:20px}.pc-heading h2{font-size:24px;font-weight:750;letter-spacing:-.6px}.pc-heading p{font-size:12px;color:var(--pc-muted);margin-top:5px}.pc-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:#edf5f0;border:1px solid #dcebe2;color:#047857;border-radius:50px;font-size:11px;white-space:nowrap}
+.pc-hero{position:relative;overflow:hidden;border:1px solid #e1e9e4;border-radius:24px;background:linear-gradient(110deg,#fff 20%,#f0f7f3);padding:36px 40px;display:grid;grid-template-columns:1fr 250px;gap:32px;align-items:center}.pc-eyebrow{font-size:10px;color:#047857;letter-spacing:2px;font-weight:750;margin-bottom:12px}.pc-hero h3{font-size:32px;line-height:1.4;font-weight:750;letter-spacing:-1px}.pc-hero p{font-size:13px;line-height:1.9;color:var(--pc-muted);margin:12px 0 22px;max-width:460px}.pc-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;border-radius:12px;padding:11px 20px;border:1px solid #dfe6e2;background:#fff;color:#39483f;font-size:13px!important;font-weight:650!important;text-decoration:none;transition:background .18s,transform .18s}.pc-btn:hover{background:#f0f5f2}.pc-primary{background:#172c22;color:#fff;border-color:#172c22}.pc-primary:hover{background:#28503b}.pc-inline{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.pc-small{font-size:11px;color:var(--pc-muted);line-height:1.8}.pc-art{display:flex;align-items:center;justify-content:center;position:relative;min-height:210px}.pc-art:before{content:'';position:absolute;width:210px;height:210px;border:1px solid #d9e8df;border-radius:50%}.pc-art:after{content:'';position:absolute;width:160px;height:160px;border:1px dashed #c8ddd0;border-radius:50%}.pc-art svg{width:155px;height:190px;z-index:1;filter:drop-shadow(0 12px 12px #174b2620)}
+.pc-wizard{border:1px solid #e1e9e4;border-radius:24px;background:white;margin-top:16px;overflow:hidden}.pc-wizard-top{padding:24px 30px 0}.pc-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;list-style:none;padding:0;margin:0}.pc-progress li{border-top:3px solid #e9eeeb;padding-top:10px;color:#89958e;font-size:11px}.pc-progress li.pc-active{border-color:#047857;color:#047857;font-weight:700}.pc-progress span{font-size:10px;margin-right:6px}.pc-content{padding:30px;min-height:340px}.pc-content h3{font-size:22px;font-weight:750;letter-spacing:-.5px;margin-bottom:8px}.pc-intro{color:var(--pc-muted);font-size:13px;line-height:1.8;margin-bottom:24px}.pc-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pc-option{display:block;position:relative;cursor:pointer;border:1px solid #e2e8e4;border-radius:14px;padding:18px;background:#fff;transition:border-color .18s,background .18s}.pc-option:hover{border-color:#96bca7}.pc-option:has(input:checked){border-color:#047857;background:#f1f8f4;box-shadow:inset 0 0 0 1px #047857}.pc-option input{accent-color:#047857;position:absolute;right:16px;top:20px;width:16px;height:16px}.pc-option strong{display:block;font-size:14px;padding-right:22px;font-weight:700}.pc-option small{display:block;color:var(--pc-muted);font-size:12px;line-height:1.8;margin-top:7px}.pc-symbol{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:#eef3f0;color:#047857;font-size:13px;font-weight:750;margin-bottom:12px}.pc-fieldset{border:0;margin:0 0 24px;padding:0;min-width:0}.pc-fieldset legend{font-size:13px;font-weight:700;margin-bottom:12px}.pc-chips{display:flex;flex-wrap:wrap;gap:8px}.pc-chip{position:relative;display:flex;align-items:center;gap:8px;border:1px solid #e2e8e4;border-radius:10px;padding:10px 13px;font-size:12px;cursor:pointer}.pc-chip:has(input:checked){border-color:#047857;background:#f1f8f4;color:#047857}.pc-chip input{accent-color:#047857;width:15px;height:15px}.pc-sub{margin-top:18px;padding:16px;background:#f7f9f8;border-radius:14px}.pc-sub .pc-fieldset{margin:0}.pc-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #edf0ee;padding:20px 30px}.pc-note{padding:14px 16px;border:1px solid #e0e9e3;border-radius:12px;background:#f6f9f7;font-size:12px;line-height:1.85;color:#526359;margin:18px 0}.pc-summary{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.pc-summary span{background:#eff5f1;color:#42604f;font-size:11px;padding:6px 10px;border-radius:8px}.pc-table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.8}.pc-table th{text-align:left;color:#738078;font-size:11px;background:#f7f9f8;font-weight:600}.pc-table td,.pc-table th{padding:13px 16px;border-bottom:1px solid #edf0ee}.pc-table td:first-child{width:120px;color:#65716b}.pc-table td:nth-child(2){font-weight:600}.pc-table-wrap{border:1px solid #e4eae6;border-radius:14px;overflow:hidden}.pc-result-head{display:flex;justify-content:space-between;gap:15px;align-items:start}.pc-input-label{display:block;font-size:13px;font-weight:650;margin:24px 0 10px}.pc-textarea{width:100%;border:1px solid #dfe7e1;border-radius:12px;padding:13px;font-size:12px!important;line-height:1.8;resize:vertical;min-height:85px;color:#36473c;background:#fafcfb}.pc-status{font-size:12px;color:#047857;min-height:22px;margin-top:10px}.pc-contact{margin-top:24px;border-top:1px solid #e8eee9;padding-top:22px}.pc-contact h4{font-weight:700;font-size:15px;margin-bottom:5px}.pc-contact textarea{min-height:200px;margin:14px 0}.pc-line{background:#06a849;color:#fff;border-color:#06a849}.pc-line:hover{background:#05893d}
+@media(max-width:639px){.pc-area{scroll-margin-top:150px;margin-bottom:44px}.pc-heading{align-items:start}.pc-heading h2{font-size:20px}.pc-heading>.pc-tag{display:none}.pc-hero{grid-template-columns:1fr;padding:25px;gap:0}.pc-hero h3{font-size:27px}.pc-art{display:none}.pc-hero p{font-size:12px}.pc-wizard-top{padding:20px 18px 0}.pc-progress{gap:7px}.pc-progress li{font-size:10px}.pc-progress span{display:block;margin-bottom:3px}.pc-content{padding:24px 18px}.pc-content h3{font-size:20px}.pc-option{padding:15px}.pc-option strong{font-size:13px}.pc-option small{font-size:11px}.pc-option input{right:12px;top:17px}.pc-nav{padding:18px;flex-wrap:wrap}.pc-nav .pc-small{display:none}.pc-table td,.pc-table th{padding:11px 10px;font-size:12px}.pc-table td:first-child{width:85px}.pc-result-head{flex-direction:column}}
+
+.pc-wizard{scroll-margin-top:115px}@media(max-width:639px){.pc-wizard{scroll-margin-top:150px}}
     </style>
 </head>
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col" onclick="closeAllDropdowns()">
@@ -135,18 +145,7 @@
                             全部商品
                         </button>
                      
-                    <div class="dropdown-group relative flex-1 lg:flex-none">
-                        <button type="button" onclick="toggleDropdown('new-laptop-menu', event)" id="btn-new-laptop" aria-expanded="false" aria-controls="new-laptop-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-1">
-                            <span>全新筆電</span> <span class="text-[9px] text-gray-400">▼</span>
-                        </button>
-                        <div id="new-laptop-menu" class="dropdown-menu absolute left-1/2 -translate-x-1/2 top-full pt-1.5 w-40 opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50">
-                            <div class="bg-white/95 backdrop-blur-md border border-gray-100 rounded-2xl p-1.5 shadow-xl flex flex-col gap-0.5">
-                                <button type="button" onclick="selectNewLaptopCategory('all', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-700 transition">全部全新筆電</button>
-                                <button type="button" onclick="selectNewLaptopCategory('office', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">文書筆電</button>
-                                <button type="button" onclick="selectNewLaptopCategory('gaming', event)" class="w-full text-left px-3 py-2 text-xs rounded-xl hover:bg-gray-50 font-medium text-gray-600 transition">遊戲筆電</button>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="button" onclick="openPcWizard()" id="btn-pc" aria-pressed="false" class="px-4 py-2 text-xs rounded-lg text-emerald-700 hover:bg-white font-semibold transition-all flex-1 lg:flex-none whitespace-nowrap">極速 PC 組裝估價 ↗</button>
 
                     <div class="dropdown-group relative flex-1 lg:flex-none">
                         <button type="button" onclick="toggleDropdown('laptop-menu', event)" id="btn-laptop" aria-expanded="false" aria-controls="laptop-menu" class="w-full px-4 py-2 text-xs rounded-lg text-gray-500 hover:text-gray-900 font-medium transition-all flex items-center justify-center gap-1">
@@ -196,6 +195,16 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-6 py-12 flex-grow w-full">
+
+<section id="pc-section" class="pc-area" aria-labelledby="pc-title">
+ <div class="pc-heading"><div><h2 id="pc-title">極速 PC 組裝估價</h2><p>從需求出發，找到適合你的桌上型電腦。</p></div><span class="pc-tag">● 冠丞 3C · 客製組裝</span></div>
+ <div class="pc-hero" id="pc-hero"><div><div class="pc-eyebrow">YOUR NEXT PC, MADE PERSONAL</div><h3>理想的電腦，<br>從你的需求開始。</h3><p>文書工作、電競遊戲，或是專業創作。告訴我們用途與預算，整理專屬配置方向，再由專員協助確認完整菜單。</p><div class="pc-inline"><button class="pc-btn pc-primary" type="button" onclick="openPcWizard()">開始組裝估價 <span aria-hidden="true">↗</span></button><span class="pc-small">3 步填寫需求 · 免登入</span></div></div><div class="pc-art" aria-hidden="true"><svg viewBox="0 0 155 190" fill="none"><path d="M28 18 111 9 140 25 140 169 111 181 28 168Z" fill="#dbe7df" stroke="#adc4b6"/><path d="M28 18 111 30 111 181 28 168Z" fill="#fff" stroke="#adc4b6"/><path d="m111 30 29-5" stroke="#adc4b6"/><rect x="43" y="46" width="51" height="92" rx="8" fill="#edf4ef" stroke="#d1e2d8"/><circle cx="68.5" cy="72" r="15" fill="#fff" stroke="#91b49f"/><circle cx="68.5" cy="72" r="8" stroke="#b7d3c2" stroke-width="4"/><circle cx="68.5" cy="113" r="15" fill="#fff" stroke="#91b49f"/><circle cx="68.5" cy="113" r="8" stroke="#b7d3c2" stroke-width="4"/><path d="m45 152 34 5" stroke="#a9c5b4" stroke-width="3" stroke-linecap="round"/><circle cx="95" cy="29" r="2" fill="#10b981"/><path d="m121 47 10-2m-10 8 10-2m-10 8 10-2" stroke="#91b49f" stroke-linecap="round"/></svg></div></div>
+ <div id="pc-wizard" class="pc-wizard" hidden>
+  <div class="pc-wizard-top"><ol class="pc-progress" aria-label="估價進度"><li><span>01</span>主要用途</li><li><span>02</span>預算偏好</li><li><span>03</span>螢幕週邊</li><li><span>04</span>配置建議</li></ol></div>
+  <div id="pc-content" class="pc-content"></div>
+  <div class="pc-nav"><button type="button" class="pc-btn" id="pc-prev" onclick="pcMove(-1)">上一步</button><span id="pc-nav-hint" class="pc-small">依照實際需求選擇即可</span><button type="button" class="pc-btn pc-primary" id="pc-next" onclick="pcMove(1)">下一步 →</button></div>
+ </div>
+</section>
         <div id="filter-indicator-bar" class="mb-6 flex flex-wrap gap-2 items-center text-xs hidden">
             <span class="text-gray-400 font-medium">當前篩選：</span>
             <span id="indicator-badge" class="bg-blue-50 text-blue-600 font-semibold px-3 py-1 rounded-full border border-blue-100 flex items-center gap-1.5">
@@ -507,6 +516,27 @@
         }
 
         // 💡 修正：改用 fetch 讀取 GAS 回傳的 JSON 陣列結構，並與你原有的邏輯完美對對應
+        function allocateProductIds(rawIds) {
+            const parsed = rawIds.map(value => {
+                const text = String(value ?? '').trim();
+                const id = /^\d+$/.test(text) ? Number(text) : NaN;
+                return Number.isSafeInteger(id) && id >= 0 ? id : null;
+            });
+            const reserved = new Set(parsed.filter(id => id !== null));
+            const used = new Set();
+            let nextId = 1;
+            return parsed.map(id => {
+                if (id !== null && !used.has(id)) {
+                    used.add(id);
+                    return id;
+                }
+                while (reserved.has(nextId) || used.has(nextId)) nextId++;
+                const generated = nextId++;
+                used.add(generated);
+                return generated;
+            });
+        }
+
         async function fetchProductsFromCloud() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 60000);
@@ -517,9 +547,9 @@
                 
                 if (!Array.isArray(rawProducts)) throw new Error("商品資料格式不正確。");
 
+                const productIds = allocateProductIds(rawProducts.map(p => getProp(p, ['id', 'ID', '序號', '商品序號'])));
                 products = rawProducts.map((p, idx) => {
                     // 自動兼容中英文試算表標題欄位
-                    let rawId = getProp(p, ['id', 'ID', '序號', '商品序號']);
                     let rawTitle = getProp(p, ['title', 'TITLE', '商品名稱', '名稱', '型號']);
                     let rawCategory = getProp(p, ['category', 'CATEGORY', '分類', '商品分類']);
                     let rawProductType = getProp(p, ['type', 'TYPE', 'productType', '商品類型', '大分類', '類型']);
@@ -557,9 +587,8 @@
                         }
                     }
 
-                    const parsedId = Number.parseInt(rawId, 10);
                     return {
-                        id: Number.isFinite(parsedId) ? parsedId : (idx + 1),
+                        id: productIds[idx],
                         title: normalizeSpecText(rawTitle) || "未命名商品",
                         type: productType,
                         category: cleanCategory,
@@ -572,7 +601,7 @@
                 });
 
                 document.getElementById('loading-view').classList.add('hidden');
-                document.getElementById('product-list-view').classList.remove('hidden');
+                if (currentActiveProductId === null) document.getElementById('product-list-view').classList.remove('hidden');
                 renderListView();
                 openProductFromUrl();
             } catch (error) {
@@ -604,16 +633,16 @@
                 : `共 ${filteredProducts.length} 件商品`;
             summary.classList.toggle('hidden', isHomeView());
 
-            // 首頁直接分成「全新筆電」與「二手筆電」兩個商品展示區塊。
+            pcSyncVisibility();
+            // 首頁組裝估價入口獨立於庫存，以下保留二手筆電展示。
             if (isHomeView()) {
                 const newLaptops = filteredProducts.filter(product => product.type === 'new-laptop');
                 const laptops = filteredProducts.filter(product => product.type === 'laptop');
                 container.className = 'space-y-16';
                 container.innerHTML = [
-                    createHomeProductSection('全新筆電', '全新筆電嚴選，滿足文書工作與遊戲需求', newLaptops, 'new-laptop'),
                     createHomeProductSection('二手筆電', '文書與遊戲筆電，並可依螢幕尺寸篩選', laptops, 'laptop')
                 ].join('');
-                const hasMoreHomeProducts = newLaptops.length > homeProductLimit || laptops.length > homeProductLimit;
+                const hasMoreHomeProducts = laptops.length > homeProductLimit;
                 loadMoreWrap.classList.toggle('hidden', !hasMoreHomeProducts);
                 return;
             }
@@ -820,7 +849,7 @@
 
         function updateCategoryButtonUI() {
             const selected = mainCategory === 'all' ? 'all' : mainCategory;
-            ['all', 'new-laptop', 'laptop'].forEach(category => {
+            ['all', 'laptop'].forEach(category => {
                 const button = document.getElementById(`btn-${category}`);
                 const active = category === selected;
                 const widthClass = category === 'all' ? '' : 'w-full';
@@ -898,6 +927,8 @@
         }
 
         function showDetailView(id, updateUrl = true) {
+            pcClose();
+            document.getElementById('pc-section').hidden = true;
             const product = products.find(p => p.id === id);
             if (!product) return;
 
@@ -990,6 +1021,7 @@
         }
 
         function showListView(updateUrl = true) {
+            pcClose();
             document.getElementById('product-detail-view').classList.add('hidden');
             document.getElementById('product-list-view').classList.remove('hidden');
             renderListView();
@@ -1098,6 +1130,43 @@
             document.querySelectorAll('button:not([type])').forEach(button => button.type = 'button');
             fetchProductsFromCloud();
         };
+
+// The estimator is deliberately independent of cloud inventory availability.
+const pcData = {
+ usage:[['office','日常文書 / 網頁追劇','多分頁、Office、線上課程與影音娛樂','文'],['gaming','電競遊戲 / 3A 大作','依遊戲類型、解析度與順暢度配置','玩'],['design2d','平面設計 / 2D 繪圖','Photoshop、Illustrator 與多圖層工作','繪'],['design3d','3D 渲染 / 剪輯 / AI','依軟體與專案規模分配運算資源','創']],
+ budget:[['15k-25k','NT$15,000–25,000'],['25k-35k','NT$25,000–35,000'],['35k-50k','NT$35,000–50,000'],['50k-plus','NT$50,000 以上'],['flexible','尚未決定，請協助評估']],
+ cpu:[['any','無偏好，由專員搭配'],['intel','Intel'],['amd','AMD']],
+ monitor:[['none','不需要，沿用現有螢幕','主機預算不含螢幕'],['office','文書護眼螢幕','偏好舒適閱讀、日常工作'],['gaming','高更新率電競螢幕','請在備註填寫解析度或遊戲'],['color','高色準創作螢幕','請在備註填寫色域或尺寸需求']],
+ addons:[['win','正版 Windows'],['wifi','Wi-Fi / 藍牙'],['kb','鍵盤滑鼠組']],
+ sub:{gaming:[['aaa','3A 單機遊戲'],['fps','FPS / 競技遊戲'],['stream','遊戲實況直播']],design3d:[['video','4K / 8K 剪輯'],['ai','AI 算圖'],['cad','CAD / 3D 渲染']]}
+};
+let pcState={step:1,usage:'',sub:[],budget:'',cpu:'any',monitor:'none',addons:[],notes:''};
+let pcOpen=false;
+const pcLabel=(group,id)=>(pcData[group].find(x=>x[0]===id)||['','未選擇'])[1];
+function pcSyncVisibility(){document.getElementById('pc-section').hidden=!isHomeView()||!document.getElementById('product-detail-view').classList.contains('hidden');}
+function openPcWizard(){resetFilters();pcOpen=true;document.getElementById('pc-section').hidden=false;document.getElementById('pc-wizard').hidden=false;document.getElementById('pc-hero').hidden=true;document.getElementById('btn-pc').setAttribute('aria-pressed','true');pcRender();document.getElementById('pc-section').scrollIntoView({behavior:'smooth',block:'start'});}
+function pcClose(){pcOpen=false;document.getElementById('pc-wizard').hidden=true;document.getElementById('pc-hero').hidden=false;document.getElementById('btn-pc').setAttribute('aria-pressed','false');}
+function pcOption(group,item){const [id,label,desc,symbol]=item;return '<label class="pc-option">'+(symbol?'<span class="pc-symbol" aria-hidden="true">'+symbol+'</span>':'')+'<input type="radio" name="pc-'+group+'" value="'+id+'" '+(pcState[group]===id?'checked':'')+' onchange="pcChoose(\''+group+'\',this.value)"><strong>'+label+'</strong>'+(desc?'<small>'+desc+'</small>':'')+'</label>';}
+function pcChips(group,items){return '<div class="pc-chips">'+items.map(([id,label])=>'<label class="pc-chip"><input type="checkbox" '+(pcState[group].includes(id)?'checked':'')+' onchange="pcToggle(\''+group+'\',\''+id+'\',this.checked)">'+label+'</label>').join('')+'</div>';}
+function pcChoose(group,value){if(!pcData[group].some(x=>x[0]===value))return;if(group==='usage'&&pcState.usage!==value)pcState.sub=[];pcState[group]=value;if(group==='usage')pcRenderSub();pcReady();}
+function pcRenderSub(){const host=document.getElementById('pc-sub');if(!host)return;const items=pcData.sub[pcState.usage];host.hidden=!items;host.innerHTML=items?'<fieldset class="pc-fieldset"><legend>想再補充哪些需求？（可複選）</legend>'+pcChips('sub',items)+'</fieldset>':'';}
+function pcToggle(group,id,checked){pcState[group]=checked?[...new Set([...pcState[group],id])]:pcState[group].filter(x=>x!==id);}
+function pcReady(){document.getElementById('pc-next').disabled=pcState.step===1?!pcState.usage:pcState.step===2?!pcState.budget:false;}
+function pcRender(){const s=pcState.step;document.querySelectorAll('.pc-progress li').forEach((el,i)=>{el.classList.toggle('pc-active',i<s);if(i===s-1)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');});let content='';
+ if(s===1)content='<h3 tabindex="-1">這台電腦，主要用來做什麼？</h3><p class="pc-intro">選擇最主要的用途，我們會優先分配對你最有幫助的效能。</p><fieldset class="pc-fieldset"><legend class="sr-only">主要用途（必選）</legend><div class="pc-options">'+pcData.usage.map(x=>pcOption('usage',x)).join('')+'</div></fieldset><div class="pc-sub" id="pc-sub" hidden></div>';
+ if(s===2)content='<h3 tabindex="-1">設定預算，讓配置更有方向。</h3><p class="pc-intro">以下為主機預算，螢幕、作業系統與週邊另外報價。</p><fieldset class="pc-fieldset"><legend>主機預算（必選）</legend><div class="pc-options">'+pcData.budget.map(x=>pcOption('budget',x)).join('')+'</div></fieldset><fieldset class="pc-fieldset"><legend>處理器品牌偏好</legend><div class="pc-options">'+pcData.cpu.map(x=>pcOption('cpu',x)).join('')+'</div></fieldset>';
+ if(s===3)content='<h3 tabindex="-1">把你的桌面，一起準備好。</h3><p class="pc-intro">已有的設備可以繼續使用；需要的配件交給專員一起搭配。</p><fieldset class="pc-fieldset"><legend>螢幕需求</legend><div class="pc-options">'+pcData.monitor.map(x=>pcOption('monitor',x)).join('')+'</div></fieldset><fieldset class="pc-fieldset"><legend>加購項目（可複選，另外報價）</legend>'+pcChips('addons',pcData.addons)+'</fieldset><label for="pc-notes" class="pc-input-label">補充需求（選填）</label><textarea id="pc-notes" class="pc-textarea" maxlength="1000" placeholder="例如：常玩的遊戲、使用軟體、螢幕解析度、機殼顏色，或想沿用的零件。" oninput="pcState.notes=this.value">'+escapeHTML(pcState.notes)+'</textarea>';
+ if(s===4)content=pcResult();
+ document.getElementById('pc-content').innerHTML=content;document.getElementById('pc-prev').textContent=s===1?'收起估價':'← 上一步';document.getElementById('pc-next').hidden=s===4;document.getElementById('pc-next').textContent=s===3?'查看配置建議 →':'下一步 →';document.getElementById('pc-nav-hint').textContent=s===4?'可返回修改需求，再更新建議':'依照實際需求選擇即可';if(s===1)pcRenderSub();pcReady();}
+function pcMove(delta){if(delta<0&&pcState.step===1){pcClose();return;}if(delta>0&&((pcState.step===1&&!pcState.usage)||(pcState.step===2&&!pcState.budget)))return;pcState.step=Math.min(4,Math.max(1,pcState.step+delta));pcRender();document.getElementById('pc-wizard').scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('#pc-content h3').focus({preventScroll:true});}
+function pcReset(){pcState={step:1,usage:'',sub:[],budget:'',cpu:'any',monitor:'none',addons:[],notes:''};pcRender();document.querySelector('#pc-content h3').focus({preventScroll:true});}
+function pcSpecs(){const u=pcState.usage;const tier=['15k-25k','25k-35k','35k-50k','50k-plus'].indexOf(pcState.budget);const flexible=tier<0;const high=tier>=2;const heavy=u==='design3d';const brand=pcState.cpu==='any'?'品牌依整體搭配評估':pcLabel('cpu',pcState.cpu)+' 平台';const rows=[['處理器 CPU',brand+'；'+(u==='office'?'以日常多工與內建顯示為優先':heavy?'依軟體需求評估多核心效能':u==='gaming'?'以遊戲效能與顯卡搭配為優先':'兼顧單核效能與多工處理')],['主機板','依 CPU 插槽、記憶體世代與擴充需求搭配'],['顯示卡 GPU',u==='office'?'優先評估內建顯示，無需預設加購獨顯':heavy?'依渲染引擎 / AI 模型確認顯存容量與軟體支援':u==='gaming'?'依遊戲、螢幕解析度與目標幀率分配顯卡預算':'依繪圖軟體需求評估獨立顯示卡'],['記憶體 RAM',flexible?'依工作量確認容量與相容世代':heavy?(high?'以 64GB 為評估起點，依專案調整':'優先評估 32GB，視預算與專案調整'):u==='office'?'以 16GB 為評估起點':high||u==='design2d'?'優先評估 32GB 雙通道配置':'評估 16GB–32GB，保留升級空間'],['儲存裝置 SSD',high&&u!=='office'?'評估 1TB–2TB NVMe SSD；依素材與遊戲容量調整':'以 1TB NVMe SSD 為評估起點'],['電源 / 散熱','依最終 CPU、顯卡功耗及接頭規格計算，搭配足夠散熱'],['機殼','確認顯卡長度、散熱器高度、主機板尺寸與進風空間'],['螢幕',pcLabel('monitor',pcState.monitor)],['加購項目',pcState.addons.length?pcState.addons.map(x=>pcLabel('addons',x)).join('、'):'無']];return rows;}
+function pcResult(){const lowHeavy=pcState.usage==='design3d'&&['15k-25k','25k-35k'].includes(pcState.budget);return '<div class="pc-result-head"><div><div class="pc-eyebrow">READY FOR YOUR NEXT STEP</div><h3 tabindex="-1">你的組裝方向，整理好了。</h3></div><button type="button" class="pc-btn" onclick="pcReset()">↻ 重新評估</button></div><p class="pc-intro">這是一份需求配置建議，專員會再依庫存與相容性確認零件菜單。</p><div class="pc-summary"><span>'+pcLabel('usage',pcState.usage)+'</span><span>主機預算：'+pcLabel('budget',pcState.budget)+'</span><span>'+pcLabel('cpu',pcState.cpu)+'</span></div>'+(lowHeavy?'<div class="pc-note">目前預算搭配專業創作需求，可能需要調整效能目標或提高預算。請補充軟體、專案規模與可接受的處理時間，由專員協助取捨。</div>':'')+'<div class="pc-table-wrap"><table class="pc-table"><caption class="sr-only">依需求整理的硬體配置方向</caption><thead><tr><th scope="col">硬體項目</th><th scope="col">建議配置方向</th></tr></thead><tbody>'+pcSpecs().map(([k,v])=>'<tr><td>'+k+'</td><td>'+v+'</td></tr>').join('')+'</tbody></table></div><div class="pc-note">此工具尚未連動即時零件價格，因此不產生固定總價。主機預算不含螢幕、正版作業系統與週邊；實際規格、相容性、服務內容及成交金額，以門市確認的報價單為準。</div><div class="pc-inline"><button type="button" class="pc-btn" onclick="pcCopy()">複製完整需求單</button><button type="button" class="pc-btn pc-primary" onclick="pcContact()">交給 LINE 專員報價 ↗</button><button type="button" class="pc-btn" onclick="pcDownload()">下載需求單</button></div><p id="pc-status" role="status" aria-live="polite" class="pc-status"></p><div id="pc-contact" class="pc-contact" hidden><h4>把需求交給冠丞 3C</h4><p class="pc-small">先複製下方需求單，再開啟 LINE 貼上傳送。此頁不會自動送出訊息。</p><label for="pc-copy-text" class="pc-input-label">完整組裝需求單</label><textarea id="pc-copy-text" class="pc-textarea" readonly></textarea><div class="pc-inline"><button type="button" class="pc-btn" onclick="pcCopy()">複製需求單</button><a class="pc-btn pc-line" href="https://line.me/R/ti/p/@138uoksb" target="_blank" rel="noopener noreferrer">開啟冠丞 3C LINE ↗</a></div></div>';}
+function pcText(){return ['【冠丞 3C｜極速 PC 組裝估價需求單】','主要用途：'+pcLabel('usage',pcState.usage),'詳細需求：'+((pcData.sub[pcState.usage]||[]).filter(x=>pcState.sub.includes(x[0])).map(x=>x[1]).join('、')||'無'),'主機預算：'+pcLabel('budget',pcState.budget)+'（螢幕 / 系統 / 週邊另計）','CPU 偏好：'+pcLabel('cpu',pcState.cpu),'','【配置評估方向】',...pcSpecs().map(([k,v])=>k+'：'+v),'','補充需求：'+(pcState.notes.trim()||'無'),'','此為需求評估，非正式報價；請協助確認零件、相容性、庫存及完整金額，謝謝！'].join('\n');}
+function pcContact(){const el=document.getElementById('pc-contact');el.hidden=false;document.getElementById('pc-copy-text').value=pcText();el.scrollIntoView({behavior:'smooth',block:'nearest'});}
+async function pcCopy(){pcContact();let ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(pcText());ok=true;}}catch{}if(!ok){const box=document.getElementById('pc-copy-text');box.focus();box.select();try{ok=document.execCommand('copy');}catch{}}document.getElementById('pc-status').textContent=ok?'已複製需求單，可開啟 LINE 貼上傳送。':'請長按或全選下方需求單，手動複製。';}
+function pcDownload(){const url=URL.createObjectURL(new Blob(['\ufeff'+pcText()],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='冠丞3C-PC組裝需求單.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.getElementById('pc-status').textContent='已建立需求單下載。';}
+
     </script>
 </body>
 </html>
