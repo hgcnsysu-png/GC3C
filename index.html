@@ -101,7 +101,8 @@
 @media(max-width:639px){.pc-area{scroll-margin-top:150px;margin-bottom:44px}.pc-heading{align-items:start}.pc-heading h2{font-size:20px}.pc-heading>.pc-tag{display:none}.pc-hero{grid-template-columns:1fr;padding:25px;gap:0}.pc-hero h3{font-size:27px}.pc-art{display:none}.pc-hero p{font-size:12px}.pc-wizard-top{padding:20px 18px 0}.pc-progress{gap:7px}.pc-progress li{font-size:10px}.pc-progress span{display:block;margin-bottom:3px}.pc-content{padding:24px 18px}.pc-content h3{font-size:20px}.pc-option{padding:15px}.pc-option strong{font-size:13px}.pc-option small{font-size:11px}.pc-option input{right:12px;top:17px}.pc-nav{padding:18px;flex-wrap:wrap}.pc-nav .pc-small{display:none}.pc-table td,.pc-table th{padding:11px 10px;font-size:12px}.pc-table td:first-child{width:85px}.pc-result-head{flex-direction:column}}
 
 .pc-wizard{scroll-margin-top:115px}@media(max-width:639px){.pc-wizard{scroll-margin-top:150px}}
-    </style>
+    .pc-hero{grid-template-columns:minmax(0,1fr) 300px}.pc-art{min-height:270px}.pc-art:before,.pc-art:after{display:none}.pc-art svg{width:300px;height:auto;filter:none}@media(max-width:639px){.pc-hero{grid-template-columns:1fr}}
+</style>
 </head>
 <body class="bg-[#fafafa] text-[#1d1d1f] font-sans antialiased min-h-screen flex flex-col" onclick="closeAllDropdowns()">
 
@@ -199,7 +200,69 @@
 
 <section id="pc-section" class="pc-area" aria-labelledby="pc-title">
  <div class="pc-heading"><div><h2 id="pc-title">極速 PC 組裝估價</h2><p>從需求出發，找到適合你的桌上型電腦。</p></div><span class="pc-tag">● 冠丞 3C · 客製組裝</span></div>
- <div class="pc-hero" id="pc-hero"><div><div class="pc-eyebrow">YOUR NEXT PC, MADE PERSONAL</div><h3>理想的電腦，<br>從你的需求開始。</h3><p>文書工作、電競遊戲，或是專業創作。告訴我們用途與預算，整理你的組裝需求，再由專員協助確認完整菜單。</p><div class="pc-inline"><button class="pc-btn pc-primary" type="button" onclick="openPcWizard()">開始組裝估價 <span aria-hidden="true">↗</span></button><span class="pc-small">3 步填寫需求 · 免登入</span></div></div><div class="pc-art" aria-hidden="true"><svg viewBox="0 0 155 190" fill="none"><path d="M28 18 111 9 140 25 140 169 111 181 28 168Z" fill="#dbe7df" stroke="#adc4b6"/><path d="M28 18 111 30 111 181 28 168Z" fill="#fff" stroke="#adc4b6"/><path d="m111 30 29-5" stroke="#adc4b6"/><rect x="43" y="46" width="51" height="92" rx="8" fill="#edf4ef" stroke="#d1e2d8"/><circle cx="68.5" cy="72" r="15" fill="#fff" stroke="#91b49f"/><circle cx="68.5" cy="72" r="8" stroke="#b7d3c2" stroke-width="4"/><circle cx="68.5" cy="113" r="15" fill="#fff" stroke="#91b49f"/><circle cx="68.5" cy="113" r="8" stroke="#b7d3c2" stroke-width="4"/><path d="m45 152 34 5" stroke="#a9c5b4" stroke-width="3" stroke-linecap="round"/><circle cx="95" cy="29" r="2" fill="#10b981"/><path d="m121 47 10-2m-10 8 10-2m-10 8 10-2" stroke="#91b49f" stroke-linecap="round"/></svg></div></div>
+ <div class="pc-hero" id="pc-hero"><div><div class="pc-eyebrow">YOUR NEXT PC, MADE PERSONAL</div><h3>理想的電腦，<br>從你的需求開始。</h3><p>文書工作、電競遊戲，或是專業創作。告訴我們用途與預算，整理你的組裝需求，再由專員協助確認完整菜單。</p><div class="pc-inline"><button class="pc-btn pc-primary" type="button" onclick="openPcWizard()">開始組裝估價 <span aria-hidden="true">↗</span></button><span class="pc-small">3 步填寫需求 · 免登入</span></div></div><div class="pc-art" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="840" height="720" viewBox="0 0 420 360" fill="none">
+ <defs>
+  <linearGradient id="case-top" x1="174" y1="47" x2="274" y2="116" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#dcebe2"/></linearGradient>
+  <linearGradient id="case-front" x1="265" y1="115" x2="338" y2="278" gradientUnits="userSpaceOnUse"><stop stop-color="#fafdfb"/><stop offset="1" stop-color="#e0eee6"/></linearGradient>
+  <linearGradient id="glass" x1="49" y1="136" x2="159" y2="289" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#dcece3" stop-opacity=".4"/></linearGradient>
+  <linearGradient id="board" x1="147" y1="107" x2="245" y2="254" gradientUnits="userSpaceOnUse"><stop stop-color="#e1eee6"/><stop offset="1" stop-color="#c3dccd"/></linearGradient>
+  <radialGradient id="halo"><stop stop-color="#d4eadd" stop-opacity=".6"/><stop offset="1" stop-color="#e6f2eb" stop-opacity="0"/></radialGradient>
+  <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="7"/></filter>
+ </defs>
+ <!-- Airy orbit and restrained speed marks echo the storefront's pale green surface. -->
+ <circle cx="214" cy="174" r="149" fill="url(#halo)"/>
+ <circle cx="214" cy="174" r="145" stroke="#d7e8de" stroke-width=".9"/>
+ <path d="M100 72a130 130 0 0 1 201 8M323 237a130 130 0 0 1-179 61" stroke="#c7ded0" stroke-dasharray="2 6" stroke-linecap="round"/>
+ <path d="M345 143h37m-25 10h37m-49 10h23M31 199h28m-40 10h34" stroke="#a8cdb8" stroke-width="2" stroke-linecap="round"/>
+ <ellipse cx="222" cy="313" rx="114" ry="13" fill="#41694e" opacity=".09" filter="url(#soft-shadow)"/>
+ <!-- Open chassis: the components are part of a coherent physical build. -->
+ <path d="m128 76 132 42v184l-132-42Z" fill="#f7fbf8" stroke="#95b5a2" stroke-width="1.3" stroke-linejoin="round"/>
+ <path d="m139 95 109 34v148l-109-35Z" fill="#eaf3ed" stroke="#c5dbcd"/>
+ <path d="m149 109 91 29v115l-91-29Z" fill="url(#board)" stroke="#a7c8b4"/>
+ <path d="m157 139 19 6v-20m19 83-30-10v-28m63 57-16-5v-20m-14-36 30 9v22" stroke="#9abbA7" stroke-width="1"/>
+ <path d="m173 139 29 9v34l-29-10Z" fill="#fafffc" stroke="#6c9b81" stroke-width="1.3"/>
+ <path d="m178 146 19 6v23l-19-6Z" fill="#d4e8dc" stroke="#a6c7b4"/>
+ <path d="m184 151 7 2v14l-7-2Z" fill="#73aa8b"/>
+ <!-- Memory sticks, a graphics card, and the lower PSU shroud. -->
+ <path d="m213 148 5 2v52l-5-2Zm10 3 5 2v52l-5-2Z" fill="#58896d"/>
+ <path d="m214 151 3 1m-3 7 3 1m-3 7 3 1m7-14 3 1m-3 7 3 1m-3 7 3 1" stroke="#a4cbb4" stroke-width="1.3"/>
+ <path d="m148 202 82 26 10-5-82-26Z" fill="#f7fcf9" stroke="#87ae97" stroke-linejoin="round"/>
+ <path d="m148 202 82 26v18l-82-26Z" fill="#a7c9b5" stroke="#87ae97"/>
+ <ellipse cx="172" cy="218" rx="8" ry="6" transform="rotate(18 172 218)" fill="#e9f4ed" stroke="#79a58a"/>
+ <ellipse cx="207" cy="229" rx="8" ry="6" transform="rotate(18 207 229)" fill="#e9f4ed" stroke="#79a58a"/>
+ <path d="m139 238 109 35v13l-109-35Z" fill="#d9e8df" stroke="#b7d0c1"/>
+ <path d="m153 248 28 9m7 2 5 2" stroke="#99bba6" stroke-width="2" stroke-linecap="round"/>
+ <path d="m128 76 74-25 132 42-74 25Z" fill="url(#case-top)" stroke="#95b5a2" stroke-width="1.3" stroke-linejoin="round"/>
+ <path d="m260 118 74-25v184l-74 25Z" fill="url(#case-front)" stroke="#95b5a2" stroke-width="1.3" stroke-linejoin="round"/>
+ <path d="m273 132 48-16v133l-48 16Z" fill="#eef6f1" stroke="#c1d8ca"/>
+ <g transform="translate(297 159) skewY(-18)">
+  <circle r="18" fill="#fff" stroke="#a1c6b1" stroke-width="1.2"/><circle r="12" fill="#deeee4" stroke="#b6d5c3"/>
+  <path d="M0-3C-11-15-13 4-3 3c-6 14 12 14 8 3C20 5 11-12 3-5" fill="#91bfa4"/><circle r="3.8" fill="#fafffc"/>
+ </g>
+ <g transform="translate(297 213) skewY(-18)">
+  <circle r="18" fill="#fff" stroke="#a1c6b1" stroke-width="1.2"/><circle r="12" fill="#deeee4" stroke="#b6d5c3"/>
+  <path d="M0-3C-11-15-13 4-3 3c-6 14 12 14 8 3C20 5 11-12 3-5" fill="#91bfa4"/><circle r="3.8" fill="#fafffc"/>
+ </g>
+ <path d="m280 279 31-10" stroke="#9fbeab" stroke-width="2.2" stroke-linecap="round"/>
+ <path d="m279 112 7-2" stroke="#0b8960" stroke-width="2.5" stroke-linecap="round"/>
+ <path d="m293 107 6-2m6-2 6-2" stroke="#a0bfae" stroke-width="2" stroke-linecap="round"/>
+ <path d="m136 264 12 4v8l-12-4Zm178 19 12-4v8l-12 4Z" fill="#91ad9c"/>
+ <!-- A floating glass side panel and alignment guides communicate custom assembly. -->
+ <path d="m59 132 100 32v135L59 267Z" fill="url(#glass)" stroke="#b1cdbb" stroke-width="1.3" stroke-linejoin="round"/>
+ <path d="m65 141 88 28v120l-88-28Z" stroke="#d2e4d9" stroke-width=".8"/>
+ <path d="m73 153 34 11m-34-3 18 6" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
+ <path d="m159 164 19-7m-19 131 20-7M59 132l17-6" stroke="#a7c7b3" stroke-dasharray="3 4"/>
+ <circle cx="65" cy="141" r="1.6" fill="#90b39d"/><circle cx="153" cy="169" r="1.6" fill="#90b39d"/>
+ <circle cx="65" cy="261" r="1.6" fill="#90b39d"/><circle cx="153" cy="289" r="1.6" fill="#90b39d"/>
+ <!-- Small CPU component, ready to assemble; no branding or distracting captions. -->
+ <path d="m77 68 30-10 31 10-30 10Z" fill="#fff" stroke="#a9c9b5"/>
+ <path d="m77 68 31 10v12L77 80Zm31 10 30-10v12l-30 10Z" fill="#d8eadd" stroke="#a9c9b5"/>
+ <path d="m89 68 18-6 18 6-17 6Z" fill="#d6ebde" stroke="#8fb69f"/>
+ <path d="m86 84 4 2m4-1 4 2m17-1 4-1m4-2 4-1" stroke="#8bb49b" stroke-width="1.4" stroke-linecap="round"/>
+ <path d="M108 99v13l12 4" stroke="#b6d1c0" stroke-dasharray="3 4" stroke-linecap="round"/>
+ <circle cx="353" cy="230" r="15" fill="#f5fbf7" stroke="#bdd9c8"/>
+ <path d="m354 220-7 11h7l-2 9 8-13h-7Z" fill="#3d9369"/>
+</svg></div></div>
  <div id="pc-wizard" class="pc-wizard" hidden>
   <div class="pc-wizard-top"><ol class="pc-progress" aria-label="估價進度"><li><span>01</span>主要用途</li><li><span>02</span>預算偏好</li><li><span>03</span>螢幕週邊</li><li><span>04</span>需求確認</li></ol></div>
   <div id="pc-content" class="pc-content"></div>
